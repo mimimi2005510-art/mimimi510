@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイポータルサイト | ホーム</title>
+    <style>
+        /* --- 基本の全体スタイル --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* --- ヘッダー・ナビゲーションバー --- */
+        header {
+            background-color: #1a73e8; /* Google風のブルー */
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        header h1 {
+            font-size: 1.3rem;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- メインコンテンツ領域 --- */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* ヒーローエリア（ウェルカムメッセージ） */
+        .hero {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .hero h2 {
+            color: #1a73e8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 各コンテンツへのリンク（カード型デザイン） */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin-bottom: 0.5rem;
+            color: #202124;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #5f6368;
+            margin-bottom: 1.2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #1557b0;
+        }
+        .btn-disabled {
+            background-color: #ccc;
+            cursor: default;
+        }
+
+        /* --- フッター --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #70757a;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>マイポータルサイト</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="app.html">一問一答アプリ</a></li>
+                </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <section class="hero">
+            <h2>ようこそ！</h2>
+            <p>Googleサイトから移行中のポータルサイトです。少しずつ新しいページや機能を追加していきます。</p>
+        </section>
+
+        <div class="card-grid">
+            
+            <div class="card">
+                <div>
+                    <h3>一問一答ウェブアプリ</h3>
+                    <p>Web上でそのまま回答と答え合わせができる学習ツールです。</p>
+                </div>
+                <a href="app.html" class="btn">アプリを開く</a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>学習コンテンツ・資料</h3>
+                    <p>授業や探究活動で使える資料やリンクをまとめて掲載する予定です。</p>
+                </div>
+                <span class="btn btn-disabled">準備中</span>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>お知らせ・更新履歴</h3>
+                    <p>サイトの更新情報や連絡事項をここに載せていきます。</p>
+                </div>
+                <span class="btn btn-disabled">準備中</span>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 マイポータルサイト. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
