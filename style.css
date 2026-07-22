@@ -613,14 +613,28 @@ footer {
     background: #fffafc;
 }
 
+/* 授業動画ページの最上部ヘッダー */
 .video-top-image {
-
-    height: 320px;
+    position: relative;
+    width: 100%;
+    /* ✅ 高さを低くして、巨大化（切り抜き）を抑える */
+    height: 200px; 
+    overflow: hidden;
 }
 
 .video-top-image img {
+    width: 100%;
+    height: 100%;
+    /* ✅ 全体の中央を切り抜く */
+    object-fit: cover;
+    object-position: center;
+    /* ✅ 1.2倍などの拡大指定を完全に削除 */
+    transform: none; 
+}
 
-    transform: scale(0.80);
-
-    object-position: center center;
+/* スマホ表示の時は少し高さを自動調整 */
+@media (max-width: 768px) {
+    .video-top-image {
+        height: 180px;
+    }
 }
