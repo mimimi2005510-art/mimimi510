@@ -247,6 +247,19 @@ footer {
     overflow: hidden;
 }
 
+.top-image::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.25);
+
+    z-index: 1;
+}
+
 .top-image img {
 
     width: 100%;
@@ -259,6 +272,8 @@ footer {
 
     display: block;
 }
+
+
 .content-box {
 
     width: 80%;
@@ -274,7 +289,19 @@ footer {
     border-radius: 20px;
 
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
+.content-box:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.12);
+}
+
 
 .content-box h2 {
 
@@ -349,6 +376,8 @@ footer {
     text-align: center;
 
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+
+    z-index: 2;
 }
 
 .hero-title h1 {
