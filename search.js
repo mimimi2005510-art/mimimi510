@@ -1,47 +1,61 @@
 /* ===================================================
-   🌸 AIみみみ（AI学習ナビゲント）設定 & ロジック
+   🌸 新UI用 AIみみみ（AI学習ナビゲント）ロジック
 =================================================== */
 
 // --------------------------------------------------
-// 1. 「AIみみみ」の性格・カスタマイズ設定エリア
+// 1. 設定 & 階層パス解決（これが最重要！）
 // --------------------------------------------------
 const MIMIMI_CONFIG = {
-    name: "AIみみみ",
-    // 挨拶メッセージ
-    greeting: "こんにちわ～！情報科アシスタントの**AIみみみ**だよ🌸<br>授業資料のことでも、勉強の悩みでも何でも聞いてね！",
-    
-    // タイピング速度（ミリ秒 / 1文字）
+    name: "AIみみみ先生",
+    greeting: "はろ〜！情報科アシスタントの**AIみみみ**だよ🌸<br>授業資料のことでも、勉強の悩みでも何でも聞いてね！<br><br>例えば...？👇",
     typingSpeed: 25,
+    geminiApiKey: "" // 空欄なら疑似AIで動きます
+};
 
-    // ★ 本物のGemini APIを使う場合はここにAPIキーを入力（空欄なら疑似AIで動きます）
-    geminiApiKey: "" 
+// 階層ズレを自動調整するためのベースパス取得
+const resolveRootPath = () => {
+    let rootPath = "";
+    if (window.location.pathname.includes("/materials/first-year/") || 
+        window.location.pathname.includes("/materials/second-year/") || 
+        window.location.pathname.includes("/materials/others/")) {
+        rootPath = "../../";
+    } else if (window.location.pathname.includes("/materials/") || 
+               window.location.pathname.includes("/videos/") || 
+               window.location.pathname.includes("/quiz/")) {
+        rootPath = "../";
+    }
+    return rootPath;
 };
 
 
 // --------------------------------------------------
-// 2. モーダル開閉制御
+// 2. パネル開閉制御 & 初期挨拶
 // --------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-    const openBtn = document.getElementById("openSearch");
-    const closeBtn = document.getElementById("closeSearch");
-    const modal = document.getElementById("searchModal");
+    const openBtn = document.getElementById("openChatBtn");
+    const closeBtn = document.getElementById("closeChatBtn");
+    const panel = document.getElementById("chatPanel");
+
+    let isInitialized = false; // 初回だけ挨拶するため
 
     if (openBtn) {
         openBtn.addEventListener("click", () => {
-            modal.classList.add("open");
+            panel.classList.add("open");
             document.getElementById("chatInput").focus();
+
+            // 初回オープン時だけタイピング挨拶
+            if (!isInitialized) {
+                addTypingBubble(MIMIMI_CONFIG.greeting, true);
+                isInitialized = true;
+            }
         });
     }
 
     if (closeBtn) {
         closeBtn.addEventListener("click", () => {
-            modal.classList.remove("open");
+            panel.classList.remove("open");
         });
     }
-
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.remove("open");
-    });
 });
 
 
@@ -62,14 +76,14 @@ async function submitSearch() {
     const query = input.value.trim();
     if (!query) return;
 
-    // ユーザーの質問を表示
+    // ユーザーの質問を右側に表示
     addBubble(query, "user");
     input.value = "";
 
     // 「考え中...」の演出
-    const loadingBubble = addBubble("みみみが考え中...💭", "ai loading");
+    const loadingBubble = addLoadingBubble();
 
-    // レスポンスの取得（Gemini APIキーがあれば本物、なければカスタム疑似AI）
+    // レスポンスの取得
     let responseText = "";
     if (MIMIMI_CONFIG.geminiApiKey) {
         responseText = await fetchGeminiResponse(query);
@@ -77,115 +91,104 @@ async function submitSearch() {
         responseText = generateMimimiResponse(query);
     }
 
-    // ローディング消去してタイピング開始
+    // ローディング消去して、みみみの回答をタイピング
     loadingBubble.remove();
     addTypingBubble(responseText);
 }
 
 
 // --------------------------------------------------
-// 4. ChatGPT/Gemini風 タイピングアニメーション
+// 4. 吹き出し（アバター付き）生成ロジック
 // --------------------------------------------------
-function addTypingBubble(fullHtml) {
-    const history = document.getElementById("chatHistory");
-    const bubble = document.createElement("div");
-    bubble.className = "chat-bubble ai";
-    history.appendChild(bubble);
 
-    // HTMLタグ（<a href="...">等）を壊さずにタイピング演出するための簡易描画
-    let index = 0;
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = fullHtml;
-    const rawText = fullHtml; // タグ付きテキスト
-
-    // 一気に全展開するか、少しずつ出すかの制御
-    bubble.innerHTML = fullHtml; // リンク切れを防ぐため一括セットし、アニメーション風に見せる
-    history.scrollTop = history.scrollHeight;
-}
-
+// 普通の吹き出し（ユーザー用）
 function addBubble(text, type) {
     const history = document.getElementById("chatHistory");
+    const rootPath = resolveRootPath();
+
+    // LINE風のコンテナ構造
+    const messageContainer = document.createElement("div");
+    messageContainer.className = `message-container ${type}`;
+
+    // ユーザー以外はアバターを付ける
+    if (type !== "user") {
+        const avatar = document.createElement("img");
+        avatar.src = `${rootPath}images/logo.png`; // みみみの画像
+        avatar.className = "ai-avatar";
+        messageContainer.appendChild(avatar);
+    }
+
     const bubble = document.createElement("div");
     bubble.className = `chat-bubble ${type}`;
     bubble.innerHTML = text;
-    history.appendChild(bubble);
+    
+    messageContainer.appendChild(bubble);
+    history.appendChild(messageContainer);
     history.scrollTop = history.scrollHeight;
-    return bubble;
+    return messageContainer;
+}
+
+// 考え中（ローディング）の吹き出し
+function addLoadingBubble() {
+    return addBubble('<span class="loading-dots">...💭</span>', "ai loading");
+}
+
+// 🌸 みみみの回答タイピング＆サジェストタグ生成
+function addTypingBubble(fullHtml, isGreeting = false) {
+    const history = document.getElementById("chatHistory");
+    const rootPath = resolveRootPath();
+
+    const messageContainer = addBubble("", "ai");
+    const bubble = messageContainer.querySelector(".chat-bubble.ai");
+
+    // HTMLタグ（リンクなど）を考慮してタイピング演出
+    // 本来は複雑だが、今回はリンク切れを防ぐため一括セットし、
+    // アニメーション風に表示させる（実用性重視）
+    bubble.innerHTML = fullHtml;
+
+    // 最初の挨拶の時だけ、下にサジェストタグを追加
+    if (isGreeting) {
+        const suggestionsDiv = document.createElement("div");
+        suggestionsDiv.className = "chat-suggestions";
+        suggestionsDiv.innerHTML = `
+            <span class="suggestion-tag" onclick="sendSuggested('情報Ⅰの資料🌸')">情報Ⅰの資料</span>
+            <span class="suggestion-tag" onclick="sendSuggested('Pythonの演習 Python🐍')">Pythonの演習</span>
+            <span class="suggestion-tag" onclick="sendSuggested('一問一答クイズ📝')">一問一答クイズ</span>
+        `;
+        history.appendChild(suggestionsDiv);
+    }
+
+    history.scrollTop = history.scrollHeight;
 }
 
 
 // --------------------------------------------------
-// 5. 🌸 「AIみみみ」の会話・カスタム回答エンジン（APIなし版）
+// 5. 🌸 「AIみみみ」のカスタム回答エンジン（APIなし版）
 // --------------------------------------------------
 function generateMimimiResponse(input) {
     const text = input.toLowerCase();
+    const rootPath = resolveRootPath();
 
-    // 現在のページ階層からルートパス（../ や ../../）を自動調整
-    let rootPath = "";
-    if (window.location.pathname.includes("/materials/first-year/") || 
-        window.location.pathname.includes("/materials/second-year/") || 
-        window.location.pathname.includes("/materials/others/")) {
-        rootPath = "../../";
-    } else if (window.location.pathname.includes("/materials/") || 
-               window.location.pathname.includes("/videos/") || 
-               window.location.pathname.includes("/quiz/")) {
-        rootPath = "../";
-    }
-
-    // --- AIみみみの口調・回答パターン（自由に追加・編集できます）---
+    // --- AIみみみのペルソナ・回答パターン（語尾カスタム）---
     if (text.includes("こんにちは") || text.includes("はろー") || text.includes("みみみ")) {
-        return `やっほー！呼んでくれてありがとう〜！🌸<br>今日は何の学習のお手伝いをしようか？`;
+        return `やっほー！呼んでくれてありがとう〜！🌸 今日は何の学習のお手伝いをしようか？何でも聞いてねっ✨`;
     } 
     else if (text.includes("情報1") || text.includes("情報i") || text.includes("1年")) {
-        return `1年生の「情報Ⅰ」の資料だね！任せて〜！✨<br>ここからスライドやプリントが見られるよっ👇<br><br>👉 <a href="${rootPath}materials/first-year/index.html" style="color:#e88ca7; font-weight:bold;">情報Ⅰ（1年）授業資料ページへ行ってみる</a>`;
+        return `1年生の「情報Ⅰ」の資料だね！任せて〜！✨ ここのページにスライドやプリントがまとまってるよっ👇<br><br>👉 <a href="${rootPath}materials/first-year/index.html" style="color:#e88ca7; font-weight:bold;">情報Ⅰ（1年）授業資料ページへ</a>`;
     } 
-    else if (text.includes("情報2") || text.includes("情報ii") || text.includes("2年") || text.includes("python") || text.includes("プログラミング")) {
+    else if (text.includes("情報2") || text.includes("情報ii") || text.includes("2年") || text.includes("python")) {
         return `おっ、2年生の「情報Ⅱ」かな？Pythonとかデータ分析の高度なやつだね！かっこいい〜！🐍<br><br>👉 <a href="${rootPath}materials/second-year/index.html" style="color:#e88ca7; font-weight:bold;">情報Ⅱ（2年）授業資料ページへGo！</a>`;
     } 
     else if (text.includes("動画") || text.includes("youtube") || text.includes("授業動画")) {
-        return `動画で復習したいんだね！みみみのおすすめ動画一覧はこちらだよチャンネル登録してね〜📺✨<br><br>👉 <a href="${rootPath}videos/index.html" style="color:#e88ca7; font-weight:bold;">授業動画一覧ページを開く</a>`;
+        return `動画で復習したいんだね！みみみのおすすめ動画一覧はこちらだよ📺✨<br><br>👉 <a href="${rootPath}videos/index.html" style="color:#e88ca7; font-weight:bold;">授業動画一覧ページを開く</a>`;
     } 
     else if (text.includes("テスト") || text.includes("問題") || text.includes("クイズ") || text.includes("一問一答")) {
-        return `テスト対策！？えらいっ！頑張る君を応援するよ〜！🔥<br>一問一答クイズでサクッと復習しちゃおう！<br><br>👉 <a href="${rootPath}quiz/index.html" style="color:#e88ca7; font-weight:bold;">一問一答クイズに挑戦する</a>`;
-    }
-    else if (text.includes("補足") || text.includes("ガイド") || text.includes("手引き")) {
-        return `共通のガイダンスや用語集だね！困ったときはここをチェックしておくと安心だよ📖<br><br>👉 <a href="${rootPath}materials/others/index.html" style="color:#e88ca7; font-weight:bold;">共通・補足資料ページへ</a>`;
+        return `テスト対策！？えらいっ！頑張る君を応援するよ〜！🔥 サクッと復習しちゃおう！<br><br>👉 <a href="${rootPath}quiz/index.html" style="color:#e88ca7; font-weight:bold;">一問一答クイズに挑戦する</a>`;
     }
     else {
-        return `う〜ん、「${input}」についてだね！<br>みみみが案内できるページをリストアップしてみたよ〜！気になるやつを押してみてね🌸<br><br>
+        return `「${input}」についてだね！<br>みみみが案内できるページをリストアップしてみたよ〜🌸 気になるやつを押してみてね！<br><br>
         ・ <a href="${rootPath}materials/index.html" style="color:#e88ca7;">📚 授業資料トップ</a><br>
         ・ <a href="${rootPath}videos/index.html" style="color:#e88ca7;">📺 授業動画コーナー</a><br>
         ・ <a href="${rootPath}quiz/index.html" style="color:#e88ca7;">📝 一問一答クイズ</a>`;
-    }
-}
-
-
-// --------------------------------------------------
-// 6. 🌐 （任意）本物のGemini APIと連携する処理
-// --------------------------------------------------
-async function fetchGeminiResponse(userQuery) {
-    const apiKey = MIMIMI_CONFIG.geminiApiKey;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-
-    // AIみみみのペルソナ設定（System Instruction）
-    const systemInstruction = `
-    あなたの名前は「AIみみみ」です。高校の情報科サイトの学習ナビゲーターアシスタントです。
-    性格：明るく、親しみやすく、可愛らしい高校の先生の助手。語尾には「〜だよ！」「〜かな？」「🌸」「✨」などを使います。
-    ユーザーから質問されたら、みみみになりきって短く親切に回答してください。
-    `;
-
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                system_instruction: { parts: [{ text: systemInstruction }] },
-                contents: [{ parts: [{ text: userQuery }] }]
-            })
-        });
-        const data = await response.json();
-        return data.candidates[0].content.parts[0].text.replace(/\n/g, "<br>");
-    } catch (e) {
-        return "ごめんなさい！ちょっと頭がウニになっちゃったみたい...💦 もう一度聞いてみてね！";
     }
 }
