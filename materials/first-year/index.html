@@ -100,6 +100,36 @@
         </footer>
     </main>
 
+    <div id="searchModal" class="search-modal-overlay">
+        <div class="search-modal">
+            <div class="search-modal-header">
+                <div class="search-modal-title">
+                    <span>🤖</span> AIみみみ
+                </div>
+                <button id="closeSearch" class="search-modal-close">✕</button>
+            </div>
+
+            <div id="chatHistory" class="chat-history">
+                <div class="chat-bubble ai">
+                    こんにちは！ AIみみみです🌸<br>
+                    知りたいキーワードや、「〜の資料はどこ？」といった質問を自由に入力してくださいね！
+                    <div class="chat-suggestions">
+                        <span class="suggestion-tag" onclick="sendSuggested('情報Ⅰの資料')">情報Ⅰの資料</span>
+                        <span class="suggestion-tag" onclick="sendSuggested('Pythonの演習')">Pythonの演習</span>
+                        <span class="suggestion-tag" onclick="sendSuggested('一問一答')">一問一答</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="質問・キーワードを入力..." onkeypress="handleKeyPress(event)">
+                <button onclick="submitSearch()">送信</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="search.js"></script>
+
 </body>
 
 </html>
