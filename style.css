@@ -631,20 +631,21 @@ footer {
     box-shadow: 0 15px 30px rgba(232, 140, 167, 0.6);
 }
 
-/* 3. チャットパネル本体 */
+/* 3. チャットパネル本体（PC見切れ防止の調整版） */
 .chat-panel {
     display: none; /* 最初は非表示 */
-    width: 380px;
-    height: 550px;
+    width: 360px; /* 横幅を少しコンパクトに (380px → 360px) */
+    height: 480px; /* 高さを少し低く調整 (550px → 480px) */
+    max-height: calc(100vh - 120px); /* ★最重要：画面の上端からはみ出さないよう自動調整 */
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px); /* すりガラス効果 */
     border-radius: 24px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: absolute;
-    bottom: 85px;
-    right: 0;
-    transform-origin: bottom right;
+    bottom: 75px; /* ボタンとの距離を少しキュッと詰める */
+    right: 0; /* 左下に設置している場合は left: 0; に変更 */
+    transform-origin: bottom right; /* 左下設置の場合は bottom left に変更 */
     animation: panelAppear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid rgba(248, 223, 232, 0.5);
     flex-direction: column;
