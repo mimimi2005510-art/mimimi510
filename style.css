@@ -1,0 +1,119 @@
+/* 全体 */
+
+body {
+    margin: 0;
+    font-family: "Yu Gothic", sans-serif;
+    background-color: #ffffff;
+}
+
+
+/* 上部ピンク帯 */
+
+.top-banner {
+    background-color: #f8dfe8;
+
+    padding: 15px 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.top-banner button {
+
+    padding: 10px 20px;
+
+    border: 1px solid #888;
+
+    background-color: white;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+/* ナビゲーションバー */
+
+.navbar {
+
+    background-color: #111;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px 40px;
+}
+
+
+/* 左側 */
+
+.logo-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.logo-area img {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+}
+
+.logo-area h1 {
+
+    font-size: 24px;
+
+    margin: 0;
+}
+
+
+/* 右側メニュー */
+
+.navbar ul {
+
+    display: flex;
+
+    list-style: none;
+
+    gap: 25px;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+.navbar li {
+
+    cursor: pointer;
+}
+
+
+/* メイン画像 */
+
+.hero {
+
+    text-align: center;
+
+    padding: 40px;
+}
+
+.hero img {
+
+    max-width: 100%;
+
+    border-radius: 10px;
+}
