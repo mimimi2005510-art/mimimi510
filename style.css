@@ -185,17 +185,34 @@ footer {
 
 .footer-buttons button {
 
-    width: 220px;
+    width: 240px;
 
-    height: 60px;
+    height: 72px;
 
-    border: 1px solid black;
+    border: none;
 
-    background: #f8d0d0;
+    border-radius: 18px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #f6f7fb
+    );
+
+    color: #333;
 
     font-size: 18px;
 
+    font-weight: 600;
+
     cursor: pointer;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .top-image {
@@ -324,4 +341,12 @@ footer {
 .footer-buttons a {
 
     text-decoration: none;
+}
+
+.footer-buttons button:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 16px 36px rgba(0, 0, 0, 0.15);
 }
