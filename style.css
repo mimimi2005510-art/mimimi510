@@ -471,9 +471,9 @@ footer {
     position: relative;
 }
 
-/* サブメニュー（.navbar ul の干渉を防ぐため強く指定） */
+/* サブメニュー（通常時は強制的に非表示） */
 .navbar ul.dropdown-menu {
-    display: none !important; /* 通常時は強制的に非表示 */
+    display: none !important; 
     position: absolute;
     top: 100%;
     left: 50%;
@@ -485,14 +485,14 @@ footer {
     padding: 10px 0;
     list-style: none;
     z-index: 1001;
-    margin-top: 5px;
-    flex-direction: column; /* 縦並びに指定 */
-    gap: 0;                 /* 親メニューの隙間指定を打ち消す */
+    margin-top: 0;           /* 隙間を無くしてホバーが外れないように修正 */
+    flex-direction: column;  /* 縦並び指定 */
+    gap: 0;                  /* 親の横並びgapを打ち消す */
 }
 
-/* 親メニュー（授業資料▼）にマウスを乗せた時だけ表示 */
+/* 親メニュー（授業資料▼）にマウスを乗せた時だけ縦並びFlexで表示 */
 .navbar li:hover > ul.dropdown-menu {
-    display: block !important; /* ホバー時のみ縦並びで表示 */
+    display: flex !important; /* blockからflexに変更して縦並びを確定させる */
     animation: menuFade 0.3s ease;
 }
 
@@ -519,7 +519,7 @@ footer {
 
 /* ふわっと表示させるアニメーション */
 @keyframes menuFade {
-    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    from { opacity: 0; transform: translateX(-50%) translateY(8px); }
     to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
