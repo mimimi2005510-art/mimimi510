@@ -407,3 +407,39 @@ footer {
     box-shadow:
         0 16px 36px rgba(240, 140, 170, 0.25);
 }
+
+.scroll-guide {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: white;
+
+    font-size: 14px;
+
+    opacity: 0.8;
+
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,100% {
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            translateY(8px);
+    }
+}
