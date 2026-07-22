@@ -612,3 +612,15 @@ footer {
 
     background: #fffafc;
 }
+
+.video-top-image {
+
+    height: 320px;
+}
+
+.video-top-image img {
+
+    transform: scale(1.15);
+
+    object-position: center center;
+}
