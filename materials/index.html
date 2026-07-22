@@ -111,35 +111,32 @@
         </footer>
     </main>
 
-    <div id="searchModal" class="search-modal-overlay">
-        <div class="search-modal">
-            <div class="search-modal-header">
-                <div class="search-modal-title">
-                    <span>🤖</span> AIみみみ
+    <div class="chat-panel-container">
+        <div id="chatPanel" class="chat-panel">
+            <div class="chat-header">
+                <div class="chat-title-area">
+                    <img src="../../images/logo.png" alt="AIみみみ" class="header-avatar">
+                    <div class="chat-status">
+                        <span class="chat-title-name">AIみみみ先生</span>
+                        <span class="chat-status-online">対応中だよ</span>
+                    </div>
                 </div>
-                <button id="closeSearch" class="search-modal-close">✕</button>
+                <button id="closeChatBtn" class="close-chat-btn">✕</button>
             </div>
 
             <div id="chatHistory" class="chat-history">
-                <div class="chat-bubble ai">
-                    こんにちは！ AIみみみです🌸<br>
-                    知りたいキーワードや、「〜の資料はどこ？」といった質問を自由に入力してくださいね！
-                    <div class="chat-suggestions">
-                        <span class="suggestion-tag" onclick="sendSuggested('情報Ⅰの資料')">情報Ⅰの資料</span>
-                        <span class="suggestion-tag" onclick="sendSuggested('Pythonの演習')">Pythonの演習</span>
-                        <span class="suggestion-tag" onclick="sendSuggested('一問一答')">一問一答</span>
-                    </div>
-                </div>
             </div>
 
             <div class="chat-input-area">
                 <input type="text" id="chatInput" placeholder="質問・キーワードを入力..." onkeypress="handleKeyPress(event)">
-                <button onclick="submitSearch()">送信</button>
+                <button onclick="submitSearch()">▶</button> 
             </div>
         </div>
+
+        <button id="openChatBtn">🔍</button>
     </div>
 
-    <script src="search.js"></script>
+<script src="search.js"></script>
 
     
 
