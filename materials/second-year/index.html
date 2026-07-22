@@ -93,6 +93,33 @@
         </footer>
     </main>
 
+    <div class="chat-panel-container">
+        <div id="chatPanel" class="chat-panel">
+            <div class="chat-header">
+                <div class="chat-title-area">
+                    <img src="../../images/logo.png" alt="AIみみみ" class="header-avatar">
+                    <div class="chat-status">
+                        <span class="chat-title-name">AIみみみ先生</span>
+                        <span class="chat-status-online">対応中だよ</span>
+                    </div>
+                </div>
+                <button id="closeChatBtn" class="close-chat-btn">✕</button>
+            </div>
+
+            <div id="chatHistory" class="chat-history">
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="質問・キーワードを入力..." onkeypress="handleKeyPress(event)">
+                <button onclick="submitSearch()">▶</button> 
+            </div>
+        </div>
+
+        <button id="openChatBtn">🔍</button>
+    </div>
+
+<script src="search.js"></script>
+
 </body>
 
 </html>
