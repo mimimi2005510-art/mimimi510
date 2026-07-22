@@ -320,3 +320,8 @@ footer {
 
     font-weight: bold;
 }
+
+.footer-buttons a {
+
+    text-decoration: none;
+}
