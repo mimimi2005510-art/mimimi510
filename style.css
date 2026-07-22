@@ -620,7 +620,7 @@ footer {
 
 .video-top-image img {
 
-    transform: scale(1.10);
+    transform: scale(0.80);
 
     object-position: center center;
 }
