@@ -686,15 +686,29 @@ footer {
 }
 
 /* AIの返信 */
+/* AIみみみの吹き出し */
 .chat-bubble.ai {
     background: #ffffff;
     color: #444;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    border: 1px solid #f0d8e0;
+    box-shadow: 0 4px 12px rgba(232, 140, 167, 0.15);
+    border: 1.5px solid #f8dfe8;
+    position: relative;
 }
 
+/* AIみみみの考え中アニメーション */
+.chat-bubble.loading {
+    color: #e88ca7;
+    font-style: italic;
+    animation: pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
 /* ユーザーの質問 */
 .chat-bubble.user {
     background: #e88ca7;
