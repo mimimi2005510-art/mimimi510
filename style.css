@@ -194,3 +194,38 @@ footer {
 
     width: 500px;
 }
+
+.content-box {
+
+    width: 80%;
+
+    max-width: 1000px;
+
+    margin: 80px auto;
+
+    padding: 40px;
+
+    background-color: #ffffff;
+
+    border-radius: 20px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+.content-box h2 {
+
+    font-size: 40px;
+
+    margin-bottom: 30px;
+
+}
+
+.content-box ul {
+
+    line-height: 2.2;
+
+    font-size: 20px;
+
+}
+
