@@ -180,3 +180,17 @@ footer {
 
     cursor: pointer;
 }
+
+.footer-image {
+
+    text-align: center;
+
+    padding: 50px 0;
+}
+
+.footer-image img {
+
+    max-width: 100%;
+
+    width: 500px;
+}
