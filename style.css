@@ -1,9 +1,15 @@
 /* 全体 */
 
 body {
+
     margin: 0;
-    font-family: "Yu Gothic", sans-serif;
-    background-color: #ffffff;
+
+    font-family:
+        "Noto Sans JP",
+        "Yu Gothic",
+        sans-serif;
+
+    background-color: #fafafa;
 }
 
 
@@ -123,10 +129,19 @@ body {
 .about {
 
     width: 80%;
+    max-width: 1000px;
 
-    margin: 60px auto;
+    margin: 80px auto;
 
-    line-height: 2;
+    padding: 40px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+    line-height: 2.3;
 
     font-size: 18px;
 }
@@ -239,5 +254,33 @@ footer {
 
 .hero3 img {
     width: 260px;
+}
+
+.top-banner {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
+
+.navbar {
+
+    position: sticky;
+
+    top: 56px;
+
+    z-index: 999;
+}
+
+.footer-buttons button:hover,
+.top-banner button:hover {
+
+    transform: translateY(-3px);
+
+    transition: 0.2s;
+
+    background: #f4bcbc;
 }
 
