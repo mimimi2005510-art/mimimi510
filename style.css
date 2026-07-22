@@ -632,9 +632,74 @@ footer {
     transform: none; 
 }
 
-/* スマホ表示の時は少し高さを自動調整 */
+
+/* ===================================
+   📱 スマホ・タブレット用レスポンシブ設定
+=================================== */
 @media (max-width: 768px) {
+    /* 1. フッター画像・ヘッダー画像のスマホ表示最適化 */
+    .bottom-image {
+        height: 150px; /* スマホ画面の比率に合わせて高さを抑え、左右のカットを最小限に */
+        margin-top: 30px;
+    }
+
     .video-top-image {
         height: 180px;
     }
-}
+
+    .top-image {
+        height: 240px;
+    }
+
+    /* 2. メインタイトルの文字崩れ防止 */
+    .hero-title h1 {
+        font-size: 32px;
+        letter-spacing: 4px;
+    }
+
+    /* 3. 授業動画カードの1列並び化（文字のつぶれを解消） */
+    .video-grid {
+        grid-template-columns: 1fr; /* 3列から1列へ */
+        width: 90%;
+        gap: 20px;
+    }
+
+    /* 4. コンテンツ・カード枠の余白調整 */
+    .about, .content-box {
+        width: 90%;
+        padding: 25px 20px;
+        margin: 30px auto;
+        font-size: 15px;
+    }
+
+    .video-card {
+        padding: 25px;
+    }
+
+    /* 5. ナビゲーション・ボタンの折り返し対応 */
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 20px;
+        position: relative; /* スマホで押しやすく位置固定を解除 */
+        top: 0;
+    }
+
+    .navbar ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .footer-buttons button {
+        width: 100%;
+        max-width: 280px;
+    }
+
+
