@@ -594,127 +594,186 @@ footer {
 }
 
 /* ===================================
-   🤖 AI検索モーダル（会話型検索UI）
+   🌸 新・おしゃれフローティングチャットUI（AIみみみ）
 =================================== */
 
-/* 暗い背景のオーバーレイ */
-.search-modal-overlay {
-    display: none;
+/* 1. 全体のコンテナ */
+.chat-panel-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
+    bottom: 30px;
+    right: 30px;
     z-index: 10000;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-modal-overlay.open {
-    display: flex;
-    animation: fadeIn 0.25s ease;
-}
-
-/* モーダル本体 */
-.search-modal {
-    background: #ffffff;
-    width: 90%;
-    max-width: 480px;
-    height: 580px;
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(232, 140, 167, 0.25);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    position: relative;
+    align-items: flex-end;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
-/* ヘッダー */
-.search-modal-header {
+/* 2. 右下の可愛い起動ボタン */
+#openChatBtn {
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #ffdde9, #e88ca7);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(232, 140, 167, 0.4);
+    font-size: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+#openChatBtn:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(232, 140, 167, 0.6);
+}
+
+/* 3. チャットパネル本体 */
+.chat-panel {
+    display: none; /* 最初は非表示 */
+    width: 380px;
+    height: 550px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px); /* すりガラス効果 */
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: absolute;
+    bottom: 85px;
+    right: 0;
+    transform-origin: bottom right;
+    animation: panelAppear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(248, 223, 232, 0.5);
+    flex-direction: column;
+}
+
+.chat-panel.open {
+    display: flex;
+}
+
+/* 4. ヘッダー */
+.chat-header {
     background: linear-gradient(135deg, #fff4f8, #ffdce8);
-    padding: 16px 20px;
+    padding: 18px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #f8dfe8;
 }
 
-.search-modal-title {
+.chat-title-area {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    color: #444;
-    font-size: 16px;
+    gap: 12px;
 }
 
-.search-modal-close {
+.header-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.chat-status {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-title-name {
+    font-weight: bold;
+    color: #444;
+    font-size: 15px;
+}
+
+.chat-status-online {
+    font-size: 11px;
+    color: #e88ca7;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.chat-status-online::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background-color: #e88ca7;
+    border-radius: 50%;
+}
+
+.close-chat-btn {
     background: none;
     border: none;
-    font-size: 22px;
+    font-size: 20px;
     color: #888;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.search-modal-close:hover {
+.close-chat-btn:hover {
     color: #e88ca7;
-    transform: scale(1.1);
+    transform: rotate(90deg);
 }
 
-/* チャットエリア */
+/* 5. トーク（チャット）履歴エリア */
 .chat-history {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    background: #fafafa;
+    gap: 15px;
+    background-color: #fafafa;
+}
+
+/* チャットメッセージ全体のコンテナ（アイコン＋吹き出し） */
+.message-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.message-container.user {
+    justify-content: flex-end;
+}
+
+/* アイコン */
+.ai-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-top: 3px;
 }
 
 /* 吹き出しの基本スタイル */
 .chat-bubble {
-    max-width: 80%;
+    max-width: 75%;
     padding: 12px 16px;
     border-radius: 18px;
     font-size: 14px;
     line-height: 1.6;
     word-break: break-word;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.03);
 }
 
-/* AIの返信 */
-/* AIみみみの吹き出し */
+/* AI（みみみ）の吹き出し */
 .chat-bubble.ai {
     background: #ffffff;
     color: #444;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-    box-shadow: 0 4px 12px rgba(232, 140, 167, 0.15);
-    border: 1.5px solid #f8dfe8;
-    position: relative;
+    border-top-left-radius: 4px; /* ここが丸くないのが新鮮 */
+    border: 1px solid #f0d8e0;
 }
 
-/* AIみみみの考え中アニメーション */
-.chat-bubble.loading {
-    color: #e88ca7;
-    font-style: italic;
-    animation: pulse 1.2s infinite ease-in-out;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
-}
-/* ユーザーの質問 */
+/* ユーザーの吹き出し（LINE風のピンク） */
 .chat-bubble.user {
     background: #e88ca7;
     color: #ffffff;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px; /* ここが丸くない */
 }
 
 /* おすすめタグ（サジェスト） */
@@ -722,14 +781,15 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 8px;
+    margin-top: 10px;
+    margin-left: 45px; /* アバターの分ずらす */
 }
 
 .suggestion-tag {
     background: #fff4f8;
     color: #e88ca7;
     border: 1px solid #ffdce8;
-    padding: 6px 12px;
+    padding: 7px 14px;
     border-radius: 20px;
     font-size: 12px;
     cursor: pointer;
@@ -737,49 +797,75 @@ footer {
 }
 
 .suggestion-tag:hover {
-    background: #e88ca7;
+    background: linear-gradient(135deg, #ffdde9, #e88ca7);
     color: #ffffff;
+    border-color: transparent;
 }
 
-/* 入力エリア */
+/* 6. 入力エリア */
 .chat-input-area {
     padding: 15px;
     background: #ffffff;
     border-top: 1px solid #f0d8e0;
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .chat-input-area input {
     flex: 1;
-    padding: 10px 16px;
+    padding: 12px 18px;
     border: 1px solid #f0d8e0;
-    border-radius: 20px;
+    border-radius: 30px;
     outline: none;
     font-size: 14px;
+    background-color: #fafafa;
 }
 
 .chat-input-area input:focus {
     border-color: #e88ca7;
+    background-color: white;
 }
 
 .chat-input-area button {
-    background: #e88ca7;
-    color: white;
+    background: none;
     border: none;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-weight: bold;
+    font-size: 24px;
+    color: #e88ca7;
     cursor: pointer;
     transition: 0.2s;
+    padding: 0;
 }
 
 .chat-input-area button:hover {
-    background: #d67b96;
+    transform: scale(1.1) rotate(-15deg);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+/* アニメーション */
+@keyframes panelAppear {
+    from { opacity: 0; transform: scale(0.8) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+/* ローディング（考え中） */
+.loading-dots {
+    color: #e88ca7;
+}
+
+/* レスポンス対応（スマホでは全画面っぽくする） */
+@media (max-width: 768px) {
+    .chat-panel-container {
+        bottom: 15px;
+        right: 15px;
+    }
+    .chat-panel {
+        width: calc(100vw - 30px);
+        height: 80vh;
+        bottom: 75px;
+    }
+    #openChatBtn {
+        width: 55px;
+        height: 55px;
+        font-size: 25px;
+    }
+}
