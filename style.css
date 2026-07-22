@@ -523,3 +523,60 @@ footer {
 
     border-radius: 12px;
 }
+
+.youtube-links {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    margin: 50px 0;
+
+    flex-wrap: wrap;
+}
+
+.youtube-button {
+
+    padding: 18px 36px;
+
+    border-radius: 18px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: white;
+
+    transition: 0.25s;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.latest-video {
+
+    background: linear-gradient(
+        135deg,
+        #ff4d6d,
+        #ff758f
+    );
+}
+
+.channel {
+
+    background: linear-gradient(
+        135deg,
+        #7b68ee,
+        #9b8cff
+    );
+}
+
+.youtube-button:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 14px 28px rgba(0,0,0,0.18);
+}
