@@ -618,7 +618,7 @@ footer {
     position: relative;
     width: 100%;
     /* ✅ 高さを低くして、巨大化（切り抜き）を抑える */
-    height: 250px; 
+    height: 350px; 
     overflow: hidden;
 }
 
