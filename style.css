@@ -455,3 +455,55 @@ footer {
             translateY(8px);
     }
 }
+
+
+.video-grid {
+
+    width: 80%;
+
+    max-width: 1100px;
+
+    margin: 40px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.video-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+
+    color: #444;
+
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
+    transition: 0.25s;
+}
+
+.video-card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow: 0 16px 35px rgba(0,0,0,0.15);
+}
+
+.video-card h3 {
+
+    margin-top: 0;
+
+    color: #e88ca7;
+}
+
+.video-card p {
+
+    line-height: 1.8;
+}
