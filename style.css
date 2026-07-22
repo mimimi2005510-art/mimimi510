@@ -126,6 +126,15 @@ body {
     transform: translateY(-2px);
 }
 
+.navbar a {
+
+    text-decoration: none;
+
+    color: inherit;
+
+    display: block;
+}
+
 
 /* メイン画像 */
 
