@@ -135,6 +135,12 @@ body {
     display: block;
 }
 
+.navbar .active {
+
+    color: #e88ca7;
+
+    font-weight: bold;
+}
 
 /* メイン画像 */
 
