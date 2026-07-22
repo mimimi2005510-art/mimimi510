@@ -265,16 +265,15 @@ footer {
 
     max-width: 1000px;
 
-    margin: 80px auto;
+    margin: 50px auto;
 
-    padding: 40px;
+    padding: 30px;
 
     background-color: #ffffff;
 
     border-radius: 20px;
 
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-
 }
 
 .content-box h2 {
