@@ -456,7 +456,7 @@ footer {
     }
 }
 
-
+/*授業動画ページ*/
 .video-grid {
 
     width: 80%;
@@ -506,4 +506,20 @@ footer {
 .video-card p {
 
     line-height: 1.8;
+}
+
+.hero4 {
+
+    text-align: center;
+
+    padding: 40px;
+}
+
+.hero4 img {
+
+    width: 350px;
+
+    max-width: 100%;
+
+    border-radius: 12px;
 }
