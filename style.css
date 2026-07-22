@@ -45,9 +45,11 @@ body {
 
 .navbar {
 
-    background-color: #111;
+    background: rgba(255, 255, 255, 0.9);
 
-    color: white;
+    backdrop-filter: blur(12px);
+
+    color: #444;
 
     display: flex;
 
@@ -56,6 +58,10 @@ body {
     align-items: center;
 
     padding: 15px 40px;
+
+    border-bottom: 1px solid #f0d8e0;
+
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -105,6 +111,15 @@ body {
 .navbar li {
 
     cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.navbar li:hover {
+
+    color: #e88ca7;
+
+    transform: translateY(-2px);
 }
 
 
@@ -195,8 +210,8 @@ footer {
 
     background: linear-gradient(
         135deg,
-        #ffffff,
-        #f6f7fb
+        #fff4f8,
+        #ffdce8
     );
 
     color: #333;
@@ -331,11 +346,11 @@ footer {
 
 .hero-title h1 {
 
-    font-size: 72px;
+    font-size: 68px;
 
-    margin: 0;
+    letter-spacing: 10px;
 
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .footer-buttons a {
@@ -345,8 +360,14 @@ footer {
 
 .footer-buttons button:hover {
 
-    transform: translateY(-6px);
+    transform: translateY(-6px) scale(1.03);
+
+    background: linear-gradient(
+        135deg,
+        #ffe6ef,
+        #ffcfe0
+    );
 
     box-shadow:
-        0 16px 36px rgba(0, 0, 0, 0.15);
+        0 16px 36px rgba(240, 140, 170, 0.25);
 }
