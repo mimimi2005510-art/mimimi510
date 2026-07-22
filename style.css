@@ -1,16 +1,12 @@
 /* 全体 */
 
 body {
-
     margin: 0;
-
     font-family:
         "Noto Sans JP",
         "Yu Gothic",
         sans-serif;
-
     font-size: 16px;
-
     background-color: #fafafa;
 }
 
@@ -19,26 +15,20 @@ body {
 
 .top-banner {
     background-color: #f8dfe8;
-
     padding: 15px 30px;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .top-banner button {
-
     padding: 10px 20px;
-
     border: 1px solid #888;
-
     background-color: white;
-
     border-radius: 5px;
-
     cursor: pointer;
 }
 
@@ -46,51 +36,37 @@ body {
 /* ナビゲーションバー */
 
 .navbar {
-
     background: rgba(255, 255, 255, 0.9);
-
     backdrop-filter: blur(12px);
-
     color: #444;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     padding: 15px 40px;
-
     border-bottom: 1px solid #f0d8e0;
-
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 56px;
+    z-index: 999;
 }
 
 
 /* 左側 */
 
 .logo-area {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 }
 
 .logo-area img {
-
     width: 45px;
-
     height: 45px;
-
     border-radius: 50%;
 }
 
 .logo-area h1 {
-
     font-size: 20px;
-
     margin: 0;
 }
 
@@ -98,373 +74,236 @@ body {
 /* 右側メニュー */
 
 .navbar ul {
-
     display: flex;
-
     list-style: none;
-
     gap: 35px;
-
     margin: 0;
-
     padding: 0;
 }
 
 .navbar li {
-
     font-size: 15px;
-
     cursor: pointer;
-
     transition: 0.2s;
 }
 
 .navbar li:hover {
-
     color: #e88ca7;
-
     transform: translateY(-2px);
 }
 
 .navbar a {
-
     text-decoration: none;
-
     color: inherit;
-
     display: block;
 }
 
 .navbar .active {
-
     color: #e88ca7;
-
     font-weight: bold;
 }
 
 /* メイン画像 */
 
 .hero {
-
     text-align: center;
-
     padding: 40px;
 }
 
 .hero img {
-
     max-width: 100%;
-
     width: 350px;
-
     border-radius: 10px;
 }
 
 .about {
-
     width: 80%;
     max-width: 1000px;
-
     margin: 80px auto;
-
     padding: 40px;
-
     background: white;
-
     border-radius: 20px;
-
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-
     line-height: 2.3;
-
     font-size: 18px;
-
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 }
 
 .about:hover {
-
     transform: translateY(-5px);
-
     box-shadow:
         0 10px 30px rgba(0,0,0,0.12);
 }
 
 .about h2 {
-
     font-size: 28px;
-
     margin-bottom: 20px;
-
     font-weight: 600;
 }
 
 .signature {
-
     text-align: right;
-
     margin-top: 50px;
 }
 
 footer {
-
     background-color: #f3f3f3;
-
     padding: 40px;
 }
 
 .footer-title {
-
     font-size: 20px;
-
     margin-bottom: 30px;
 }
 
 .footer-buttons {
-
     display: flex;
-
     justify-content: center;
-
     gap: 30px;
 }
 
 .footer-buttons button {
-
     width: 210px;
-
     height: 60px;
-
     border: none;
-
     border-radius: 18px;
-
     background: linear-gradient(
         135deg,
         #fff4f8,
         #ffdce8
     );
-
     color: #333;
-
     font-size: 16px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     box-shadow:
         0 8px 24px rgba(0, 0, 0, 0.08);
-
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 }
 
 .top-image {
-
     position: relative;
-
     width: 100%;
-
     height: 420px;
-
     overflow: hidden;
 }
 
 .top-image::before {
-
     content: "";
-
     position: absolute;
-
     inset: 0;
-
     background: rgba(0,0,0,0.25);
-
     z-index: 1;
 }
 
 .top-image img {
-
     width: 100%;
-
     height: 100%;
-
     object-fit: cover;
-
     object-position: center 35%;
-
     display: block;
 }
 
 
 .content-box {
-
     width: 80%;
-
     max-width: 1000px;
-
     margin: 50px auto;
-
     padding: 30px;
-
     background-color: #ffffff;
-
     border-radius: 20px;
-
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 }
 .content-box:hover {
-
     transform: translateY(-5px);
-
     box-shadow:
         0 10px 30px rgba(0,0,0,0.12);
 }
 
 
 .content-box h2 {
-
     font-size: 28px;
-
     margin-bottom: 20px;
-
     font-weight: 600;
 }
 
 .content-box p,
 .content-box ul,
 .about p {
-
     font-size: 16px;
-
     line-height: 2;
 }
 
-.hero1 img {
-    width: 320px;
-}
-
-.hero2 img {
-    width: 320px;
-}
-
+.hero1 img,
+.hero2 img,
 .hero3 img {
     width: 320px;
 }
 
-.top-banner {
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 1000;
-}
-
-.navbar {
-
-    position: sticky;
-
-    top: 56px;
-
-    z-index: 999;
-}
-
 .footer-buttons button:hover,
 .top-banner button:hover {
-
     transform: translateY(-3px);
-
     transition: 0.2s;
-
     background: #f4bcbc;
 }
 
 .hero-title {
-
     position: absolute;
-
     top: 50%;
-
     left: 50%;
-
     transform: translate(-50%, -50%);
-
     color: white;
-
     text-align: center;
-
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-
     z-index: 2;
 }
 
 .hero-title h1 {
-
     font-size: 68px;
-
     letter-spacing: 10px;
-
     font-weight: 500;
 }
 
 .footer-buttons a {
-
     text-decoration: none;
 }
 
 .footer-buttons button:hover {
-
     transform: translateY(-6px) scale(1.03);
-
     background: linear-gradient(
         135deg,
         #ffe6ef,
         #ffcfe0
     );
-
     box-shadow:
         0 16px 36px rgba(240, 140, 170, 0.25);
 }
 
 .scroll-guide {
-
     position: absolute;
-
     bottom: 20px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     color: white;
-
     font-size: 14px;
-
     opacity: 0.8;
-
     animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
-
     0%,100% {
-
         transform:
             translateX(-50%)
             translateY(0);
     }
-
     50% {
-
         transform:
             translateX(-50%)
             translateY(8px);
@@ -473,118 +312,116 @@ footer {
 
 /*授業動画ページ*/
 .video-grid {
-
     width: 80%;
-
     max-width: 1100px;
-
     margin: 40px auto;
-
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 25px;
 }
 
 .video-card {
-
     background: white;
-
-    padding: 40px;
-
+    padding: 30px; /* 余白を微調整して埋め込みとバランスを最適化 */
     border-radius: 20px;
-
     text-decoration: none;
-
     color: #444;
-
     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-
     transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .video-card:hover {
-
     transform: translateY(-8px);
-
     box-shadow: 0 16px 35px rgba(0,0,0,0.15);
 }
 
 .video-card h3 {
-
     margin-top: 0;
-
     color: #e88ca7;
-
     text-align: center;
 }
 
 .video-card p {
-
     line-height: 1.8;
-
     color: #666;
+    margin-bottom: 10px;
+}
+
+/* 🎬 追加：YouTube埋め込み枠（16:9比率を固定） */
+.video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 15px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 🎬 追加：カード内の詳細リンクボタン */
+.card-link-button {
+    display: block;
+    text-align: center;
+    padding: 10px 15px;
+    background: #f8dfe8;
+    color: #444;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.card-link-button:hover {
+    background: #e88ca7;
+    color: white;
 }
 
 .bottom-image {
-
     width: 100%;
-
-    height: 300px;
-
+    height: 220px;
     overflow: hidden;
-
     margin-top: 80px;
 }
 
 .bottom-image img {
-
     width: 100%;
-
     height: 100%;
-
     object-fit: cover;
-
     object-position: center 40%;
-
     display: block;
 }
 
 .youtube-links {
-
     display: flex;
-
     justify-content: center;
-
     gap: 30px;
-
     margin: 50px 0;
-
     flex-wrap: wrap;
 }
 
 .youtube-button {
-
     padding: 18px 36px;
-
     border-radius: 18px;
-
     text-decoration: none;
-
     font-size: 16px;
-
     font-weight: 600;
-
     color: white;
-
     transition: 0.25s;
-
     box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .latest-video {
-
     background: linear-gradient(
         135deg,
         #ff4d6d,
@@ -593,7 +430,6 @@ footer {
 }
 
 .channel {
-
     background: linear-gradient(
         135deg,
         #7b68ee,
@@ -602,14 +438,11 @@ footer {
 }
 
 .youtube-button:hover {
-
     transform: translateY(-5px);
-
     box-shadow: 0 14px 28px rgba(0,0,0,0.18);
 }
 
 .video-page {
-
     background: #fffafc;
 }
 
@@ -617,7 +450,6 @@ footer {
 .video-top-image {
     position: relative;
     width: 100%;
-    /* ✅ 高さを低くして、巨大化（切り抜き）を抑える */
     height: 350px; 
     overflow: hidden;
 }
@@ -625,10 +457,8 @@ footer {
 .video-top-image img {
     width: 100%;
     height: 100%;
-    /* ✅ 全体の中央を切り抜く */
     object-fit: cover;
     object-position: center;
-    /* ✅ 1.2倍などの拡大指定を完全に削除 */
     transform: none; 
 }
 
@@ -639,7 +469,7 @@ footer {
 @media (max-width: 768px) {
     /* 1. フッター画像・ヘッダー画像のスマホ表示最適化 */
     .bottom-image {
-        height: 150px; /* スマホ画面の比率に合わせて高さを抑え、左右のカットを最小限に */
+        height: 150px;
         margin-top: 30px;
     }
 
@@ -659,7 +489,7 @@ footer {
 
     /* 3. 授業動画カードの1列並び化（文字のつぶれを解消） */
     .video-grid {
-        grid-template-columns: 1fr; /* 3列から1列へ */
+        grid-template-columns: 1fr;
         width: 90%;
         gap: 20px;
     }
@@ -681,7 +511,7 @@ footer {
         flex-direction: column;
         gap: 12px;
         padding: 12px 20px;
-        position: relative; /* スマホで押しやすく位置固定を解除 */
+        position: relative;
         top: 0;
     }
 
@@ -701,5 +531,4 @@ footer {
         width: 100%;
         max-width: 280px;
     }
-
-
+}
