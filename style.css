@@ -462,6 +462,73 @@ footer {
     transform: none; 
 }
 
+/* --- ドロップダウンメニューの改良 --- */
+
+/* 親となる「li」の基準設定 */
+.navbar li {
+    position: relative; /* サブメニューの表示位置の基準にする */
+}
+
+/* サブメニュー（隠れているリスト）の基本設定 */
+.dropdown-menu {
+    display: none;      /* 最初は非表示 */
+    position: absolute;
+    top: 100%;          /* 親メニューのすぐ下に配置 */
+    left: 50%;
+    transform: translateX(-50%); /* 中央寄せ */
+    background-color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* 高級感のある影 */
+    border-radius: 12px;
+    min-width: 180px;
+    padding: 10px 0;
+    list-style: none;
+    z-index: 1001;
+    margin-top: 5px;   /* 少し隙間を空ける */
+}
+
+/* 親メニューにマウスを乗せたら表示 */
+.navbar li:hover .dropdown-menu {
+    display: block;
+    animation: menuFade 0.3s ease; /* ふわっと表示 */
+}
+
+/* メニュー間の隙間で消えないようにするブリッジ */
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 10;
+}
+
+/* サブメニュー内の各項目 */
+.dropdown-menu li {
+    width: 100%;
+    text-align: center;
+}
+
+.dropdown-menu a {
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    color: #444 !important;
+    display: block !important;
+    transition: 0.2s;
+    white-space: nowrap; /* 改行させない */
+}
+
+/* サブメニュー内のホバー時 */
+.dropdown-menu a:hover {
+    background-color: #fff4f8;
+    color: #e88ca7 !important;
+}
+
+/* ふわっと表示させるアニメーション */
+@keyframes menuFade {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
 
 /* ===================================
    📱 スマホ・タブレット用レスポンシブ設定
