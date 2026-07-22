@@ -1,1 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>情報Ⅰ 一問一答</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f4f6fb;
+      font-family: "Yu Gothic", "Meiryo", sans-serif;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 5px;
+      color: #1e293b;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 16px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      background-color: #f8fafc;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus {
+      border-color: #2563eb;
+    }
+
+    .main-button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: #2563eb;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .main-button:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .back-button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #2563eb;
+      border-radius: 12px;
+      background: white;
+      color: #2563eb;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .back-button:hover {
+      background: #eff6ff;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    #progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #2563eb;
+      transition: 0.3s;
+    }
+
+    #timer-bar {
+      width: 100%;
+      height: 100%;
+      background: #22c55e;
+      transition: 1s linear;
+    }
+
+    #question-number {
+      color: #64748b;
+      margin-bottom: 10px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    #question {
+      font-size: 24px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      color: #0f172a;
+    }
+
+    #timer {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      color: #e11d48;
+      margin-bottom: 8px;
+    }
+
+    .rate-box {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #64748b;
+      margin-top: -10px;
+      margin-bottom: 20px;
+      background: #f8fafc;
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .choice {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      margin-bottom: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      background: white;
+      font-size: 17px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s;
+      color: #1e293b;
+    }
+
+    .choice:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      border-color: #93c5fd;
+    }
+
+    .correct {
+      background: #dcfce7 !important;
+      border-color: #86efac !important;
+      color: #166534 !important;
+      font-weight: bold;
+    }
+
+    .wrong {
+      background: #fee2e2 !important;
+      border-color: #fca5a5 !important;
+      color: #991b1b !important;
+    }
+
+    #result {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      min-height: 40px;
+    }
+
+    #score {
+      text-align: center;
+      font-size: 36px;
+      margin: 20px 0 10px 0;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    #percentage {
+      text-align: center;
+      font-size: 22px;
+      color: #2563eb;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .explanation-box {
+      background: #f8fafc;
+      border-left: 4px solid #2563eb;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #334155;
+      text-align: left;
+    }
+
+    .addon-details {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      margin-top: 15px;
+      overflow: hidden;
+    }
+
+    .addon-summary {
+      padding: 14px 20px;
+      font-weight: bold;
+      font-size: 15px;
+      color: #1e293b;
+      cursor: pointer;
+      user-select: none;
+      background: #f8fafc;
+      transition: background 0.2s;
+    }
+
+    .addon-summary:hover {
+      background: #f1f5f9;
+    }
+
+    .addon-content {
+      padding: 18px 20px;
+      border-top: 1px solid #e2e8f0;
+      background: white;
+      max-height: 350px;
+      overflow-y: auto;
+    }
+
+    .mission-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #f1f5f9;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .achievement-badge {
+      padding: 12px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+      transition: transform 0.2s;
+    }
+
+    .achievement-badge:hover {
+      transform: scale(1.03);
+    }
+
+    .achievement-badge.common {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .achievement-badge.rare {
+      border: 2px solid #3b82f6;
+      background: #eff6ff;
+    }
+
+    .achievement-badge.legendary {
+      border: 2px solid #eab308;
+      background: linear-gradient(135deg, #fef08a, #fef9c3);
+      box-shadow: 0 4px 10px rgba(234, 179, 8, 0.15);
+    }
+
+    .achievement-badge.locked {
+      background: #f8fafc !important;
+      color: #94a3b8;
+      border: 1px dashed #cbd5e1 !important;
+      box-shadow: none !important;
+    }
+
+    .status-container {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      padding: 18px 20px;
+      border-radius: 16px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+    }
+
+    .levelup-popup {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      background: linear-gradient(135deg, #eab308, #f59e0b);
+      color: white;
+      padding: 25px 50px;
+      border-radius: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .levelup-popup.show {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    
+    .wrong-card {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 12px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      #question {
+        font-size: 20px;
+      }
+
+      .choice {
+        padding: 15px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- レベルアップポップアップ -->
+  <div id="levelup-notice" class="levelup-popup">
+    🎉 LEVEL UP! 🎉
+    <div style="font-size: 18px; margin-top: 5px; font-weight: normal;" id="levelup-subtext">RANK 2 に到達しました！</div>
+  </div>
+
+  <!-- 実績解除ポップアップ -->
+  <div id="achievement-notice" class="levelup-popup" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+    🏆 実績解除！ 🏆
+    <div style="font-size: 18px; margin-top: 5px; font-weight: normal;" id="achievement-subtext">実績名</div>
+  </div>
+
+  <div class="container">
+    <h1>情報Ⅰ 一問一答</h1>
+    <p class="subtitle">単元とレベルを選んで学習を始めましょう</p>
+
+    <!-- メニュー画面 -->
+    <div id="menu" class="card">
+      <div class="status-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 18px; font-weight: bold; letter-spacing: 0.5px;">RANK <span id="user-level">1</span></span>
+          <span style="font-size: 14px; font-weight: bold;" id="user-streak">🔥 1 日連続</span>
+        </div>
+        <div style="background: rgba(255,255,255,0.2); height: 8px; border-radius: 999px; overflow: hidden;">
+          <div id="xp-bar" style="background: #38bdf8; width: 0%; height: 100%; transition: width 0.5s ease;"></div>
+        </div>
+        <div style="text-align: right; font-size: 11px; margin-top: 5px; color: #bfdbfe;" id="xp-text">0 / 200 XP</div>
+      </div>
+
+      <h3 style="margin-top:0; color:#1e293b;">条件選択</h3>
+      
+      <label for="unitSelect">■ 単元</label>
+      <select id="unitSelect"></select>
+
+      <label for="levelSelect">■ 難易度レベル</label>
+      <select id="levelSelect">
+        <option value="すべて">すべて（全レベル）</option>
+        <option value="★">★（基礎問題）</option>
+        <option value="★★">★★（練習問題）</option>
+        <option value="★★★">★★★（演習問題）</option>
+        <option value="★★★★">★★★★（応用問題）</option>
+        <option value="★★★★★">★★★★★（入試レベル）</option>
+      </select>
+
+      <details class="addon-details">
+        <summary class="addon-summary">📅 本日の学習ミッション</summary>
+        <div class="addon-content" id="daily-missions-area"></div>
+      </details>
+
+      <details class="addon-details">
+        <summary class="addon-summary">🏆 実績コレクション図鑑</summary>
+        <div class="addon-content" id="achievement-grid-area"></div>
+      </details>
+
+      <details class="addon-details" style="margin-bottom: 25px;">
+        <summary class="addon-summary">📝 マイ・デバッグノート（誤答克服リスト）</summary>
+        <div class="addon-content" id="wrong-questions-area"></div>
+      </details>
+
+      <button class="main-button" onclick="startQuiz()">学習開始</button>
+    </div>
+
+    <!-- クイズ画面 -->
+    <div id="quiz" class="card" style="display:none;">
+      <div class="progress-container">
+        <div id="progress-bar"></div>
+      </div>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <div id="question-number"></div>
+        <div id="combo-display" style="font-size: 18px; font-weight: bold; color: #f59e0b; display: none;">🔥 0 COMBO</div>
+      </div>
+      
+      <div id="timer"></div>
+
+      <div class="progress-container">
+        <div id="timer-bar"></div>
+      </div>
+
+      <h2 id="question"></h2>
+
+      <div class="rate-box">
+        <div id="global-rate">問題正答率：--%</div>
+        <div id="personal-rate">あなたの累計正答率：--%</div>
+      </div>
+
+      <div id="choices"></div>
+      <div id="explanation-area"></div>
+      <p id="result"></p>
+      
+      <button class="back-button" onclick="goBackToMenu()">単元選択に戻る</button>
+    </div>
+
+    <!-- 終了画面 -->
+    <div id="finish" class="card" style="display:none;">
+      <h2 style="text-align:center; color:#1e293b;">学習終了</h2>
+      <p id="score"></p>
+      <p id="percentage"></p>
+      <div id="title"></div>
+      <button class="main-button" onclick="goBackToMenu()">もう一度解く / 最初に戻る</button>
+    </div>
+  </div>
+
+  <!-- 外部問題データファイルの読み込み -->
+  <script src="questions.js"></script>
+
+  <script>
+    // -------------------------------------------------------------
+    // グローバル状態管理変数
+    // -------------------------------------------------------------
+    let allQuestions = [];
+    let current = 0;
+    let score = 0;
+
+    let combo = 0;
+    let maxCombo = 0;
+
+    let timerId;
+    let timeLeft = 0;
+    let totalTime = 0;
+    let currentLevel = "";
+    let currentUnit = "";
+
+    // ローカルユーザーキーの生成・管理
+    let userKey = localStorage.getItem("quiz_user_key");
+    if (!userKey) {
+      userKey = "user_" + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+      localStorage.setItem("quiz_user_key", userKey);
+    }
+
+    let personalAnswerCount = 0;
+    let personalCorrectCount = 0;
+
+    // -------------------------------------------------------------
+    // 実績リスト定義
+    // -------------------------------------------------------------
+    const VISUAL_ACHIEVEMENTS = [
+      { name: "最初の一歩", icon: "📝", desc: "累計50問解答", rarity: "common" },
+      { name: "学習の習慣化", icon: "🧮", desc: "累計100問解答", rarity: "common" },
+      { name: "コツコツ積み上げ", icon: "🧱", desc: "累計150問解答", rarity: "common" },
+      { name: "基礎地盤の完成", icon: "🏗️", desc: "累計200問解答", rarity: "common" },
+      { name: "知識のスタック構造", icon: "📦", desc: "累計250問解答", rarity: "common" },
+      { name: "継続の力", icon: "⛓️", desc: "累計300問解答", rarity: "common" },
+      { name: "ブレイクスルー手前", icon: "🚀", desc: "累計400問解答", rarity: "rare" },
+      { name: "弛まぬ努力", icon: "📈", desc: "累計500問解答", rarity: "rare" },
+      { name: "達人への階段・銅", icon: "🥉", desc: "累計600問解答", rarity: "rare" },
+      { name: "達人への階段・銀", icon: "🥈", desc: "累計700問解答", rarity: "rare" },
+      { name: "達人への階段・金", icon: "🥇", desc: "累計800問解答", rarity: "rare" },
+      { name: "マスター手前", icon: "👑", desc: "累計900問解答", rarity: "rare" },
+      { name: "努力の結晶", icon: "✨", desc: "累計1000問解答", rarity: "legendary" },
+      { name: "512問達成", icon: "💿", desc: "累計512問解答", rarity: "rare" },
+      { name: "2048問達成", icon: "🖥️", desc: "累計2048問解答", rarity: "legendary" },
+      
+      { name: "ひらめきの芽", icon: "🌱", desc: "累計25問正解", rarity: "common" },
+      { name: "確かな手応え", icon: "💡", desc: "累計50問正解", rarity: "common" },
+      { name: "知識のインプット", icon: "📖", desc: "累計75問正解", rarity: "common" },
+      { name: "知識の開花", icon: "🌸", desc: "累計150問正解", rarity: "common" },
+      { name: "知識の定着", icon: "📜", desc: "累計200問正解突破", rarity: "rare" },
+      { name: "データベース構築", icon: "🗄️", desc: "累計250問正解", rarity: "rare" },
+      { name: "グランドマスター", icon: "🦅", desc: "累計300問正解", rarity: "legendary" },
+
+      { name: "バグの種火", icon: "🔥", desc: "累計50回誤答", rarity: "common" },
+      { name: "苦ての発見", icon: "🩹", desc: "累計100回誤答", rarity: "common" },
+      { name: "デバッグ見習い", icon: "🔧", desc: "累計150回誤答", rarity: "common" },
+      { name: "例外処理の達人", icon: "⚙️", desc: "累計200回誤答", rarity: "common" },
+      { name: "パッチ適用中", icon: "🛠️", desc: "累計250回誤答", rarity: "common" },
+      { name: "粘り強い復習", icon: "📚", desc: "累計300回誤答", rarity: "rare" },
+      { name: "エラーハンドラー", icon: "🛡️", desc: "累計350回誤答", rarity: "rare" },
+      { name: "レジリエンス", icon: "💎", desc: "累計400回誤答", rarity: "rare" },
+      { name: "不屈のデバッガー", icon: "🦁", desc: "累計450回誤答", rarity: "rare" },
+      { name: "バグバスター", icon: "👾", desc: "累計500回誤答", rarity: "legendary" },
+
+      { name: "最初の一またぎ", icon: "🏃", desc: "連続ログイン2日以上達成", rarity: "common" },
+      { name: "習慣の定着", icon: "🌿", desc: "連続ログイン3日以上達成", rarity: "rare" },
+      { name: "平日フルコミット", icon: "📅", desc: "連続ログイン5日以上達成", rarity: "rare" },
+      { name: "ウィークリー同期", icon: "🌎", desc: "連続ログイン7日以上達成", rarity: "legendary" },
+
+      { name: "トリプルショット", icon: "🎯", desc: "最高3連続正解", rarity: "common" },
+      { name: "的中者", icon: "🏹", desc: "最高5連続正解", rarity: "common" },
+      { name: "クリティカルヒット", icon: "⚔️", desc: "最高8連続正解", rarity: "common" },
+      { name: "安定のプロセス", icon: "🔒", desc: "最高10連続正解", rarity: "rare" },
+      { name: "連勝王", icon: "👑", desc: "最高15連続正解", rarity: "rare" },
+      { name: "完全制覇", icon: "🌟", desc: "最高20連続正解", rarity: "legendary" },
+
+      { name: "高い安定性", icon: "🔮", desc: "累計正答率90%以上", rarity: "legendary" },
+      { name: "難関への挑戦", icon: "🧗", desc: "最高難度で50%以上正解", rarity: "rare" },
+      { name: "全問正解", icon: "🏅", desc: "1回の挑戦で全問正解", rarity: "rare" },
+      { name: "完璧な即答", icon: "🏎️", desc: "全問正解かつ時間70%残し", rarity: "legendary" },
+
+      { name: "朝のルーティン", icon: "🌅", desc: "朝5〜8時の朝活解答", rarity: "common" },
+      { name: "ナイトラーニング", icon: "🌙", desc: "夜22〜3時の集中解答", rarity: "common" },
+
+      { name: "デジタルエシックス", icon: "⚖️", desc: "「情報社会」で10問正解", rarity: "common", category: "情報社会", target: 10 },
+      { name: "インフォデザイナー", icon: "🎨", desc: "「情報デザイン」で10問正解", rarity: "common", category: "情報デザイン", target: 10 },
+      { name: "コード職人", icon: "⌨️", desc: "「コンピュータとプログラミング」で10問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 10 },
+      { name: "シグナルウォーカー", icon: "📡", desc: "「情報通信ネットワーク」で10問正解", rarity: "common", category: "情報通信ネットワーク", target: 10 },
+      { name: "データサイエンティスト", icon: "📊", desc: "「データの活用」で10問正解", rarity: "legendary", category: "データの活用", target: 10 },
+      { name: "ソリューションの鍵", icon: "🧩", desc: "「問題解決」で10問正解", rarity: "rare", category: "問題解決", target: 10 }
+    ];
+
+    const MISSION_POOL = [
+      { id: "m_ans10", text: "🎯 <b>日課の基礎演習</b>：本日10問以上に解答する", target: 10, type: "answers", reward: 50 },
+      { id: "m_cor5", text: "💎 <b>精度の追求</b>：本日5問以上に正解する", target: 5, type: "corrects", reward: 50 },
+      { id: "m_ans20", text: "🔥 <b>圧倒的挑戦</b>：本日20問以上に解答する", target: 20, type: "answers", reward: 100 },
+      { id: "m_cor12", text: "👑 <b>至高の領域へ</b>：本日12問以上に正解する", target: 12, type: "corrects", reward: 100 },
+      { id: "m_combo5", text: "⚔️ <b>コンボマスター</b>：本日最高5連続正解を達成する", target: 5, type: "maxCombo", reward: 60 },
+      { id: "m_lv5", text: "🧗 <b>限界突破</b>：本日難易度「★★★★★」に1回以上解答する", target: 1, type: "lv5Count", reward: 80 }
+    ];
+
+    // 初期起動時のロード処理
+    document.addEventListener("DOMContentLoaded", () => {
+      initApp();
+    });
+
+    function initApp() {
+      // 個人スコアをlocalStorageから読み込み
+      personalAnswerCount = parseInt(localStorage.getItem("quiz_p_ans_" + userKey)) || 0;
+      personalCorrectCount = parseInt(localStorage.getItem("quiz_p_cor_" + userKey)) || 0;
+
+      // QUESTIONS_DATA から単元一覧を取得
+      loadUnitsFromQuestionsData();
+
+      // UIの更新
+      updateMenuElements();
+    }
+
+    // 単元一覧をQUESTIONS_DATAから自動抽出してセレクトボックスを生成
+    function loadUnitsFromQuestionsData() {
+      const select = document.getElementById("unitSelect");
+      select.innerHTML = "";
+
+      let units = [];
+      if (typeof QUESTIONS_DATA !== "undefined" && Array.isArray(QUESTIONS_DATA)) {
+        const rawUnits = QUESTIONS_DATA.map(q => q.unit).filter(u => u && u.trim() !== "");
+        units = [...new Set(rawUnits)];
+      }
+
+      if (units.length === 0) {
+        units = ["全単元"];
+      }
+
+      units.forEach(unit => {
+        const option = document.createElement("option");
+        option.value = unit;
+        option.textContent = unit;
+        select.appendChild(option);
+      });
+
+      localStorage.setItem("quiz_total_units_count", units.length);
+    }
+
+    // ローカル問題検索処理（GASの getQuestions 互換）
+    function getQuestionsLocal(unit, level) {
+      if (typeof QUESTIONS_DATA === "undefined" || !Array.isArray(QUESTIONS_DATA)) {
+        return [];
+      }
+
+      const filtered = QUESTIONS_DATA.filter(row => {
+        const matchUnit = (unit === "すべての単元" || row.unit === unit);
+        const matchLevel = (level === "すべて" || row.level === level);
+        return matchUnit && matchLevel;
+      });
+
+      // シャッフル
+      return filtered.sort(() => Math.random() - 0.5).map(q => {
+        // ローカルでの回答数・正解数を取得
+        const qStats = JSON.parse(localStorage.getItem("quiz_q_stat_" + q.id) || '{"ans":0,"cor":0}');
+        return {
+          id: q.id || "Q_" + Math.random().toString(36).substring(2, 8),
+          category: q.category || "",
+          level: q.level || "★",
+          question: q.question,
+          choices: q.choices,
+          answer: Number(q.answer),
+          correctCount: qStats.cor,
+          answerCount: qStats.ans,
+          explanation: q.explanation || "解説は登録されていません。"
+        };
+      });
+    }
+
+    // ローカル回答保存処理（GASの saveAnswer 互換）
+    function saveAnswerLocal(questionId, isCorrect, category) {
+      // 個人の回答数・正解数更新
+      personalAnswerCount++;
+      if (isCorrect) personalCorrectCount++;
+
+      localStorage.setItem("quiz_p_ans_" + userKey, personalAnswerCount);
+      localStorage.setItem("quiz_p_cor_" + userKey, personalCorrectCount);
+
+      // 問題別の集計データ更新
+      const qKey = "quiz_q_stat_" + questionId;
+      const qStats = JSON.parse(localStorage.getItem(qKey) || '{"ans":0,"cor":0}');
+      qStats.ans++;
+      if (isCorrect) qStats.cor++;
+      localStorage.setItem(qKey, JSON.stringify(qStats));
+
+      // カテゴリ別正解数の記録（実績用）
+      if (isCorrect && category) {
+        const catKey = "quiz_cat_cor_" + category;
+        const currentCatCor = (parseInt(localStorage.getItem(catKey)) || 0) + 1;
+        localStorage.setItem(catKey, currentCatCor);
+      }
+
+      // デバッグノート（誤答克服リスト）の記録
+      if (!isCorrect) {
+        let wrongList = JSON.parse(localStorage.getItem("quiz_wrong_list_" + userKey) || "[]");
+        const qObj = allQuestions[current];
+        if (qObj && !wrongList.some(item => item.id === questionId)) {
+          wrongList.push({
+            id: questionId,
+            question: qObj.question,
+            explanation: qObj.explanation
+          });
+          localStorage.setItem("quiz_wrong_list_" + userKey, JSON.stringify(wrongList));
+        }
+      } else {
+        // 正解した場合は誤答リストから削除
+        let wrongList = JSON.parse(localStorage.getItem("quiz_wrong_list_" + userKey) || "[]");
+        wrongList = wrongList.filter(item => item.id !== questionId);
+        localStorage.setItem("quiz_wrong_list_" + userKey, JSON.stringify(wrongList));
+      }
+    }
+
+    // -------------------------------------------------------------
+    // ゲーミフィケーション＆状態表示ロジック
+    // -------------------------------------------------------------
+    function updateGamificationStatus(addXpAmount = 0) {
+      let xp = parseInt(localStorage.getItem("quiz_user_xp_" + userKey)) || 0;
+      if (!localStorage.getItem("quiz_user_xp_" + userKey) && personalAnswerCount > 0) {
+        xp = personalAnswerCount * 5 + personalCorrectCount * 10;
+      }
+
+      xp += addXpAmount;
+      localStorage.setItem("quiz_user_xp_" + userKey, xp);
+
+      let level = 1;
+      let reqXp = 200;
+      let accumXp = 0;
+
+      while (xp >= accumXp + reqXp) {
+        accumXp += reqXp;
+        level++;
+        reqXp = Math.floor(reqXp * 1.2);
+      }
+
+      const prevLevel = parseInt(localStorage.getItem("quiz_user_level_" + userKey)) || 1;
+      if (level > prevLevel) {
+        localStorage.setItem("quiz_user_level_" + userKey, level);
+        showLevelUpNotice(`RANK ${level} に到達しました！`);
+      } else {
+        localStorage.setItem("quiz_user_level_" + userKey, level);
+      }
+
+      const currentLevelXp = xp - accumXp;
+      const percent = Math.min(100, Math.floor((currentLevelXp / reqXp) * 100));
+
+      document.getElementById("user-level").textContent = level;
+      document.getElementById("xp-bar").style.width = percent + "%";
+      document.getElementById("xp-text").textContent = `${currentLevelXp} / ${reqXp} XP`;
+
+      // 連続ログインカウント
+      const today = new Date().toLocaleDateString();
+      const lastLogin = localStorage.getItem("quiz_last_login_" + userKey);
+      let streak = parseInt(localStorage.getItem("quiz_login_streak_" + userKey)) || 1;
+
+      if (lastLogin !== today) {
+        if (lastLogin) {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          if (lastLogin === yesterday.toLocaleDateString()) {
+            streak++;
+          } else {
+            streak = 1;
+          }
+        }
+        localStorage.setItem("quiz_last_login_" + userKey, today);
+        localStorage.setItem("quiz_login_streak_" + userKey, streak);
+      }
+
+      document.getElementById("user-streak").textContent = `🔥 ${streak} 日連続`;
+    }
+
+    function showLevelUpNotice(text) {
+      const popup = document.getElementById("levelup-notice");
+      document.getElementById("levelup-subtext").textContent = text;
+      popup.classList.add("show");
+      setTimeout(() => popup.classList.remove("show"), 3500);
+    }
+
+    function showAchievementNotice(text) {
+      const popup = document.getElementById("achievement-notice");
+      document.getElementById("achievement-subtext").textContent = text;
+      popup.classList.add("show");
+      setTimeout(() => popup.classList.remove("show"), 3500);
+    }
+
+    function updateMenuElements() {
+      updateGamificationStatus(0);
+      renderMissions();
+      renderAchievements();
+      renderWrongQuestions();
+    }
+
+    // デイリーミッションの描画・判定
+    function renderMissions() {
+      const area = document.getElementById("daily-missions-area");
+      const today = new Date().toLocaleDateString();
+
+      let mData = JSON.parse(localStorage.getItem("quiz_daily_m_" + userKey) || "{}");
+      if (mData.date !== today) {
+        const shuffled = [...MISSION_POOL].sort(() => Math.random() - 0.5);
+        mData = {
+          date: today,
+          list: shuffled.slice(0, 3).map(m => ({ id: m.id, done: false })),
+          answersToday: 0,
+          correctsToday: 0,
+          maxComboToday: 0,
+          lv5Today: 0
+        };
+        localStorage.setItem("quiz_daily_m_" + userKey, JSON.stringify(mData));
+      }
+
+      let html = "";
+      mData.list.forEach(item => {
+        const spec = MISSION_POOL.find(p => p.id === item.id);
+        if (!spec) return;
+
+        let currentVal = 0;
+        if (spec.type === "answers") currentVal = mData.answersToday || 0;
+        if (spec.type === "corrects") currentVal = mData.correctsToday || 0;
+        if (spec.type === "maxCombo") currentVal = mData.maxComboToday || 0;
+        if (spec.type === "lv5Count") currentVal = mData.lv5Today || 0;
+
+        const isClear = currentVal >= spec.target;
+        if (isClear && !item.done) {
+          item.done = true;
+          localStorage.setItem("quiz_daily_m_" + userKey, JSON.stringify(mData));
+          updateGamificationStatus(spec.reward);
+          showLevelUpNotice(`ミッション達成！ +${spec.reward}XP`);
+        }
+
+        html += `
+          <div class="mission-item">
+            <div>${spec.text}</div>
+            <div>
+              ${item.done ? '<span style="color:#22c55e; font-weight:bold;">CLEAR!</span>' : `<span style="color:#64748b;">${Math.min(currentVal, spec.target)} / ${spec.target}</span>`}
+            </div>
+          </div>
+        `;
+      });
+
+      area.innerHTML = html;
+    }
+
+    // 実績一覧の描画
+    function renderAchievements() {
+      const area = document.getElementById("achievement-grid-area");
+      const unlockedList = JSON.parse(localStorage.getItem("quiz_achievements_" + userKey) || "[]");
+
+      let html = '<div class="achievement-grid">';
+      VISUAL_ACHIEVEMENTS.forEach(ach => {
+        let isUnlocked = unlockedList.includes(ach.name);
+
+        // 自動判定チェック
+        if (!isUnlocked) {
+          const wrongCount = personalAnswerCount - personalCorrectCount;
+          const streak = parseInt(localStorage.getItem("quiz_login_streak_" + userKey)) || 1;
+          const maxComboAllTime = parseInt(localStorage.getItem("quiz_max_combo_" + userKey)) || 0;
+          const catCor = ach.category ? (parseInt(localStorage.getItem("quiz_cat_cor_" + ach.category)) || 0) : 0;
+
+          if (ach.desc.includes("累計") && ach.desc.includes("問解答")) {
+            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
+            if (personalAnswerCount >= target) isUnlocked = true;
+          } else if (ach.desc.includes("累計") && ach.desc.includes("問正解")) {
+            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
+            if (ach.category) {
+              if (catCor >= (ach.target || 10)) isUnlocked = true;
+            } else {
+              if (personalCorrectCount >= target) isUnlocked = true;
+            }
+          } else if (ach.desc.includes("誤答")) {
+            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
+            if (wrongCount >= target) isUnlocked = true;
+          } else if (ach.desc.includes("連続ログイン")) {
+            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
+            if (streak >= target) isUnlocked = true;
+          } else if (ach.desc.includes("最高") && ach.desc.includes("連続正解")) {
+            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
+            if (maxComboAllTime >= target) isUnlocked = true;
+          }
+
+          if (isUnlocked) {
+            unlockedList.push(ach.name);
+            localStorage.setItem("quiz_achievements_" + userKey, JSON.stringify(unlockedList));
+            showAchievementNotice(`「${ach.name}」を解除！`);
+          }
+        }
+
+        html += `
+          <div class="achievement-badge ${ach.rarity} ${isUnlocked ? '' : 'locked'}">
+            <div style="font-size: 24px;">${isUnlocked ? ach.icon : '🔒'}</div>
+            <div style="font-weight: bold; margin: 4px 0;">${ach.name}</div>
+            <div style="font-size: 11px; opacity: 0.8;">${ach.desc}</div>
+          </div>
+        `;
+      });
+
+      html += '</div>';
+      area.innerHTML = html;
+    }
+
+    // デバッグノート（誤答リスト）の描画
+    function renderWrongQuestions() {
+      const area = document.getElementById("wrong-questions-area");
+      const wrongList = JSON.parse(localStorage.getItem("quiz_wrong_list_" + userKey) || "[]");
+
+      if (wrongList.length === 0) {
+        area.innerHTML = `<div style="color: #64748b; text-align: center; padding: 10px;">間違えた問題はありません！素晴らしい！</div>`;
+        return;
+      }
+
+      let html = `<div style="margin-bottom: 10px; font-weight: bold; color: #e11d48;">復習が必要な問題: ${wrongList.length} 件</div>`;
+      wrongList.forEach((item, index) => {
+        html += `
+          <div class="wrong-card">
+            <div style="font-weight: bold; margin-bottom: 4px; color: #1e293b;">Q. ${item.question}</div>
+            <div style="color: #475569;">💡 ${item.explanation}</div>
+          </div>
+        `;
+      });
+
+      area.innerHTML = html;
+    }
+
+    // -------------------------------------------------------------
+    // クイズメイン処理
+    // -------------------------------------------------------------
+    function startQuiz() {
+      const unit = document.getElementById("unitSelect").value;
+      const level = document.getElementById("levelSelect").value;
+
+      currentUnit = unit;
+      currentLevel = level;
+
+      allQuestions = getQuestionsLocal(unit, level);
+
+      if (allQuestions.length === 0) {
+        alert("該当する問題が見つかりませんでした。別の条件を試してください。");
+        return;
+      }
+
+      current = 0;
+      score = 0;
+      combo = 0;
+      maxCombo = 0;
+
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("finish").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+
+      totalTime = allQuestions.length * 20; // 1問あたり20秒換算
+      timeLeft = totalTime;
+
+      startTimer();
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = allQuestions[current];
+      
+      // プログレスバー
+      const progressPercent = (current / allQuestions.length) * 100;
+      document.getElementById("progress-bar").style.width = progressPercent + "%";
+
+      document.getElementById("question-number").textContent = `問題 ${current + 1} / ${allQuestions.length} （レベル: ${q.level}）`;
+      document.getElementById("question").textContent = q.question;
+      document.getElementById("result").textContent = "";
+      document.getElementById("explanation-area").innerHTML = "";
+
+      // 全体正答率
+      const gRate = q.answerCount > 0 ? Math.round((q.correctCount / q.answerCount) * 100) : "--";
+      document.getElementById("global-rate").textContent = `正答率：${gRate}% (${q.correctCount}/${q.answerCount})`;
+
+      // 累計個人正答率
+      const pRate = personalAnswerCount > 0 ? Math.round((personalCorrectCount / personalAnswerCount) * 100) : "--";
+      document.getElementById("personal-rate").textContent = `あなたの累計正答率：${pRate}%`;
+
+      // 選択肢の描画
+      const choicesDiv = document.getElementById("choices");
+      choicesDiv.innerHTML = "";
+
+      q.choices.forEach((choiceText, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "choice";
+        btn.textContent = `${idx + 1}. ${choiceText}`;
+        btn.onclick = () => checkAnswer(idx + 1, btn);
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(userChoice, selectedBtn) {
+      const q = allQuestions[current];
+      const isCorrect = (userChoice === q.answer);
+
+      // ボタンの無効化
+      const buttons = document.querySelectorAll(".choice");
+      buttons.forEach(btn => btn.disabled = true);
+
+      // 正解・不正解表示
+      if (isCorrect) {
+        selectedBtn.classList.add("correct");
+        document.getElementById("result").textContent = "⭕ 正解！";
+        document.getElementById("result").style.color = "#166534";
+        score++;
+        combo++;
+        if (combo > maxCombo) maxCombo = combo;
+
+        // コンボ表示
+        if (combo >= 2) {
+          const comboDisp = document.getElementById("combo-display");
+          comboDisp.textContent = `🔥 ${combo} COMBO!`;
+          comboDisp.style.display = "block";
+        }
+      } else {
+        selectedBtn.classList.add("wrong");
+        buttons[q.answer - 1].classList.add("correct"); // 正解のボタンを緑にする
+        document.getElementById("result").textContent = "❌ 不正解...";
+        document.getElementById("result").style.color = "#991b1b";
+        combo = 0;
+        document.getElementById("combo-display").style.display = "none";
+      }
+
+      // 解説表示
+      if (q.explanation) {
+        document.getElementById("explanation-area").innerHTML = `
+          <div class="explanation-box">
+            <b>【解説】</b><br>${q.explanation}
+          </div>
+        `;
+      }
+
+      // ローカル保存＆XP追加
+      saveAnswerLocal(q.id, isCorrect, q.category);
+      const xpEarned = isCorrect ? 15 : 5;
+      updateGamificationStatus(xpEarned);
+
+      // デイリーミッションカウンター更新
+      let mData = JSON.parse(localStorage.getItem("quiz_daily_m_" + userKey) || "{}");
+      mData.answersToday = (mData.answersToday || 0) + 1;
+      if (isCorrect) mData.correctsToday = (mData.correctsToday || 0) + 1;
+      if (maxCombo > (mData.maxComboToday || 0)) mData.maxComboToday = maxCombo;
+      if (q.level === "★★★★★") mData.lv5Today = (mData.lv5Today || 0) + 1;
+      localStorage.setItem("quiz_daily_m_" + userKey, JSON.stringify(mData));
+
+      // 過去最高コンボ保持
+      const prevMaxCombo = parseInt(localStorage.getItem("quiz_max_combo_" + userKey)) || 0;
+      if (maxCombo > prevMaxCombo) {
+        localStorage.setItem("quiz_max_combo_" + userKey, maxCombo);
+      }
+
+      // 次の問題へ
+      setTimeout(() => {
+        current++;
+        if (current < allQuestions.length) {
+          loadQuestion();
+        } else {
+          finishQuiz();
+        }
+      }, 2500);
+    }
+
+    function finishQuiz() {
+      clearInterval(timerId);
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById("finish").style.display = "block";
+
+      const percent = Math.round((score / allQuestions.length) * 100);
+      document.getElementById("score").textContent = `${allQuestions.length} 問中 ${score} 問正解！`;
+      document.getElementById("percentage").textContent = `正答率: ${percent}%`;
+
+      let titleMessage = "";
+      if (percent === 100) titleMessage = "🏆 素晴らしい！パーフェクト達成です！";
+      else if (percent >= 80) titleMessage = "🌟 高得点！この調子でマスターを目指しましょう！";
+      else if (percent >= 50) titleMessage = "👍 ナイスチャレンジ！間違えた問題の解説を確認しよう！";
+      else titleMessage = "📖 復習のチャンス！デバッグノートを活用してもう一度！";
+
+      document.getElementById("title").innerHTML = `<div style="text-align:center; font-size:18px; color:#475569; font-weight:bold;">${titleMessage}</div>`;
+
+      // クイズ終了時のメニュー表示更新
+      updateMenuElements();
+    }
+
+    function goBackToMenu() {
+      clearInterval(timerId);
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById("finish").style.display = "none";
+      document.getElementById("menu").style.display = "block";
+      updateMenuElements();
+    }
+
+    function startTimer() {
+      updateTimer();
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        timeLeft--;
+        updateTimer();
+        if (timeLeft <= 0) {
+          clearInterval(timerId);
+          alert("時間切れです！");
+          finishQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById("timer").textContent = `⏱️ 残り ${minutes}:${String(seconds).padStart(2, "0")}`;
+
+      const percent = (timeLeft / totalTime) * 100;
+      const bar = document.getElementById("timer-bar");
+      bar.style.width = percent + "%";
+
+      if (percent <= 20) bar.style.background = "#ef4444";
+      else if (percent <= 50) bar.style.background = "#f59e0b";
+      else bar.style.background = "#22c55e";
+    }
+  </script>
+</body>
+
+</html>
 
