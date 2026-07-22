@@ -163,6 +163,18 @@ body {
     line-height: 2.3;
 
     font-size: 18px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.about:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.12);
 }
 
 .about h2 {
