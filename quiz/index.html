@@ -1676,14 +1676,14 @@
 
       // ローカル保存＆XP追加
       saveAnswerLocal(q.id, isCorrect, q.category);
-      // 問題統計を最新状態へ更新
-      const latestStats = JSON.parse(
-          localStorage.getItem("quiz_q_stat_" + q.id) ||
-          '{"ans":0,"cor":0}'
+      // 更新された統計を読み込み直す
+      const updatedStats = JSON.parse(
+        localStorage.getItem("quiz_q_stat_" + q.id) ||
+        '{"ans":0,"cor":0}'
       );
 
-      q.answerCount = latestStats.ans;
-      q.correctCount = latestStats.cor;
+      q.answerCount = updatedStats.ans;
+      q.correctCount = updatedStats.cor;
       const xpEarned = isCorrect ? 15 : 5;
       updateGamificationStatus(xpEarned);
 
