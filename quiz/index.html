@@ -1249,9 +1249,14 @@
       const select = document.getElementById("unitSelect");
       select.innerHTML = "";
 
+      const allOption = document.createElement("option");
+      allOption.value = "全単元";
+      allOption.textContent = "全単元";
+      select.appendChild(allOption);
+
       let units = [];
-      if (typeof QUESTIONS_DATA !== "undefined" && Array.isArray(QUESTIONS_DATA)) {
-        const rawUnits = QUESTIONS_DATA.map(q => q.unit).filter(u => u && u.trim() !== "");
+      if (typeof quizQuestions !== "undefined" && Array.isArray(quizQuestions)) {
+        const rawUnits = quizQuestions.map(q => q.unit).filter(u => u && u.trim() !== "");
         units = [...new Set(rawUnits)];
       }
 
@@ -1271,13 +1276,13 @@
 
     // ローカル問題検索処理（GASの getQuestions 互換）
     function getQuestionsLocal(unit, level) {
-      if (typeof QUESTIONS_DATA === "undefined" || !Array.isArray(QUESTIONS_DATA)) {
+      if (typeof quizQuestions === "undefined" || !Array.isArray(quizQuestions)) {
         return [];
       }
 
-      const filtered = QUESTIONS_DATA.filter(row => {
-        const matchUnit = (unit === "すべての単元" || row.unit === unit);
-        const matchLevel = (level === "すべて" || row.level === level);
+      const filtered = quizQuestions.filter(row => {
+        const matchUnit = (unit === "全単元" || row.unit === unit);
+        const matchLevel = (level === "すべて" || row.difficulty === level);
         return matchUnit && matchLevel;
       });
 
@@ -1287,10 +1292,10 @@
         const qStats = JSON.parse(localStorage.getItem("quiz_q_stat_" + q.id) || '{"ans":0,"cor":0}');
         return {
           id: q.id || "Q_" + Math.random().toString(36).substring(2, 8),
-          category: q.category || "",
-          level: q.level || "★",
+          category: q.field || "",
+          level: q.difficulty || "★",
           question: q.question,
-          choices: q.choices,
+          choices: q.options,
           answer: Number(q.answer),
           correctCount: qStats.cor,
           answerCount: qStats.ans,
@@ -1621,6 +1626,14 @@
 
     function checkAnswer(userChoice, selectedBtn) {
       const q = allQuestions[current];
+      // 最新の問題統計を読み込む
+      const latestStats = JSON.parse(
+        localStorage.getItem("quiz_q_stat_" + q.id) ||
+        '{"ans":0,"cor":0}'
+      );
+
+      q.answerCount = latestStats.ans;
+      q.correctCount = latestStats.cor;
       const isCorrect = (userChoice === q.answer);
 
       // ボタンの無効化
@@ -1662,6 +1675,14 @@
 
       // ローカル保存＆XP追加
       saveAnswerLocal(q.id, isCorrect, q.category);
+      // 問題統計を最新状態へ更新
+      const latestStats = JSON.parse(
+          localStorage.getItem("quiz_q_stat_" + q.id) ||
+          '{"ans":0,"cor":0}'
+      );
+
+      q.answerCount = latestStats.ans;
+      q.correctCount = latestStats.cor;
       const xpEarned = isCorrect ? 15 : 5;
       updateGamificationStatus(xpEarned);
 
@@ -1707,6 +1728,8 @@
 
       document.getElementById("title").innerHTML = `<div style="text-align:center; font-size:18px; color:#475569; font-weight:bold;">${titleMessage}</div>`;
 
+      renderAchievements();
+      renderWrongQuestions();
       // クイズ終了時のメニュー表示更新
       updateMenuElements();
     }
