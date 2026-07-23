@@ -1233,6 +1233,7 @@
     });
 
     function initApp() {
+      console.log(quizQuestions);
       // 個人スコアをlocalStorageから読み込み
       personalAnswerCount = parseInt(localStorage.getItem("quiz_p_ans_" + userKey)) || 0;
       personalCorrectCount = parseInt(localStorage.getItem("quiz_p_cor_" + userKey)) || 0;
