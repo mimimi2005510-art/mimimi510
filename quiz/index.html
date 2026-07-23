@@ -14,7 +14,7 @@
 
     body {
       margin: 0;
-      padding: 0px;
+      padding: 0;
       background: #f4f6fb;
       font-family: "Yu Gothic", "Meiryo", sans-serif;
       color: #333;
@@ -25,6 +25,22 @@
       margin: 40px auto; /* 上下に 40px の余白を設定 */
       padding: 0 20px;   /* スマホ表示時に左右が端にくっつかないよう保護 */
       position: relative;
+    }
+
+    /* ★ここを追加★ トップヘッダー画像（quiz-footer.png）用スタイル */
+    .top-banner-image {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .top-banner-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: block;
     }
 
     h1 {
@@ -544,16 +560,50 @@
     }
 
     /* フッター内のフォントサイズ統一 */
+    /* ★ここを上書き★ フッター全体のフォント・カラー統一 */
     footer {
-      font-size: 16px !important; /* 他ページのサイズに合わせて16px〜18pxで調整 */
+      background-color: #1e293b !important;
+      color: #ffffff !important;
+      padding: 35px 20px !important;
+      text-align: center !important;
+      margin-top: 60px !important;
+      font-size: 16px !important;
+      width: 100%;
     }
 
     footer .footer-title,
     footer span,
     footer p,
     footer a {
-      font-size: 16px !important;
+      font-size: 18px !important;
+      font-weight: bold !important;
+      color: #ffffff !important;
+      text-decoration: none;
+    }
+
+    footer .footer-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    footer .footer-buttons button {
+      font-size: 15px !important;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #ffffff;
+      color: #1e293b;
       font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    footer .footer-buttons button:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-2px);
     }
 
   
