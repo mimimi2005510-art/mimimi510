@@ -606,6 +606,70 @@
       transform: translateY(-2px);
     }
 
+    /* ===========================
+   上部画像（Googleサイト風）
+    =========================== */
+
+    .quiz-top-image{
+
+      position: relative;
+
+      width:100%;
+
+      height:380px;
+
+      overflow:hidden;
+
+    }
+
+    .quiz-top-image img{
+
+      width:100%;
+
+      height:100%;
+
+      object-fit:cover;
+
+      object-position:center 35%;
+
+      display:block;
+
+    }
+
+    .quiz-top-image::before{
+
+      content:"";
+
+      position:absolute;
+
+      inset:0;
+
+      background:rgba(0,0,0,.25);
+
+    }
+
+    .quiz-title{
+
+      position:absolute;
+
+      top:50%;
+
+      left:50%;
+
+      transform:translate(-50%,-50%);
+
+      color:#fff;
+
+      font-size:68px;
+
+      letter-spacing:8px;
+
+      text-shadow:0 4px 12px rgba(0,0,0,.7);
+
+      z-index:2;
+
+    }
+
   
   </style>
 </head>
