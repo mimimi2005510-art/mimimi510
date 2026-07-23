@@ -874,51 +874,6 @@ footer {
 
 
 
-/* ------------------------------
-   一問一答ページ専用
------------------------------- */
-
-.quiz-header{
-
-    position:relative;
-
-    width:100%;
-
-    height:260px;
-
-    overflow:hidden;
-
-}
-
-.quiz-header img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center 40%;
-
-}
-
-.quiz-header::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:rgba(0,0,0,.25);
-
-}
-
-.quiz-header .hero-title{
-
-    z-index:2;
-
-}
 
 
 
