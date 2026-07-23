@@ -390,7 +390,158 @@
         padding: 15px;
         font-size: 15px;
       }
+      
     }
+    /* 追加コンテンツ用スタイル */
+.notice-box {
+  background-color: #fffbe0;
+  border-left: 4px solid #f59e0b;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #92400e;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.achievement-summary-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.achievement-summary-card h3 {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  color: #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-badge {
+  background: #2563eb;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.achievement-sub-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #475569;
+  margin: 15px 0 10px 0;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 4px;
+}
+
+.achievement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.achievement-list li {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #f1f5f9;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  color: #334155;
+}
+
+.rarity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rarity-item {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.rarity-item strong {
+  display: block;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.rarity-common {
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #475569;
+}
+
+.rarity-rare {
+  border: 2px solid #3b82f6;
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.rarity-legendary {
+  border: 2px solid #eab308;
+  background: linear-gradient(135deg, #fef08a, #fef9c3);
+  color: #854d0e;
+}
+
+.inquiry-section {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 25px;
+}
+
+.inquiry-section h3 {
+  margin-top: 0;
+  font-size: 17px;
+  color: #1e293b;
+}
+
+.inquiry-section textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  margin-top: 8px;
+  resize: vertical;
+  outline: none;
+}
+
+.inquiry-section textarea:focus {
+  border-color: #2563eb;
+}
+
+.inquiry-submit-btn {
+  background: #475569;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.inquiry-submit-btn:hover {
+  background: #334155;
+}
   </style>
 </head>
 
@@ -483,6 +634,49 @@
       </details>
 
       <button class="main-button" onclick="startQuiz()">学習開始</button>
+
+      <div class="notice-box">
+      💡 <b>お知らせ</b>：一問一答の内容には、教科書に記載されていない最新用語や発展内容も出題されるようになっています。
+      </div>
+
+      <div style="text-align: center; margin-bottom: 25px;">
+        <img src="quiz_main1.png" alt="一問一答メイン画像" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+      </div>
+
+      <div class="achievement-summary-card">
+        <h3>
+          <span>🏆 アチーブメント</span>
+          <span class="total-badge">総数 114 個</span>
+        </h3>
+
+        <div class="achievement-sub-title">■ カテゴリ毎の内訳</div>
+        <ul class="achievement-list">
+          <li><span>累計解答数</span><strong>15 個</strong></li>
+          <li><span>累計正解数</span><strong>7 個</strong></li>
+          <li><span>累計誤答数</span><strong>10 個</strong></li>
+          <li><span>ログイン日数</span><strong>4 個</strong></li>
+          <li><span>連続正解数</span><strong>6 個</strong></li>
+          <li><span>特殊条件</span><strong>9 個</strong></li>
+          <li><span>単元別回答数</span><strong>56 個</strong></li>
+        </ul>
+
+        <div class="achievement-sub-title">■ レア度別内訳</div>
+        <div class="rarity-grid">
+          <div class="rarity-item rarity-common">
+            Common (灰色の枠)
+            <strong>54 個</strong>
+          </div>
+          <div class="rarity-item rarity-rare">
+            Rare (青色の枠)
+            <strong>36 個</strong>
+          </div>
+          <div class="rarity-item rarity-legendary">
+            Legendary (金色の枠)
+            <strong>24 個</strong>
+          </div>
+        </div>
+      </div>
+      
     </div>
 
     <!-- クイズ画面 -->
