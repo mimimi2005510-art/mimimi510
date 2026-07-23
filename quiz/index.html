@@ -703,6 +703,58 @@
 
       text-shadow:none;
     }
+
+    .message-box{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:18px;
+    }
+
+    .message-box img{
+
+      width:60px;
+
+      height:60px;
+
+      border-radius:50%;
+
+      flex-shrink:0;
+    }
+
+    .message-box p{
+
+      margin:0;
+
+      background:#fff5f8;
+
+      padding:15px 20px;
+
+      border-radius:18px;
+
+      position:relative;
+
+      box-shadow:0 3px 10px rgba(0,0,0,.08);
+    }
+
+    .message-box p::before{
+
+      content:"";
+
+      position:absolute;
+
+      left:-10px;
+
+      top:24px;
+
+      border-right:10px solid #fff5f8;
+
+      border-top:10px solid transparent;
+
+      border-bottom:10px solid transparent;
+    }
   
   </style>
 </head>
@@ -862,11 +914,17 @@
 
       <section class="content-box">
 
-        <p>
-            全部取得できるように頑張ってみよう！！
-        </p>
+        <div class="message-box">
 
-    </section>
+          <img src="../images/fight!.png" alt="応援">
+
+          <p>
+              全部取得できるように頑張ってみよう！！
+          </p>
+
+        </div>
+
+      </section>
 
       <section class="hero">
           <img src="../images/quiz_main2.png" alt="アチーブメント頑張ろう画像">
