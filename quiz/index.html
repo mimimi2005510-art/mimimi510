@@ -680,28 +680,27 @@
 
       transform:translate(-50%,-50%);
 
-      padding:20px 50px;
+      width:90%;
 
-      background:rgba(255,255,255,.65);
-
-      backdrop-filter:blur(8px);
-
-      border-radius:20px;
+      text-align:center;
 
       z-index:2;
     }
-
+    
     .hero-title h1{
 
       margin:0;
 
-      color:#23395d;
-
-      font-size:58px;
+      font-size:60px;
 
       font-weight:700;
 
-      text-shadow:none;
+      letter-spacing:6px;
+
+      color:#ffe6f0;
+
+      text-shadow:
+          0 3px 10px rgba(0,0,0,.75);
     }
 
     .message-box{
@@ -754,6 +753,35 @@
       border-top:10px solid transparent;
 
       border-bottom:10px solid transparent;
+    }
+
+    .fight-message{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:20px;
+    }
+
+    .fight-message img{
+
+      width:60px;
+
+      height:60px;
+
+      object-fit:contain;
+
+      flex-shrink:0;
+    }
+
+    .fight-message p{
+
+      margin:0;
+
+      font-size:18px;
+
+      line-height:1.8;
     }
   
   </style>
@@ -914,7 +942,7 @@
 
       <section class="content-box">
 
-        <div class="message-box">
+        <div class="fight-message">
 
           <img src="../images/fight!.png" alt="応援">
 
