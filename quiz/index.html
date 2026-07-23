@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>情報Ⅰ 一問一答</title>
-  <link rel="icon" href="images/icon.ico">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../images/icon.ico">
   <style>
     * {
       box-sizing: border-box;
@@ -412,6 +413,27 @@
       </a>
   </header>
 
+  <nav class="navbar">
+    <div class="logo-area">
+      <img src="../images/logo.png" alt="ロゴ">
+      <h1>情報科 みみみ</h1>
+    </div>
+
+    <ul>
+      <li><a href="../index.html">ホーム</a></li>
+      <li class="active"><a href="quiz/index.html">一問一答</a></li>
+      <li><a href="../videos/index.html">授業動画</a></li>
+      <li><a href="../materials/index.html">授業資料 ▼</a>
+        <ul class="dropdown-menu">
+          <li><a href="../materials/first-year/index.html">情報Ⅰ（１年）</a></li>
+          <li><a href="../materials/second-year/index.html">情報Ⅱ（２年）</a></li>
+          <li><a href="../materials/others/index.html">共通・補足資料</a></li>
+        </ul>
+      </li>
+      <li><a href="../years/index.html">各年度 ▼</a></li>
+    </ul>
+  </nav>
+
   <div class="container">
     <h1>情報Ⅰ 一問一答</h1>
     <p class="subtitle">単元とレベルを選んで学習を始めましょう</p>
@@ -502,6 +524,53 @@
       <button class="main-button" onclick="goBackToMenu()">もう一度解く / 最初に戻る</button>
     </div>
   </div>
+
+  <footer>
+    <div class="footer-title">
+      質問＆連絡先：
+    </div>
+
+    <div class="footer-buttons">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMvVZe5J0cjGJMThHWPiKqtxn4tVEtYSKkZ_cwsuv_sHXXvA/viewform?usp=dialog" target="_blank">
+        <button>📝 フィードバック</button>
+      </a>
+
+      <a href="mailto:xxxholic510@gmail.com?subject=お問い合わせ">
+        <button>✉️ 連絡先</button>
+      </a>
+
+      <a href="https://classroom.google.com/c/ODU1NTc1NzgyMjA1?cjc=kzs6yp2s" target="_blank">
+        <button>🏫 情報科準備室</button>
+      </a>
+    </div>
+  </footer>
+
+  <div class="chat-panel-container">
+    <div id="chatPanel" class="chat-panel">
+      <div class="chat-header">
+        <div class="chat-title-area">
+          <img src="../images/logo.png" alt="AIみみみ" class="header-avatar">
+          <div class="chat-status">
+            <span class="chat-title-name">AIみみみ先生</span>
+            <span class="chat-status-online">対応中だよ</span>
+          </div>
+        </div>
+        <button id="closeChatBtn" class="close-chat-btn">✕</button>
+      </div>
+
+      <div id="chatHistory" class="chat-history">
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="質問・キーワードを入力..." onkeypress="handleKeyPress(event)">
+        <button onclick="submitSearch()">▶</button> 
+      </div>
+    </div>
+
+    <button id="openChatBtn">🔍</button>
+  </div>
+
+  <script src="../search.js"></script>
 
   <!-- 外部問題データファイルの読み込み -->
   <script src="questions.js"></script>
