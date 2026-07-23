@@ -1133,16 +1133,89 @@
       { name: "難関への挑戦", icon: "🧗", desc: "最高難度で50%以上正解", rarity: "rare" },
       { name: "全問正解", icon: "🏅", desc: "1回の挑戦で全問正解", rarity: "rare" },
       { name: "完璧な即答", icon: "🏎️", desc: "全問正解かつ時間70%残し", rarity: "legendary" },
-
       { name: "朝のルーティン", icon: "🌅", desc: "朝5〜8時の朝活解答", rarity: "common" },
       { name: "ナイトラーニング", icon: "🌙", desc: "夜22〜3時の集中解答", rarity: "common" },
+      { name: "デバッグ完了", icon: "🧰", desc: "誤答経験後に高得点クリア", rarity: "common" },
+      { name: "クロック同期", icon: "⏱️", desc: "電光石火のスピード正解", rarity: "rare" },
+      { name: "全単元開拓者", icon: "🗺️", desc: "すべての単元をプレイ", rarity: "legendary" },
 
       { name: "デジタルエシックス", icon: "⚖️", desc: "「情報社会」で10問正解", rarity: "common", category: "情報社会", target: 10 },
       { name: "インフォデザイナー", icon: "🎨", desc: "「情報デザイン」で10問正解", rarity: "common", category: "情報デザイン", target: 10 },
       { name: "コード職人", icon: "⌨️", desc: "「コンピュータとプログラミング」で10問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 10 },
       { name: "シグナルウォーカー", icon: "📡", desc: "「情報通信ネットワーク」で10問正解", rarity: "common", category: "情報通信ネットワーク", target: 10 },
       { name: "データサイエンティスト", icon: "📊", desc: "「データの活用」で10問正解", rarity: "legendary", category: "データの活用", target: 10 },
-      { name: "ソリューションの鍵", icon: "🧩", desc: "「問題解決」で10問正解", rarity: "rare", category: "問題解決", target: 10 }
+      { name: "ソリューションの鍵", icon: "🧩", desc: "「問題解決」で10問正解", rarity: "rare", category: "問題解決", target: 10 },
+      { name: "未来の予測者", icon: "🎲", desc: "「予想問題」で10問正解", rarity: "legendary", category: "予想問題", target: 10 },
+
+      // ■ 情報社会
+      { name: "キープロテクター", icon: "🔑", desc: "「情報社会」で50問正解", rarity: "common", category: "情報社会", target: 50 },
+      { name: "セキュリティアナリスト", icon: "🕵️", desc: "「情報社会」で100問正解", rarity: "common", category: "情報社会", target: 100 },
+      { name: "インシデントソルバー", icon: "🧯", desc: "「情報社会」で150問正解", rarity: "common", category: "情報社会", target: 150 },
+      { name: "デジタル市民の誇り", icon: "🪪", desc: "「情報社会」で200問正解", rarity: "rare", category: "情報社会", target: 200 },
+      { name: "プロパティ・ガード", icon: "📑", desc: "「情報社会」で250問正解", rarity: "rare", category: "情報社会", target: 250 },
+      { name: "暗号の支配者", icon: "🔏", desc: "「情報社会」で300問正解", rarity: "rare", category: "情報社会", target: 300 },
+      { name: "堅牢なる砦", icon: "🏢", desc: "「情報社会」で350問正解", rarity: "legendary", category: "情報社会", target: 350 },
+      { name: "ソサエティ5.0の先駆者", icon: "🪐", desc: "「情報社会」で400問正解", rarity: "legendary", category: "情報社会", target: 400 },
+
+      // ■ 情報デザイン
+      { name: "グリッドスケッチャー", icon: "📐", desc: "「情報デザイン」で50問正解", rarity: "common", category: "情報デザイン", target: 50 },
+      { name: "ビジュアルインサイダー", icon: "👁️", desc: "「情報デザイン」で100問正解", rarity: "common", category: "情報デザイン", target: 100 },
+      { name: "インフォ・ペンシル", icon: "✏️", desc: "「情報デザイン」で150問正解", rarity: "common", category: "情報デザイン", target: 150 },
+      { name: "パレットマスター", icon: "🌈", desc: "「情報デザイン」で200問正解", rarity: "rare", category: "情報デザイン", target: 200 },
+      { name: "フレームワークの絵師", icon: "🖼️", desc: "「情報デザイン」で250問正解", rarity: "rare", category: "情報デザイン", target: 250 },
+      { name: "UIアーキテクト", icon: "📱", desc: "「情報デザイン」で300問正解", rarity: "rare", category: "情報デザイン", target: 300 },
+      { name: "メディア表現の伝道師", icon: "🎭", desc: "「情報デザイン」で350問正解", rarity: "legendary", category: "情報デザイン", target: 350 },
+      { name: "アクセシビリティの至宝", icon: "🕊️", desc: "「情報デザイン」で400問正解", rarity: "legendary", category: "情報デザイン", target: 400 },
+
+      // ■ コンピュータとプログラミング
+      { name: "ロジックの導線", icon: "🔌", desc: "「コンピュータとプログラミング」で50問正解", rarity: "common", category: "コンピュータとプログラミング", target: 50 },
+      { name: "ターミナルパイロット", icon: "💻", desc: "「コンピュータとプログラミング」で100問正解", rarity: "common", category: "コンピュータとプログラミング", target: 100 },
+      { name: "バグハンター", icon: "🪲", desc: "「コンピュータとプログラミング」で150問正解", rarity: "common", category: "コンピュータとプログラミング", target: 150 },
+      { name: "アルゴリズムの系譜", icon: "🪵", desc: "「コンピュータとプログラミング」で200問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 200 },
+      { name: "並列処理の達人", icon: "🧵", desc: "「コンピュータとプログラミング」で250問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 250 },
+      { name: "オートメーションの神", icon: "🤖", desc: "「コンピュータとプログラミング」で300問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 300 },
+      { name: "ソースコードの魔術師", icon: "🧙‍♂️", desc: "「コンピュータとプログラミング」で350問正解", rarity: "legendary", category: "コンピュータとプログラミング", target: 350 },
+      { name: "コンピューティングの極致", icon: "🌌", desc: "「コンピュータとプログラミング」で400問正解", rarity: "legendary", category: "コンピュータとプログラミング", target: 400 },
+
+      // ■ 情報通信ネットワーク
+      { name: "パケットトレーサー", icon: "🧲", desc: "「情報通信ネットワーク」で50問正解", rarity: "common", category: "情報通信ネットワーク", target: 50 },
+      { name: "ノードコネクター", icon: "🔗", desc: "「情報通信ネットワーク」で100問正解", rarity: "common", category: "情報通信ネットワーク", target: 100 },
+      { name: "アドレス・ロケーター", icon: "📍", desc: "「情報通信ネットワーク防衛」で150問正解", rarity: "common", category: "情報通信ネットワーク", target: 150 },
+      { name: "プロトコル・セーバー", icon: "🛟", desc: "「情報通信ネットワーク」で200問正解", rarity: "rare", category: "情報通信ネットワーク", target: 200 },
+      { name: "ドメイン・ホスト", icon: "📣", desc: "httpリクエスト250回突破", rarity: "rare", category: "情報通信ネットワーク", target: 250 },
+      { name: "ネビュラ・クラウド", icon: "☁️", desc: "「情報通信ネットワーク」で300問正解", rarity: "rare", category: "情報通信ネットワーク", target: 300 },
+      { name: "ギガビット・エクスプレス", icon: "📶", desc: "「情報通信ネットワーク」で350問正解", rarity: "legendary", category: "情報通信ネットワーク", target: 350 },
+      { name: "次世代通信の覇者", icon: "🛸", desc: "「情報通信ネットワーク」で400問正解", rarity: "legendary", category: "情報通信ネットワーク", target: 400 },
+
+      // ■ データの活用
+      { name: "データエントリー", icon: "📋", desc: "「データの活用」で50問正解", rarity: "common", category: "データの活用", target: 50 },
+      { name: "サンプリング・アイ", icon: "🌡️", desc: "「データの活用」で100問正解", rarity: "common", category: "データの活用", target: 100 },
+      { name: "インサイトの探術師", icon: "🧬", desc: "「データの活用」で150問正解", rarity: "common", category: "データの活用", target: 150 },
+      { name: "ディストリビューション", icon: "🧿", desc: "「データの活用」で200問正解", rarity: "rare", category: "データの活用", target: 200 },
+      { name: "ストラクチャ・ビルダー", icon: "🗂️", desc: "「データの活用」で250問正解", rarity: "rare", category: "データの活用", target: 250 },
+      { name: "ビッグデータマイナー", icon: "🦾", desc: "「データの活用」で300問正解", rarity: "rare", category: "データの活用", target: 300 },
+      { name: "アナリティクス・コア", icon: "🔬", desc: "「データの活用」で350問正解", rarity: "legendary", category: "データの活用", target: 350 },
+      { name: "叡智のビッグバン", icon: "🌠", desc: "「データの活用」で400問正解", rarity: "legendary", category: "データの活用", target: 400 },
+
+      // ■ 問題解決
+      { name: "課題発見のルポルタージュ", icon: "🔎", desc: "「問題解決」で50問正解", rarity: "common", category: "問題解決", target: 50 },
+      { name: "ファインディング・コア", icon: "🔦", desc: "「問題解決」で100問正解", rarity: "common", category: "問題解決", target: 100 },
+      { name: "ブレイクダウン構造", icon: "🪜", desc: "「問題解決」で150問正解", rarity: "common", category: "問題解決", target: 150 },
+      { name: "モデリングの職人", icon: "🔨", desc: "「問題解決」で200問正解", rarity: "rare", category: "問題解決", target: 200 },
+      { name: "オプティマイザー", icon: "🎛️", desc: "「問題解決」で250問正解", rarity: "rare", category: "問題解決", target: 250 },
+      { name: "クリティカルシンカー", icon: "🤹", desc: "「問題解決」で300問正解", rarity: "rare", category: "問題解決", target: 300 },
+      { name: "ボトルネッククラッシャー", icon: "⛰️", desc: "「問題解決」で350問正解", rarity: "legendary", category: "問題解決", target: 350 },
+      { name: "伝説のソリューション", icon: "🔱", desc: "「問題解決」で400問正解", rarity: "legendary", category: "問題解決", target: 400 },
+
+      // ■ 予想問題
+      { name: "ストラテジー・ノート", icon: "📓", desc: "「予想問題」で50問正解", rarity: "common", category: "予想問題", target: 50 },
+      { name: "ラボラトリー・テスト", icon: "🏫", desc: "「予想問題」で100問正解", rarity: "common", category: "予想問題", target: 100 },
+      { name: "ポッシビリティ", icon: "🎰", desc: "「予想問題」で150問正解", rarity: "common", category: "予想問題", target: 150 },
+      { name: "フルチャージ・エナジー", icon: "🔋", desc: "「予想問題」で200問正解", rarity: "rare", category: "予想問題", target: 200 },
+      { name: "ミッドナイト・ワーク", icon: "🕯️", desc: "「予想問題」で250問正解", rarity: "rare", category: "予想問題", target: 250 },
+      { name: "カウンターの構え", icon: "🥋", desc: "「予想問題」で300問正解", rarity: "rare", category: "予想問題", target: 300 },
+      { name: "完全合格圏内", icon: "💮", desc: "「予想問題」で350問正解", rarity: "legendary", category: "予想問題", target: 350 },
+      { name: "予測AIのシンギュラリティ", icon: "💫", desc: "「予想問題」で400問正解", rarity: "legendary", category: "予想問題", target: 400 }
     ];
 
     const MISSION_POOL = [
