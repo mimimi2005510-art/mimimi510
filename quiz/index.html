@@ -882,7 +882,7 @@
       </select>
 
       <div class="menu-item">
-        <label>問題数</label>
+        <label>■ 問題数</label>
           <select id="questionCount">
             <option value="5">5問</option>
             <option value="10" selected>10問</option>
@@ -1232,6 +1232,15 @@
       { name: "完全合格圏内", icon: "💮", desc: "「予想問題」で350問正解", rarity: "legendary", type:"category",category: "予想問題", target: 350 },
       { name: "予測AIのシンギュラリティ", icon: "💫", desc: "「予想問題」で400問正解", rarity: "legendary",type:"category", category: "予想問題", target: 400 },
 
+      //章制覇
+      { name:"第1章制覇", icon:"📘", desc:"第1章の問題をすべて解答", rarity:"common", type:"chapter", chapter:"Q01" },
+      { name:"第2章制覇", icon:"📗", desc:"第2章の問題をすべて解答", rarity:"common", type:"chapter", chapter:"Q02" },
+      { name:"第3章制覇", icon:"📙", desc:"第3章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q03" },
+      { name:"第4章制覇", icon:"📕", desc:"第4章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q04" },
+      { name:"第5章制覇", icon:"📒", desc:"第5章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q05" },
+      { name:"第6章制覇", icon:"📔", desc:"第6章の問題をすべて解答", rarity:"legendary", type:"chapter", chapter:"Q06" },
+      { name:"第7章制覇", icon:"🛸", desc:"第7章の問題をすべて解答", rarity:"legendary", type:"chapter", chapter:"Q07" },
+
       //レベル
       { name:"RANK5", icon:"⭐", desc:"レベル5到達", rarity:"common", type:"level", target:5 },
       { name:"RANK10", icon:"⭐⭐", desc:"レベル10到達", rarity:"common", type:"level", target:10 },
@@ -1270,7 +1279,16 @@
       { name:"不屈の精神", icon:"🛠️", desc:"誤答後に80%以上でクリア", rarity:"rare", type:"recover", target:1 },
       { name:"フェニックス", icon:"🔥", desc:"誤答後に80%以上クリア10回", rarity:"legendary", type:"recover", target:10 },
 
+      // 問題数別クリア
+      { name:"ショートランナー", icon:"🚶", desc:"5問モードをクリア", rarity:"common", type:"mode", target:5 },
+      { name:"クイックマスター", icon:"🏃", desc:"10問モードをクリア", rarity:"common", type:"mode", target:10 },
+      { name:"チャレンジャー", icon:"🚴", desc:"20問モードをクリア", rarity:"rare", type:"mode", target:20 },
+      { name:"ロングランナー", icon:"🚵", desc:"40問モードをクリア", rarity:"legendary", type:"mode", target:40 },
       
+      //初見正解
+      { name:"ファーストアンサー", icon:"😃", desc:"初見問題を1問正解", rarity:"common", type:"first", target:1 },
+      { name:"初見ハンター", icon:"😄", desc:"初見問題を10問正解", rarity:"rare", type:"first", target:10 },
+      { name:"未知への挑戦者", icon:"😆", desc:"初見問題を50問正解", rarity:"legendary", type:"first", target:50 },
       
     ];
 
@@ -1431,6 +1449,23 @@
       );
 
       //--------------------------------------
+      //章記録
+      //--------------------------------------
+
+      const chapter =
+        questionId.split("-")[0];
+
+      //--------------------------------------
+      // 初見判定
+      //--------------------------------------
+
+      const firstKey =
+        "quiz_first_" + questionId;
+
+      const firstPlay =
+        localStorage.getItem(firstKey) === null;
+
+      //--------------------------------------
       // 問題別統計
       //--------------------------------------
 
@@ -1443,8 +1478,36 @@
 
       stats.ans++;
 
+      //--------------------------------------
+      // 初見記録
+      //--------------------------------------
+
+      if(firstPlay){
+
+        localStorage.setItem(firstKey,"1");
+
+      }
+
       if (isCorrect) {
         stats.cor++;
+
+        //--------------------------------------
+        // 初見正解数
+        //--------------------------------------
+
+        if(firstPlay){
+
+          const firstCorrect =
+            parseInt(
+              localStorage.getItem(
+                "quiz_first_correct_" + userKey
+              )
+            ) || 0;
+          localStorage.setItem(
+            "quiz_first_correct_" + userKey,
+            firstCorrect + 1
+          );
+        }
       }
 
       localStorage.setItem(
@@ -1517,6 +1580,26 @@
         JSON.stringify(wrongList)
 
       );
+
+    //--------------------------------------
+    //章の解答済み問題
+    //--------------------------------------
+
+    const chapterKey =
+      "quiz_chapter_" + chapter;
+
+    let chapterList =
+      JSON.parse(
+        localStorage.getItem(chapterKey)
+          || "[]"
+      );
+    if(!chapterList.includes(questionId)){
+      chapterList.push(questionId);
+      localStorage.setItem(
+        chapterKey,
+        JSON.stringify(chapterList)
+      );
+    }
 
     }
 
@@ -1787,6 +1870,50 @@
               }
 
               break;
+
+            case "mode":
+
+              const modeClear =
+                localStorage.getItem(
+                  "quiz_mode_clear_" + ach.target
+                );
+
+              if(modeClear){
+                isUnlocked = true;
+              }
+
+              break;
+
+              case "first":
+                const firstCorrect =
+                  parseInt(
+                    localStorage.getItem(
+                      "quiz_first_correct_" + userKey
+                    )
+                  ) || 0;
+                if(firstCorrect >= ach.target){
+                  isUnlocked = true;
+                }
+                break;
+
+              case "chapter":
+                const chapterAnswered =
+                  JSON.parse(
+                    localStorage.getItem(
+                      "quiz_chapter_" + ach.chapter
+                    ) || "[]"
+                  );
+                const totalChapter =
+                  quizQuestions.filter(q =>
+                    q.id.startsWith(ach.chapter)
+                  ).length;
+                if(
+                  totalChapter > 0 &&
+                    chapterAnswered.length >= totalChapter
+                ){
+                  isUnlocked = true;
+                }
+                break;
           
           }
 
@@ -2236,6 +2363,16 @@
       document.getElementById("finish").style.display = "block";
 
       const total = allQuestions.length;
+      //------------------------------------
+      // 問題数別クリア記録
+      //------------------------------------
+
+      localStorage.setItem(
+        "quiz_mode_clear_" + total,
+        "1"
+      );
+
+      
       const percent = total > 0
         ? Math.round(score * 100 / total)
         : 0;
