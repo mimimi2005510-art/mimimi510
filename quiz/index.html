@@ -1277,75 +1277,188 @@
 
     // ローカル問題検索処理（GASの getQuestions 互換）
     function getQuestionsLocal(unit, level) {
-      if (typeof quizQuestions === "undefined" || !Array.isArray(quizQuestions)) {
+
+      if (!Array.isArray(quizQuestions)) {
         return [];
       }
 
       const filtered = quizQuestions.filter(row => {
-        const matchUnit = (unit === "全単元" || row.unit === unit);
-        const matchLevel = (level === "すべて" || row.difficulty === level);
+
+        const matchUnit =
+          unit === "全単元" ||
+          row.unit === unit;
+
+        const matchLevel =
+          level === "すべて" ||
+          row.difficulty === level;
+
         return matchUnit && matchLevel;
+
       });
 
-      // シャッフル
-      return filtered.sort(() => Math.random() - 0.5).map(q => {
-        // ローカルでの回答数・正解数を取得
-        const qStats = JSON.parse(localStorage.getItem("quiz_q_stat_" + q.id) || '{"ans":0,"cor":0}');
-        return {
-          id: q.id || "Q_" + Math.random().toString(36).substring(2, 8),
-          category: q.field || "",
-          level: q.difficulty || "★",
-          question: q.question,
-          choices: q.options,
-          answer: Number(q.answer),
-          correctCount: qStats.cor,
-          answerCount: qStats.ans,
-          explanation: q.explanation || "解説は登録されていません。"
-        };
-      });
-    }
+      // Fisher-Yatesシャッフル
+      const shuffled = [...filtered];
+
+        for (let i = shuffled.length - 1; i > 0; i--) {
+
+          const j = Math.floor(Math.random() * (i + 1));
+
+            [shuffled[i], shuffled[j]] =
+             [shuffled[j], shuffled[i]];
+
+          }
+
+          return shuffled.map((q, index) => {
+
+            const id =
+              q.id ||
+              "Q_" + index;
+
+            const stats = JSON.parse(
+              localStorage.getItem("quiz_q_stat_" + id) ||
+              '{"ans":0,"cor":0}'
+            );
+
+            return {
+
+              id: id,
+
+              unit: q.unit || "",
+
+              category: q.field || "",
+
+              level: q.difficulty || "★",
+
+              question: q.question || "",
+
+              choices: Array.isArray(q.options)
+                ? q.options
+                : [],
+
+              answer: Number(q.answer),
+
+              explanation:
+                q.explanation ||
+                "解説は登録されていません。",
+
+              answerCount: stats.ans,
+
+              correctCount: stats.cor
+
+            };
+
+        });
+
+      }
 
     // ローカル回答保存処理（GASの saveAnswer 互換）
     function saveAnswerLocal(questionId, isCorrect, category) {
-      // 個人の回答数・正解数更新
+
+      // 個人回答数
       personalAnswerCount++;
-      if (isCorrect) personalCorrectCount++;
 
-      localStorage.setItem("quiz_p_ans_" + userKey, personalAnswerCount);
-      localStorage.setItem("quiz_p_cor_" + userKey, personalCorrectCount);
+      if (isCorrect) {
+        personalCorrectCount++;
+      }
 
-      // 問題別の集計データ更新
-      const qKey = "quiz_q_stat_" + questionId;
-      const qStats = JSON.parse(localStorage.getItem(qKey) || '{"ans":0,"cor":0}');
-      qStats.ans++;
-      if (isCorrect) qStats.cor++;
-      localStorage.setItem(qKey, JSON.stringify(qStats));
+      localStorage.setItem(
+        "quiz_p_ans_" + userKey,
+        personalAnswerCount
+      );
 
-      // カテゴリ別正解数の記録（実績用）
+      localStorage.setItem(
+        "quiz_p_cor_" + userKey,
+        personalCorrectCount
+      );
+
+      //--------------------------------------
+      // 問題別統計
+      //--------------------------------------
+
+      const statKey = "quiz_q_stat_" + questionId;
+
+      const stats = JSON.parse(
+        localStorage.getItem(statKey) ||
+        '{"ans":0,"cor":0}'
+      );
+
+      stats.ans++;
+
+      if (isCorrect) {
+        stats.cor++;
+      }
+
+      localStorage.setItem(
+        statKey,
+        JSON.stringify(stats)
+      );
+
+      //--------------------------------------
+      // カテゴリ正解数
+      //--------------------------------------
+
       if (isCorrect && category) {
-        const catKey = "quiz_cat_cor_" + category;
-        const currentCatCor = (parseInt(localStorage.getItem(catKey)) || 0) + 1;
-        localStorage.setItem(catKey, currentCatCor);
+
+        const catKey =
+          "quiz_cat_cor_" + category;
+
+        const catCount =
+          parseInt(localStorage.getItem(catKey)) || 0;
+
+        localStorage.setItem(
+          catKey,
+          catCount + 1
+        );
+
       }
 
-      // デバッグノート（誤答克服リスト）の記録
+      //--------------------------------------
+      // デバッグノート
+      //--------------------------------------
+
+      let wrongList = JSON.parse(
+        localStorage.getItem(
+          "quiz_wrong_list_" + userKey
+        ) || "[]"
+      );
+
       if (!isCorrect) {
-        let wrongList = JSON.parse(localStorage.getItem("quiz_wrong_list_" + userKey) || "[]");
-        const qObj = allQuestions[current];
-        if (qObj && !wrongList.some(item => item.id === questionId)) {
+
+        const q = allQuestions[current];
+
+        if (
+          q &&
+          !wrongList.some(item => item.id === questionId)
+        ) {
+
           wrongList.push({
+
             id: questionId,
-            question: qObj.question,
-            explanation: qObj.explanation
+
+            question: q.question,
+
+            explanation: q.explanation
+
           });
-          localStorage.setItem("quiz_wrong_list_" + userKey, JSON.stringify(wrongList));
+
         }
+
       } else {
-        // 正解した場合は誤答リストから削除
-        let wrongList = JSON.parse(localStorage.getItem("quiz_wrong_list_" + userKey) || "[]");
-        wrongList = wrongList.filter(item => item.id !== questionId);
-        localStorage.setItem("quiz_wrong_list_" + userKey, JSON.stringify(wrongList));
+
+        wrongList = wrongList.filter(
+          item => item.id !== questionId
+        );
+
       }
+
+      localStorage.setItem(
+
+        "quiz_wrong_list_" + userKey,
+
+        JSON.stringify(wrongList)
+
+      );
+
     }
 
     // -------------------------------------------------------------
@@ -1593,182 +1706,430 @@
     }
 
     function loadQuestion() {
-      const q = allQuestions[current];
-      
-      // プログレスバー
-      const progressPercent = (current / allQuestions.length) * 100;
-      document.getElementById("progress-bar").style.width = progressPercent + "%";
 
-      document.getElementById("question-number").textContent = `問題 ${current + 1} / ${allQuestions.length} （レベル: ${q.level}）`;
-      document.getElementById("question").textContent = q.question;
+      const q = allQuestions[current];
+
+      //------------------------------------
+      // 最新統計を読み込む
+      //------------------------------------
+
+      const stats = JSON.parse(
+        localStorage.getItem("quiz_q_stat_" + q.id) ||
+        '{"ans":0,"cor":0}'
+      );
+
+      q.answerCount = stats.ans;
+      q.correctCount = stats.cor;
+
+      //------------------------------------
+      // プログレスバー
+      //------------------------------------
+
+      document.getElementById("progress-bar").style.width =
+        ((current / allQuestions.length) * 100) + "%";
+
+      //------------------------------------
+      // 問題番号
+      //------------------------------------
+
+      document.getElementById("question-number").textContent =
+        `問題 ${current + 1} / ${allQuestions.length} （レベル: ${q.level}）`;
+
+      //------------------------------------
+      // 問題文
+      //------------------------------------
+
+      document.getElementById("question").textContent =
+        q.question;
+
       document.getElementById("result").textContent = "";
+
       document.getElementById("explanation-area").innerHTML = "";
 
+      //------------------------------------
       // 全体正答率
-      const gRate = q.answerCount > 0 ? Math.round((q.correctCount / q.answerCount) * 100) : "--";
-      document.getElementById("global-rate").textContent = `正答率：${gRate}% (${q.correctCount}/${q.answerCount})`;
+      //------------------------------------
 
-      // 累計個人正答率
-      const pRate = personalAnswerCount > 0 ? Math.round((personalCorrectCount / personalAnswerCount) * 100) : "--";
-      document.getElementById("personal-rate").textContent = `あなたの累計正答率：${pRate}%`;
+      const globalRate =
+        q.answerCount > 0
+          ? Math.round(q.correctCount * 100 / q.answerCount)
+          : "--";
 
-      // 選択肢の描画
-      const choicesDiv = document.getElementById("choices");
+      document.getElementById("global-rate").textContent =
+        `正答率：${globalRate}% (${q.correctCount}/${q.answerCount})`;
+
+      //------------------------------------
+      // 個人正答率
+      //------------------------------------
+
+      const personalRate =
+        personalAnswerCount > 0
+          ? Math.round(personalCorrectCount * 100 / personalAnswerCount)
+          : "--";
+
+      document.getElementById("personal-rate").textContent =
+        `あなたの累計正答率：${personalRate}%`;
+
+      //------------------------------------
+      // 選択肢生成
+      //------------------------------------
+
+      const choicesDiv =
+        document.getElementById("choices");
+
       choicesDiv.innerHTML = "";
 
-      q.choices.forEach((choiceText, idx) => {
+      if (!Array.isArray(q.choices)) {
+        return;
+      }
+
+      q.choices.forEach((choice, index) => {
+
         const btn = document.createElement("button");
+
         btn.className = "choice";
-        btn.textContent = `${idx + 1}. ${choiceText}`;
-        btn.onclick = () => checkAnswer(idx + 1, btn);
+
+        btn.textContent =
+          `${index + 1}. ${choice}`;
+
+        btn.onclick = () => {
+
+          checkAnswer(index + 1, btn);
+
+        };
+
         choicesDiv.appendChild(btn);
+
       });
+
     }
 
     function checkAnswer(userChoice, selectedBtn) {
-      const q = allQuestions[current];
-      // 最新の問題統計を読み込む
-      const latestStats = JSON.parse(
-        localStorage.getItem("quiz_q_stat_" + q.id) ||
-        '{"ans":0,"cor":0}'
-      );
 
-      q.answerCount = latestStats.ans;
-      q.correctCount = latestStats.cor;
+      const q = allQuestions[current];
+
       const isCorrect = (userChoice === q.answer);
 
-      // ボタンの無効化
+      //------------------------------------
+      // ボタン無効化
+      //------------------------------------
+
       const buttons = document.querySelectorAll(".choice");
+
       buttons.forEach(btn => btn.disabled = true);
 
+      //------------------------------------
       // 正解・不正解表示
+      //------------------------------------
+
       if (isCorrect) {
+
         selectedBtn.classList.add("correct");
+
         document.getElementById("result").textContent = "⭕ 正解！";
         document.getElementById("result").style.color = "#166534";
-        score++;
-        combo++;
-        if (combo > maxCombo) maxCombo = combo;
 
-        // コンボ表示
-        if (combo >= 2) {
-          const comboDisp = document.getElementById("combo-display");
-          comboDisp.textContent = `🔥 ${combo} COMBO!`;
-          comboDisp.style.display = "block";
+        score++;
+
+        combo++;
+
+        if (combo > maxCombo) {
+
+          maxCombo = combo;
+
         }
+
+        if (combo >= 2) {
+
+          const comboDisp =
+            document.getElementById("combo-display");
+
+          comboDisp.textContent =
+            `🔥 ${combo} COMBO!`;
+
+          comboDisp.style.display = "block";
+
+        }
+
       } else {
+
         selectedBtn.classList.add("wrong");
-        buttons[q.answer - 1].classList.add("correct"); // 正解のボタンを緑にする
+
+        if (buttons[q.answer - 1]) {
+          buttons[q.answer - 1].classList.add("correct");
+        }
+
         document.getElementById("result").textContent = "❌ 不正解...";
         document.getElementById("result").style.color = "#991b1b";
+
         combo = 0;
+
         document.getElementById("combo-display").style.display = "none";
+
       }
 
+      //------------------------------------
       // 解説表示
-      if (q.explanation) {
-        document.getElementById("explanation-area").innerHTML = `
-          <div class="explanation-box">
-            <b>【解説】</b><br>${q.explanation}
-          </div>
-        `;
-      }
+      //------------------------------------
 
-      // ローカル保存＆XP追加
-      saveAnswerLocal(q.id, isCorrect, q.category);
-      // 更新された統計を読み込み直す
-      const updatedStats = JSON.parse(
-        localStorage.getItem("quiz_q_stat_" + q.id) ||
-        '{"ans":0,"cor":0}'
+      document.getElementById("explanation-area").innerHTML = `
+        <div class="explanation-box">
+            <b>【解説】</b><br>${q.explanation}
+        </div>
+      `;
+
+      //------------------------------------
+      // 保存処理
+      //------------------------------------
+
+      saveAnswerLocal(
+        q.id,
+        isCorrect,
+        q.category
       );
 
-      q.answerCount = updatedStats.ans;
-      q.correctCount = updatedStats.cor;
-      const xpEarned = isCorrect ? 15 : 5;
-      updateGamificationStatus(xpEarned);
+      //------------------------------------
+      // 最新統計取得
+      //------------------------------------
 
-      // デイリーミッションカウンター更新
-      let mData = JSON.parse(localStorage.getItem("quiz_daily_m_" + userKey) || "{}");
-      mData.answersToday = (mData.answersToday || 0) + 1;
-      if (isCorrect) mData.correctsToday = (mData.correctsToday || 0) + 1;
-      if (maxCombo > (mData.maxComboToday || 0)) mData.maxComboToday = maxCombo;
-      if (q.level === "★★★★★") mData.lv5Today = (mData.lv5Today || 0) + 1;
-      localStorage.setItem("quiz_daily_m_" + userKey, JSON.stringify(mData));
+      const stats = JSON.parse(
 
-      // 過去最高コンボ保持
-      const prevMaxCombo = parseInt(localStorage.getItem("quiz_max_combo_" + userKey)) || 0;
-      if (maxCombo > prevMaxCombo) {
-        localStorage.setItem("quiz_max_combo_" + userKey, maxCombo);
+        localStorage.getItem("quiz_q_stat_" + q.id) ||
+
+        '{"ans":0,"cor":0}'
+
+      );
+
+      q.answerCount = stats.ans;
+      q.correctCount = stats.cor;
+
+      //------------------------------------
+      // XP
+      //------------------------------------
+
+      updateGamificationStatus(
+
+        isCorrect ? 15 : 5
+
+      );
+
+      //------------------------------------
+      // デイリーミッション
+      //------------------------------------
+
+      let mission = JSON.parse(
+
+        localStorage.getItem("quiz_daily_m_" + userKey)
+
+        || "{}"
+
+      );
+
+      mission.answersToday =
+
+        (mission.answersToday || 0) + 1;
+
+      if (isCorrect) {
+
+        mission.correctsToday =
+
+          (mission.correctsToday || 0) + 1;
+
       }
 
-      // 次の問題へ
+      if (maxCombo > (mission.maxComboToday || 0)) {
+
+        mission.maxComboToday = maxCombo;
+
+      }
+
+      if (q.level === "★★★★★") {
+
+        mission.lv5Today =
+
+          (mission.lv5Today || 0) + 1;
+
+      }
+
+      localStorage.setItem(
+
+        "quiz_daily_m_" + userKey,
+
+        JSON.stringify(mission)
+
+      );
+
+      //------------------------------------
+      // 最大コンボ
+      //------------------------------------
+
+      const maxComboAll =
+
+        parseInt(
+
+          localStorage.getItem("quiz_max_combo_" + userKey)
+
+        ) || 0;
+
+      if (maxCombo > maxComboAll) {
+
+        localStorage.setItem(
+
+          "quiz_max_combo_" + userKey,
+
+          maxCombo
+
+        );
+
+      }
+
+      //------------------------------------
+      // 次の問題
+      //------------------------------------
+
       setTimeout(() => {
+
         current++;
+
         if (current < allQuestions.length) {
+
           loadQuestion();
+
         } else {
+
           finishQuiz();
+
         }
+
       }, 2500);
+
     }
 
     function finishQuiz() {
+
       clearInterval(timerId);
+
       document.getElementById("quiz").style.display = "none";
       document.getElementById("finish").style.display = "block";
 
-      const percent = Math.round((score / allQuestions.length) * 100);
-      document.getElementById("score").textContent = `${allQuestions.length} 問中 ${score} 問正解！`;
-      document.getElementById("percentage").textContent = `正答率: ${percent}%`;
+      const total = allQuestions.length;
+      const percent = total > 0
+        ? Math.round(score * 100 / total)
+        : 0;
 
-      let titleMessage = "";
-      if (percent === 100) titleMessage = "🏆 素晴らしい！パーフェクト達成です！";
-      else if (percent >= 80) titleMessage = "🌟 高得点！この調子でマスターを目指しましょう！";
-      else if (percent >= 50) titleMessage = "👍 ナイスチャレンジ！間違えた問題の解説を確認しよう！";
-      else titleMessage = "📖 復習のチャンス！デバッグノートを活用してもう一度！";
+      document.getElementById("score").textContent =
+        `${total} 問中 ${score} 問正解！`;
 
-      document.getElementById("title").innerHTML = `<div style="text-align:center; font-size:18px; color:#475569; font-weight:bold;">${titleMessage}</div>`;
+      document.getElementById("percentage").textContent =
+        `正答率: ${percent}%`;
 
-      renderAchievements();
-      renderWrongQuestions();
-      // クイズ終了時のメニュー表示更新
+      let message = "";
+
+      if (percent === 100) {
+
+        message =
+          "🏆 素晴らしい！パーフェクト達成です！";
+
+      } else if (percent >= 80) {
+
+        message =
+          "🌟 高得点！この調子でマスターを目指しましょう！";
+
+      } else if (percent >= 50) {
+
+        message =
+          "👍 ナイスチャレンジ！間違えた問題の解説を確認しましょう！";
+
+      } else {
+
+        message =
+          "📖 復習のチャンス！デバッグノートを活用しましょう！";
+
+      }
+
+      document.getElementById("title").innerHTML =
+
+        `<div style="text-align:center;font-size:18px;color:#475569;font-weight:bold;">${message}</div>`;
+
       updateMenuElements();
+
     }
 
     function goBackToMenu() {
+
       clearInterval(timerId);
+
       document.getElementById("quiz").style.display = "none";
+
       document.getElementById("finish").style.display = "none";
+
       document.getElementById("menu").style.display = "block";
+
       updateMenuElements();
+
     }
 
     function startTimer() {
-      updateTimer();
+
       clearInterval(timerId);
+
+      updateTimer();
+
       timerId = setInterval(() => {
-        timeLeft--;
-        updateTimer();
+
         if (timeLeft <= 0) {
+
           clearInterval(timerId);
+
           alert("時間切れです！");
+
           finishQuiz();
+
+          return;
+
         }
+
+        timeLeft--;
+
+        updateTimer();
+
       }, 1000);
+
     }
 
     function updateTimer() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById("timer").textContent = `⏱️ 残り ${minutes}:${String(seconds).padStart(2, "0")}`;
 
-      const percent = (timeLeft / totalTime) * 100;
-      const bar = document.getElementById("timer-bar");
+      const minutes = Math.floor(timeLeft / 60);
+
+      const seconds = timeLeft % 60;
+
+      document.getElementById("timer").textContent =
+        `⏱️ 残り ${minutes}:${String(seconds).padStart(2, "0")}`;
+
+      const percent =
+        totalTime > 0
+          ? (timeLeft / totalTime) * 100
+          : 0;
+
+      const bar =
+        document.getElementById("timer-bar");
+
       bar.style.width = percent + "%";
 
-      if (percent <= 20) bar.style.background = "#ef4444";
-      else if (percent <= 50) bar.style.background = "#f59e0b";
-      else bar.style.background = "#22c55e";
+      if (percent <= 20) {
+
+        bar.style.background = "#ef4444";
+
+      } else if (percent <= 50) {
+
+        bar.style.background = "#f59e0b";
+
+      } else {
+
+        bar.style.background = "#22c55e";
+
+      }
+
     }
   </script>
 </body>
