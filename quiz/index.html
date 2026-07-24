@@ -881,6 +881,17 @@
         <option value="★★★★★">★★★★★（入試レベル）</option>
       </select>
 
+      <div class="menu-item">
+        <label>問題数</label>
+          <select id="questionCount">
+            <option value="5">5問</option>
+            <option value="10" selected>10問</option>
+            <option value="20">20問</option>
+            <option value="40">40問</option>
+            <option value="9999">すべて</option>
+          </select>
+      </div>
+
       <details class="addon-details">
         <summary class="addon-summary">📅 本日の学習ミッション</summary>
         <div class="addon-content" id="daily-missions-area"></div>
@@ -1067,6 +1078,7 @@
     let totalTime = 0;
     let currentLevel = "";
     let currentUnit = "";
+    let playStart = 0;
 
     // ローカルユーザーキーの生成・管理
     let userKey = localStorage.getItem("quiz_user_key");
@@ -1082,22 +1094,25 @@
     // 実績リスト定義
     // -------------------------------------------------------------
     const VISUAL_ACHIEVEMENTS = [
-      
-      { name: "最初の一歩", icon: "📝", desc: "累計50問解答", rarity: "common", type: "answer", target: 50},
-      { name: "学習の習慣化", icon: "🧮", desc: "累計100問解答", rarity: "common", type: "answer", target: 100 },
-      { name: "コツコツ積み上げ", icon: "🧱", desc: "累計150問解答", rarity: "common", type: "answer", target: 150 },
-      { name: "基礎地盤の完成", icon: "🏗️", desc: "累計200問解答", rarity: "common", type: "answer", target: 200 },
-      { name: "知識のスタック構造", icon: "📦", desc: "累計250問解答", rarity: "common", type: "answer", target: 250 },
-      { name: "継続の力", icon: "⛓️", desc: "累計300問解答", rarity: "common", type: "answer", target: 300 },
-      { name: "ブレイクスルー手前", icon: "🚀", desc: "累計400問解答", rarity: "rare", type: "answer", target: 400 },
-      { name: "弛まぬ努力", icon: "📈", desc: "累計500問解答", rarity: "rare", type: "answer", target: 500 },
-      { name: "達人への階段・銅", icon: "🥉", desc: "累計600問解答", rarity: "rare", type: "answer", target: 600 },
-      { name: "達人への階段・銀", icon: "🥈", desc: "累計700問解答", rarity: "rare", type: "answer", target: 700 },
-      { name: "達人への階段・金", icon: "🥇", desc: "累計800問解答", rarity: "rare", type: "answer", target: 800 },
-      { name: "マスター手前", icon: "👑", desc: "累計900問解答", rarity: "rare", type: "answer", target: 900 },
-      { name: "努力の結晶", icon: "✨", desc: "累計1000問解答", rarity: "legendary", type: "answer", target: 1000 },
-      { name: "512問達成", icon: "💿", desc: "累計512問解答", rarity: "rare", type: "answer", target: 512 },
-      { name: "2048問達成", icon: "🖥️", desc: "累計2048問解答", rarity: "legendary", type: "answer", target: 2048 },
+      { name: "生まれたて", icon: "🍼", desc: "累計5問解答", rarity: "common", type: "answers", target: 5},
+      { name: "立ち始め", icon: "📝", desc: "累計25問解答", rarity: "common", type: "answers", target: 25},
+      { name: "牛歩", icon: "🐄", desc: "累計50問解答", rarity: "common", type: "answers", target: 50},
+      { name: "学習の習慣化", icon: "🧮", desc: "累計100問解答", rarity: "common", type: "answers", target: 100 },
+      { name: "コツコツ積み上げ", icon: "🧱", desc: "累計150問解答", rarity: "common", type: "answers", target: 150 },
+      { name: "基礎地盤の完成", icon: "🏗️", desc: "累計200問解答", rarity: "common", type: "answers", target: 200 },
+      { name: "知識のスタック構造", icon: "📦", desc: "累計250問解答", rarity: "common", type: "answers", target: 250 },
+      { name: "1Bの思考数", icon: "1️⃣", desc: "累計256問解答", rarity: "common", type: "answers", target: 256 },
+      { name: "継続の力", icon: "⛓️", desc: "累計300問解答", rarity: "common", type: "answers", target: 300 },
+      { name: "ブレイクスルー手前", icon: "🚀", desc: "累計400問解答", rarity: "rare", type: "answers", target: 400 },
+      { name: "弛まぬ努力", icon: "📈", desc: "累計500問解答", rarity: "rare", type: "answers", target: 500 },
+      { name: "達人への階段・銅", icon: "🥉", desc: "累計600問解答", rarity: "rare", type: "answers", target: 600 },
+      { name: "達人への階段・銀", icon: "🥈", desc: "累計700問解答", rarity: "rare", type: "answers", target: 700 },
+      { name: "達人への階段・金", icon: "🥇", desc: "累計800問解答", rarity: "rare", type: "answers", target: 800 },
+      { name: "マスター手前", icon: "👑", desc: "累計900問解答", rarity: "rare", type: "answers", target: 900 },
+      { name: "努力の結晶", icon: "✨", desc: "累計1000問解答", rarity: "legendary", type: "answers", target: 1000 },
+      { name: "1Kbitの思考数", icon: "✔️", desc: "累計1024問解答", rarity: "legendary", type: "answers", target: 1024 },
+      { name: "512問達成", icon: "💿", desc: "累計512問解答", rarity: "rare", type: "answers", target: 512 },
+      { name: "2048問達成", icon: "🖥️", desc: "累計2048問解答", rarity: "legendary", type: "answers", target: 2048 },
       
       { name: "ひらめきの芽", icon: "🌱", desc: "累計25問正解", rarity: "common", type: "correct", target: 25 },
       { name: "確かな手応え", icon: "💡", desc: "累計50問正解", rarity: "common", type: "correct", target: 50 },
@@ -1118,10 +1133,10 @@
       { name: "不屈のデバッガー", icon: "🦁", desc: "累計450回誤答", rarity: "rare" ,type:"wrong",target:450 },
       { name: "バグバスター", icon: "👾", desc: "累計500回誤答", rarity: "legendary" ,type:"wrong",target:500 },
 
-      { name: "最初の一またぎ", icon: "🏃", desc: "連続ログイン2日以上達成", rarity: "common",type:"login",target:2 },
-      { name: "習慣の定着", icon: "🌿", desc: "連続ログイン3日以上達成", rarity: "rare",type:"login",target:3  },
-      { name: "平日フルコミット", icon: "📅", desc: "連続ログイン5日以上達成", rarity: "rare" ,type:"login",target:5 },
-      { name: "ウィークリー同期", icon: "🌎", desc: "連続ログイン7日以上達成", rarity: "legendary" ,type:"login",target:7 },
+      { name: "最初の一またぎ", icon: "🏃", desc: "連続ログイン2日以上達成", rarity: "common",type:"streak",target:2 },
+      { name: "習慣の定着", icon: "🌿", desc: "連続ログイン3日以上達成", rarity: "rare",type:"streak",target:3  },
+      { name: "平日フルコミット", icon: "📅", desc: "連続ログイン5日以上達成", rarity: "rare" ,type:"streak",target:5 },
+      { name: "ウィークリー同期", icon: "🌎", desc: "連続ログイン7日以上達成", rarity: "legendary" ,type:"streak",target:7 },
 
       { name: "トリプルショット", icon: "🎯", desc: "最高3連続正解", rarity: "common" ,type:"combo",target:3 },
       { name: "的中者", icon: "🏹", desc: "最高5連続正解", rarity: "common" ,type:"combo",target:5},
@@ -1137,86 +1152,126 @@
       { name: "朝のルーティン", icon: "🌅", desc: "朝5〜8時の朝活解答", rarity: "common" ,type:"time",mode:"morning"},
       { name: "ナイトラーニング", icon: "🌙", desc: "夜22〜3時の集中解答", rarity: "common" ,type:"time",mode:"night"},
       { name: "デバッグ完了", icon: "🧰", desc: "誤答経験後に高得点クリア", rarity: "common" ,type:"recover"},
-      { name: "クロック同期", icon: "⏱️", desc: "電光石火のスピード正解", rarity: "rare" },
-      { name: "全単元開拓者", icon: "🗺️", desc: "すべての単元をプレイ", rarity: "legendary" },
+      
 
-      { name: "デジタルエシックス", icon: "⚖️", desc: "「情報社会」で10問正解", rarity: "common", category: "情報社会", target: 10 },
-      { name: "インフォデザイナー", icon: "🎨", desc: "「情報デザイン」で10問正解", rarity: "common", category: "情報デザイン", target: 10 },
-      { name: "コード職人", icon: "⌨️", desc: "「コンピュータとプログラミング」で10問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 10 },
-      { name: "シグナルウォーカー", icon: "📡", desc: "「情報通信ネットワーク」で10問正解", rarity: "common", category: "情報通信ネットワーク", target: 10 },
-      { name: "データサイエンティスト", icon: "📊", desc: "「データの活用」で10問正解", rarity: "legendary", category: "データの活用", target: 10 },
-      { name: "ソリューションの鍵", icon: "🧩", desc: "「問題解決」で10問正解", rarity: "rare", category: "問題解決", target: 10 },
-      { name: "未来の予測者", icon: "🎲", desc: "「予想問題」で10問正解", rarity: "legendary", category: "予想問題", target: 10 },
+      { name: "デジタルエシックス", icon: "⚖️", desc: "「情報社会」で10問正解", rarity: "common", type:"category",category: "情報社会", target: 10 },
+      { name: "インフォデザイナー", icon: "🎨", desc: "「情報デザイン」で10問正解", rarity: "common", type:"category",category: "情報デザイン", target: 10 },
+      { name: "コード職人", icon: "⌨️", desc: "「コンピュータとプログラミング」で10問正解", rarity: "rare", type:"category",category: "コンピュータとプログラミング", target: 10 },
+      { name: "シグナルウォーカー", icon: "📡", desc: "「情報通信ネットワーク」で10問正解", rarity: "common", type:"category",category: "情報通信ネットワーク", target: 10 },
+      { name: "データサイエンティスト", icon: "📊", desc: "「データの活用」で10問正解", rarity: "legendary", type:"category",category: "データの活用", target: 10 },
+      { name: "ソリューションの鍵", icon: "🧩", desc: "「問題解決」で10問正解", rarity: "rare", type:"category",category: "問題解決", target: 10 },
+      { name: "未来の予測者", icon: "🎲", desc: "「予想問題」で10問正解", rarity: "legendary", type:"category",category: "予想問題", target: 10 },
 
       // ■ 情報社会
-      { name: "キープロテクター", icon: "🔑", desc: "「情報社会」で50問正解", rarity: "common", category: "情報社会", target: 50 },
-      { name: "セキュリティアナリスト", icon: "🕵️", desc: "「情報社会」で100問正解", rarity: "common", category: "情報社会", target: 100 },
-      { name: "インシデントソルバー", icon: "🧯", desc: "「情報社会」で150問正解", rarity: "common", category: "情報社会", target: 150 },
-      { name: "デジタル市民の誇り", icon: "🪪", desc: "「情報社会」で200問正解", rarity: "rare", category: "情報社会", target: 200 },
-      { name: "プロパティ・ガード", icon: "📑", desc: "「情報社会」で250問正解", rarity: "rare", category: "情報社会", target: 250 },
-      { name: "暗号の支配者", icon: "🔏", desc: "「情報社会」で300問正解", rarity: "rare", category: "情報社会", target: 300 },
-      { name: "堅牢なる砦", icon: "🏢", desc: "「情報社会」で350問正解", rarity: "legendary", category: "情報社会", target: 350 },
-      { name: "ソサエティ5.0の先駆者", icon: "🪐", desc: "「情報社会」で400問正解", rarity: "legendary", category: "情報社会", target: 400 },
+      { name: "キープロテクター", icon: "🔑", desc: "「情報社会」で50問正解", rarity: "common",type:"category", category: "情報社会", target: 50 },
+      { name: "セキュリティアナリスト", icon: "🕵️", desc: "「情報社会」で100問正解", rarity: "common",type:"category", category: "情報社会", target: 100 },
+      { name: "インシデントソルバー", icon: "🧯", desc: "「情報社会」で150問正解", rarity: "common",type:"category", category: "情報社会", target: 150 },
+      { name: "デジタル市民の誇り", icon: "🪪", desc: "「情報社会」で200問正解", rarity: "rare",type:"category", category: "情報社会", target: 200 },
+      { name: "プロパティ・ガード", icon: "📑", desc: "「情報社会」で250問正解", rarity: "rare",type:"category", category: "情報社会", target: 250 },
+      { name: "暗号の支配者", icon: "🔏", desc: "「情報社会」で300問正解", rarity: "rare",type:"category", category: "情報社会", target: 300 },
+      { name: "堅牢なる砦", icon: "🏢", desc: "「情報社会」で350問正解", rarity: "legendary",type:"category", category: "情報社会", target: 350 },
+      { name: "ソサエティ5.0の先駆者", icon: "🪐", desc: "「情報社会」で400問正解", rarity: "legendary",type:"category",type:"category", category: "情報社会", target: 400 },
 
       // ■ 情報デザイン
-      { name: "グリッドスケッチャー", icon: "📐", desc: "「情報デザイン」で50問正解", rarity: "common", category: "情報デザイン", target: 50 },
-      { name: "ビジュアルインサイダー", icon: "👁️", desc: "「情報デザイン」で100問正解", rarity: "common", category: "情報デザイン", target: 100 },
-      { name: "インフォ・ペンシル", icon: "✏️", desc: "「情報デザイン」で150問正解", rarity: "common", category: "情報デザイン", target: 150 },
-      { name: "パレットマスター", icon: "🌈", desc: "「情報デザイン」で200問正解", rarity: "rare", category: "情報デザイン", target: 200 },
-      { name: "フレームワークの絵師", icon: "🖼️", desc: "「情報デザイン」で250問正解", rarity: "rare", category: "情報デザイン", target: 250 },
-      { name: "UIアーキテクト", icon: "📱", desc: "「情報デザイン」で300問正解", rarity: "rare", category: "情報デザイン", target: 300 },
-      { name: "メディア表現の伝道師", icon: "🎭", desc: "「情報デザイン」で350問正解", rarity: "legendary", category: "情報デザイン", target: 350 },
-      { name: "アクセシビリティの至宝", icon: "🕊️", desc: "「情報デザイン」で400問正解", rarity: "legendary", category: "情報デザイン", target: 400 },
+      { name: "グリッドスケッチャー", icon: "📐", desc: "「情報デザイン」で50問正解", rarity: "common",type:"category", category: "情報デザイン", target: 50 },
+      { name: "ビジュアルインサイダー", icon: "👁️", desc: "「情報デザイン」で100問正解", rarity: "common",type:"category", category: "情報デザイン", target: 100 },
+      { name: "インフォ・ペンシル", icon: "✏️", desc: "「情報デザイン」で150問正解", rarity: "common",type:"category", category: "情報デザイン", target: 150 },
+      { name: "パレットマスター", icon: "🌈", desc: "「情報デザイン」で200問正解", rarity: "rare",type:"category", category: "情報デザイン", target: 200 },
+      { name: "フレームワークの絵師", icon: "🖼️", desc: "「情報デザイン」で250問正解", rarity: "rare",type:"category", category: "情報デザイン", target: 250 },
+      { name: "UIアーキテクト", icon: "📱", desc: "「情報デザイン」で300問正解", rarity: "rare",type:"category", category: "情報デザイン", target: 300 },
+      { name: "メディア表現の伝道師", icon: "🎭", desc: "「情報デザイン」で350問正解", rarity: "legendary",type:"category", category: "情報デザイン", target: 350 },
+      { name: "アクセシビリティの至宝", icon: "🕊️", desc: "「情報デザイン」で400問正解", rarity: "legendary",type:"category", category: "情報デザイン", target: 400 },
 
       // ■ コンピュータとプログラミング
-      { name: "ロジックの導線", icon: "🔌", desc: "「コンピュータとプログラミング」で50問正解", rarity: "common", category: "コンピュータとプログラミング", target: 50 },
-      { name: "ターミナルパイロット", icon: "💻", desc: "「コンピュータとプログラミング」で100問正解", rarity: "common", category: "コンピュータとプログラミング", target: 100 },
-      { name: "バグハンター", icon: "🪲", desc: "「コンピュータとプログラミング」で150問正解", rarity: "common", category: "コンピュータとプログラミング", target: 150 },
-      { name: "アルゴリズムの系譜", icon: "🪵", desc: "「コンピュータとプログラミング」で200問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 200 },
-      { name: "並列処理の達人", icon: "🧵", desc: "「コンピュータとプログラミング」で250問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 250 },
-      { name: "オートメーションの神", icon: "🤖", desc: "「コンピュータとプログラミング」で300問正解", rarity: "rare", category: "コンピュータとプログラミング", target: 300 },
-      { name: "ソースコードの魔術師", icon: "🧙‍♂️", desc: "「コンピュータとプログラミング」で350問正解", rarity: "legendary", category: "コンピュータとプログラミング", target: 350 },
-      { name: "コンピューティングの極致", icon: "🌌", desc: "「コンピュータとプログラミング」で400問正解", rarity: "legendary", category: "コンピュータとプログラミング", target: 400 },
+      { name: "ロジックの導線", icon: "🔌", desc: "「コンピュータとプログラミング」で50問正解", rarity: "common",type:"category", category: "コンピュータとプログラミング", target: 50 },
+      { name: "ターミナルパイロット", icon: "💻", desc: "「コンピュータとプログラミング」で100問正解", rarity: "common",type:"category", category: "コンピュータとプログラミング", target: 100 },
+      { name: "バグハンター", icon: "🪲", desc: "「コンピュータとプログラミング」で150問正解", rarity: "common",type:"category", category: "コンピュータとプログラミング", target: 150 },
+      { name: "アルゴリズムの系譜", icon: "🪵", desc: "「コンピュータとプログラミング」で200問正解", rarity: "rare",type:"category", category: "コンピュータとプログラミング", target: 200 },
+      { name: "並列処理の達人", icon: "🧵", desc: "「コンピュータとプログラミング」で250問正解", rarity: "rare",type:"category", category: "コンピュータとプログラミング", target: 250 },
+      { name: "オートメーションの神", icon: "🤖", desc: "「コンピュータとプログラミング」で300問正解", rarity: "rare",type:"category", category: "コンピュータとプログラミング", target: 300 },
+      { name: "ソースコードの魔術師", icon: "🧙‍♂️", desc: "「コンピュータとプログラミング」で350問正解", rarity: "legendary",type:"category", category: "コンピュータとプログラミング", target: 350 },
+      { name: "コンピューティングの極致", icon: "🌌", desc: "「コンピュータとプログラミング」で400問正解", rarity: "legendary",type:"category", category: "コンピュータとプログラミング", target: 400 },
 
       // ■ 情報通信ネットワーク
-      { name: "パケットトレーサー", icon: "🧲", desc: "「情報通信ネットワーク」で50問正解", rarity: "common", category: "情報通信ネットワーク", target: 50 },
-      { name: "ノードコネクター", icon: "🔗", desc: "「情報通信ネットワーク」で100問正解", rarity: "common", category: "情報通信ネットワーク", target: 100 },
-      { name: "アドレス・ロケーター", icon: "📍", desc: "「情報通信ネットワーク防衛」で150問正解", rarity: "common", category: "情報通信ネットワーク", target: 150 },
-      { name: "プロトコル・セーバー", icon: "🛟", desc: "「情報通信ネットワーク」で200問正解", rarity: "rare", category: "情報通信ネットワーク", target: 200 },
-      { name: "ドメイン・ホスト", icon: "📣", desc: "httpリクエスト250回突破", rarity: "rare", category: "情報通信ネットワーク", target: 250 },
-      { name: "ネビュラ・クラウド", icon: "☁️", desc: "「情報通信ネットワーク」で300問正解", rarity: "rare", category: "情報通信ネットワーク", target: 300 },
-      { name: "ギガビット・エクスプレス", icon: "📶", desc: "「情報通信ネットワーク」で350問正解", rarity: "legendary", category: "情報通信ネットワーク", target: 350 },
-      { name: "次世代通信の覇者", icon: "🛸", desc: "「情報通信ネットワーク」で400問正解", rarity: "legendary", category: "情報通信ネットワーク", target: 400 },
+      { name: "パケットトレーサー", icon: "🧲", desc: "「情報通信ネットワーク」で50問正解", rarity: "common",type:"category", category: "情報通信ネットワーク", target: 50 },
+      { name: "ノードコネクター", icon: "🔗", desc: "「情報通信ネットワーク」で100問正解", rarity: "common",type:"category", category: "情報通信ネットワーク", target: 100 },
+      { name: "アドレス・ロケーター", icon: "📍", desc: "「情報通信ネットワーク防衛」で150問正解", rarity: "common",type:"category", category: "情報通信ネットワーク", target: 150 },
+      { name: "プロトコル・セーバー", icon: "🛟", desc: "「情報通信ネットワーク」で200問正解", rarity: "rare",type:"category", category: "情報通信ネットワーク", target: 200 },
+      { name: "ドメイン・ホスト", icon: "📣", desc: "httpリクエスト250回突破", rarity: "rare",type:"category", category: "情報通信ネットワーク", target: 250 },
+      { name: "ネビュラ・クラウド", icon: "☁️", desc: "「情報通信ネットワーク」で300問正解", rarity: "rare",type:"category", category: "情報通信ネットワーク", target: 300 },
+      { name: "ギガビット・エクスプレス", icon: "📶", desc: "「情報通信ネットワーク」で350問正解", rarity: "legendary",type:"category", category: "情報通信ネットワーク", target: 350 },
+      { name: "次世代通信の覇者", icon: "🛸", desc: "「情報通信ネットワーク」で400問正解", rarity: "legendary",type:"category", category: "情報通信ネットワーク", target: 400 },
 
       // ■ データの活用
-      { name: "データエントリー", icon: "📋", desc: "「データの活用」で50問正解", rarity: "common", category: "データの活用", target: 50 },
-      { name: "サンプリング・アイ", icon: "🌡️", desc: "「データの活用」で100問正解", rarity: "common", category: "データの活用", target: 100 },
-      { name: "インサイトの探術師", icon: "🧬", desc: "「データの活用」で150問正解", rarity: "common", category: "データの活用", target: 150 },
-      { name: "ディストリビューション", icon: "🧿", desc: "「データの活用」で200問正解", rarity: "rare", category: "データの活用", target: 200 },
-      { name: "ストラクチャ・ビルダー", icon: "🗂️", desc: "「データの活用」で250問正解", rarity: "rare", category: "データの活用", target: 250 },
-      { name: "ビッグデータマイナー", icon: "🦾", desc: "「データの活用」で300問正解", rarity: "rare", category: "データの活用", target: 300 },
-      { name: "アナリティクス・コア", icon: "🔬", desc: "「データの活用」で350問正解", rarity: "legendary", category: "データの活用", target: 350 },
-      { name: "叡智のビッグバン", icon: "🌠", desc: "「データの活用」で400問正解", rarity: "legendary", category: "データの活用", target: 400 },
+      { name: "データエントリー", icon: "📋", desc: "「データの活用」で50問正解", rarity: "common",type:"category", category: "データの活用", target: 50 },
+      { name: "サンプリング・アイ", icon: "🌡️", desc: "「データの活用」で100問正解", rarity: "common",type:"category", category: "データの活用", target: 100 },
+      { name: "インサイトの探術師", icon: "🧬", desc: "「データの活用」で150問正解", rarity: "common",type:"category", category: "データの活用", target: 150 },
+      { name: "ディストリビューション", icon: "🧿", desc: "「データの活用」で200問正解", rarity: "rare",type:"category", category: "データの活用", target: 200 },
+      { name: "ストラクチャ・ビルダー", icon: "🗂️", desc: "「データの活用」で250問正解", rarity: "rare",type:"category", category: "データの活用", target: 250 },
+      { name: "ビッグデータマイナー", icon: "🦾", desc: "「データの活用」で300問正解", rarity: "rare",type:"category", category: "データの活用", target: 300 },
+      { name: "アナリティクス・コア", icon: "🔬", desc: "「データの活用」で350問正解", rarity: "legendary",type:"category", category: "データの活用", target: 350 },
+      { name: "叡智のビッグバン", icon: "🌠", desc: "「データの活用」で400問正解", rarity: "legendary",type:"category", category: "データの活用", target: 400 },
 
       // ■ 問題解決
-      { name: "課題発見のルポルタージュ", icon: "🔎", desc: "「問題解決」で50問正解", rarity: "common", category: "問題解決", target: 50 },
-      { name: "ファインディング・コア", icon: "🔦", desc: "「問題解決」で100問正解", rarity: "common", category: "問題解決", target: 100 },
-      { name: "ブレイクダウン構造", icon: "🪜", desc: "「問題解決」で150問正解", rarity: "common", category: "問題解決", target: 150 },
-      { name: "モデリングの職人", icon: "🔨", desc: "「問題解決」で200問正解", rarity: "rare", category: "問題解決", target: 200 },
-      { name: "オプティマイザー", icon: "🎛️", desc: "「問題解決」で250問正解", rarity: "rare", category: "問題解決", target: 250 },
-      { name: "クリティカルシンカー", icon: "🤹", desc: "「問題解決」で300問正解", rarity: "rare", category: "問題解決", target: 300 },
-      { name: "ボトルネッククラッシャー", icon: "⛰️", desc: "「問題解決」で350問正解", rarity: "legendary", category: "問題解決", target: 350 },
-      { name: "伝説のソリューション", icon: "🔱", desc: "「問題解決」で400問正解", rarity: "legendary", category: "問題解決", target: 400 },
+      { name: "課題発見のルポルタージュ", icon: "🔎", desc: "「問題解決」で50問正解", rarity: "common",type:"category", category: "問題解決", target: 50 },
+      { name: "ファインディング・コア", icon: "🔦", desc: "「問題解決」で100問正解", rarity: "common",type:"category", category: "問題解決", target: 100 },
+      { name: "ブレイクダウン構造", icon: "🪜", desc: "「問題解決」で150問正解", rarity: "common",type:"category", category: "問題解決", target: 150 },
+      { name: "モデリングの職人", icon: "🔨", desc: "「問題解決」で200問正解", rarity: "rare",type:"category", category: "問題解決", target: 200 },
+      { name: "オプティマイザー", icon: "🎛️", desc: "「問題解決」で250問正解", rarity: "rare",type:"category", category: "問題解決", target: 250 },
+      { name: "クリティカルシンカー", icon: "🤹", desc: "「問題解決」で300問正解", rarity: "rare",type:"category", category: "問題解決", target: 300 },
+      { name: "ボトルネッククラッシャー", icon: "⛰️", desc: "「問題解決」で350問正解", rarity: "legendary",type:"category", category: "問題解決", target: 350 },
+      { name: "伝説のソリューション", icon: "🔱", desc: "「問題解決」で400問正解", rarity: "legendary",type:"category", category: "問題解決", target: 400 },
 
       // ■ 予想問題
-      { name: "ストラテジー・ノート", icon: "📓", desc: "「予想問題」で50問正解", rarity: "common", category: "予想問題", target: 50 },
-      { name: "ラボラトリー・テスト", icon: "🏫", desc: "「予想問題」で100問正解", rarity: "common", category: "予想問題", target: 100 },
-      { name: "ポッシビリティ", icon: "🎰", desc: "「予想問題」で150問正解", rarity: "common", category: "予想問題", target: 150 },
-      { name: "フルチャージ・エナジー", icon: "🔋", desc: "「予想問題」で200問正解", rarity: "rare", category: "予想問題", target: 200 },
-      { name: "ミッドナイト・ワーク", icon: "🕯️", desc: "「予想問題」で250問正解", rarity: "rare", category: "予想問題", target: 250 },
-      { name: "カウンターの構え", icon: "🥋", desc: "「予想問題」で300問正解", rarity: "rare", category: "予想問題", target: 300 },
-      { name: "完全合格圏内", icon: "💮", desc: "「予想問題」で350問正解", rarity: "legendary", category: "予想問題", target: 350 },
-      { name: "予測AIのシンギュラリティ", icon: "💫", desc: "「予想問題」で400問正解", rarity: "legendary", category: "予想問題", target: 400 }
+      { name: "ストラテジー・ノート", icon: "📓", desc: "「予想問題」で50問正解", rarity: "common",type:"category", category: "予想問題", target: 50 },
+      { name: "ラボラトリー・テスト", icon: "🏫", desc: "「予想問題」で100問正解", rarity: "common", type:"category",category: "予想問題", target: 100 },
+      { name: "ポッシビリティ", icon: "🎰", desc: "「予想問題」で150問正解", rarity: "common",type:"category", category: "予想問題", target: 150 },
+      { name: "フルチャージ・エナジー", icon: "🔋", desc: "「予想問題」で200問正解", rarity: "rare", type:"category",category: "予想問題", target: 200 },
+      { name: "ミッドナイト・ワーク", icon: "🕯️", desc: "「予想問題」で250問正解", rarity: "rare", type:"category",category: "予想問題", target: 250 },
+      { name: "カウンターの構え", icon: "🥋", desc: "「予想問題」で300問正解", rarity: "rare", type:"category",category: "予想問題", target: 300 },
+      { name: "完全合格圏内", icon: "💮", desc: "「予想問題」で350問正解", rarity: "legendary", type:"category",category: "予想問題", target: 350 },
+      { name: "予測AIのシンギュラリティ", icon: "💫", desc: "「予想問題」で400問正解", rarity: "legendary",type:"category", category: "予想問題", target: 400 },
+
+      //レベル
+      { name:"RANK5", icon:"⭐", desc:"レベル5到達", rarity:"common", type:"level", target:5 },
+      { name:"RANK10", icon:"⭐⭐", desc:"レベル10到達", rarity:"common", type:"level", target:10 },
+      { name:"RANK20", icon:"⭐⭐⭐", desc:"レベル20到達", rarity:"common", type:"level", target:20 },
+
+      //xp
+      { name:"経験者", icon:"💠", desc:"1000XP獲得", rarity:"common", type:"xp", target:1000 },
+      { name:"熟練者", icon:"💎", desc:"5000XP獲得", rarity:"rare", type:"xp", target:5000 },
+      { name:"伝説", icon:"👑", desc:"10000XP獲得", rarity:"legendary", type:"xp", target:10000 },
+      
+      //play time
+      { name:"30分プレイ", icon:"⌚", desc:"累計30分プレイ", rarity:"common", type:"playtime", target:1800 },
+      { name:"1時間プレイ", icon:"🕐", desc:"累計1時間プレイ", rarity:"common", type:"playtime", target:3600 },
+      { name:"10時間プレイ", icon:"🕙", desc:"累計10時間プレイ", rarity:"rare", type:"playtime", target:36000 },
+      { name:"100時間プレイ", icon:"⏳", desc:"累計100時間プレイ", rarity:"legendary", type:"playtime", target:360000 },
+
+      //parfect
+      { name:"パーフェクト", icon:"🏆", desc:"全問正解1回", rarity:"rare", type:"perfect", target:1 },
+      { name:"完全攻略", icon:"👑", desc:"全問正解10回", rarity:"legendary", type:"perfect", target:10 },
+
+      //speedclear
+      { name:"電光石火", icon:"⚡", desc:"時間70%以上残して全問正解", rarity:"legendary", type:"speed", target:1 },
+
+      //朝活
+      { name:"朝活ビギナー", icon:"🌅", desc:"朝に10回プレイ", rarity:"common", type:"time", mode:"morning", target:10 },
+      { name:"朝活マスター", icon:"☀️", desc:"朝に100回プレイ", rarity:"legendary", type:"time", mode:"morning", target:100 },
+
+      
+      //夜活
+      { name:"夜更かし研究員", icon:"🌙", desc:"夜に10回プレイ", rarity:"common", type:"time", mode:"night", target:10 },
+
+      //all
+      { name:"全単元開拓者", icon:"🗺️", desc:"全単元プレイ", rarity:"legendary", type:"units", target:7 },
+
+      //recover
+      { name:"不屈の精神", icon:"🛠️", desc:"誤答後に80%以上でクリア", rarity:"rare", type:"recover", target:1 },
+      { name:"フェニックス", icon:"🔥", desc:"誤答後に80%以上クリア10回", rarity:"legendary", type:"recover", target:10 },
+
+      
+      
     ];
 
     const MISSION_POOL = [
@@ -1277,7 +1332,7 @@
     }
 
     // ローカル問題検索処理（GASの getQuestions 互換）
-    function getQuestionsLocal(unit, level) {
+    function getQuestionsLocal(unit, level, count) {
 
       if (!Array.isArray(quizQuestions)) {
         return [];
@@ -1309,7 +1364,10 @@
 
           }
 
-          return shuffled.map((q, index) => {
+          const selected =
+            shuffled.slice(0, Math.min(count, shuffled.length));
+
+          return selected.map((q,index)=>{
 
             const id =
               q.id ||
@@ -1675,6 +1733,61 @@
             case "category":
               isUnlocked = catCorrect >= ach.target;
               break;
+
+            case "accuracy":
+              const accuracy = personalAnswerCount > 0
+                ? (personalCorrectCount / personalAnswerCount) * 100
+                : 0;
+
+              if (accuracy >= ach.target) {
+                isUnlocked = true;
+              }
+              break;
+
+            
+            case "speed":
+              const speed =
+                parseInt(localStorage.getItem("quiz_speed_clear_" + userKey)) || 0;
+
+                if (speed >= (ach.target || 1)) {
+                  isUnlocked = true;
+                }
+                break;
+
+            case "recover":
+              const recover =
+                parseInt(localStorage.getItem("quiz_recover_clear_" + userKey)) || 0;
+
+                if (recover >= (ach.target || 1)) {
+                  isUnlocked = true;
+                }
+                break;
+
+            case "time":
+
+              const timeKey =
+                "quiz_time_" + ach.mode + "_" + userKey;
+
+              const count =
+                parseInt(localStorage.getItem(timeKey)) || 0;
+
+                if (count >= (ach.target || 1)) {
+                  isUnlocked = true;
+                }
+
+                break;
+
+            case "units":
+
+              const played =
+                JSON.parse(localStorage.getItem("quiz_played_units_" + userKey) || "[]");
+
+              if (played.length >= ach.target) {
+                isUnlocked = true;
+              }
+
+              break;
+          
           }
 
           if (isUnlocked) {
@@ -1753,8 +1866,13 @@
       currentUnit = unit;
       currentLevel = level;
 
-      allQuestions = getQuestionsLocal(unit, level);
+      const questionCount =
+        parseInt(document.getElementById("questionCount").value);
 
+      allQuestions =
+        getQuestionsLocal(unit, level, questionCount);
+
+      
       if (allQuestions.length === 0) {
         alert("該当する問題が見つかりませんでした。別の条件を試してください。");
         return;
@@ -1774,6 +1892,27 @@
 
       startTimer();
       loadQuestion();
+      playStart = Date.now();
+
+      let played = JSON.parse(
+        localStorage.getItem("quiz_played_units_" + userKey) || "[]"
+      );
+
+      if (
+        currentUnit !== "全単元" &&
+        !played.includes(currentUnit)
+      ){
+
+        played.push(currentUnit);
+
+        localStorage.setItem(
+          "quiz_played_units_" + userKey,
+          JSON.stringify(played)
+        );
+
+      }
+
+      
     }
 
     function loadQuestion() {
@@ -1907,6 +2046,18 @@
         if (combo > maxCombo) {
 
           maxCombo = combo;
+
+        }
+
+        const savedCombo =
+          parseInt(localStorage.getItem("quiz_max_combo_" + userKey)) || 0;
+
+        if(maxCombo > savedCombo){
+
+          localStorage.setItem(
+            "quiz_max_combo_" + userKey,
+            maxCombo
+          );
 
         }
 
@@ -2077,6 +2228,7 @@
     }
 
     function finishQuiz() {
+      const clearedByTime = (timeLeft > 0);
 
       clearInterval(timerId);
 
@@ -2122,8 +2274,79 @@
 
         `<div style="text-align:center;font-size:18px;color:#475569;font-weight:bold;">${message}</div>`;
 
-      updateMenuElements();
+      
 
+      if (percent === 100 && clearedByTime) {
+
+        let perfect =
+          parseInt(localStorage.getItem("quiz_perfect_count_" + userKey)) || 0;
+
+        perfect++;
+
+        localStorage.setItem(
+          "quiz_perfect_count_" + userKey,
+          perfect
+        );
+
+        // 残り時間70%以上なら
+        if ((timeLeft / totalTime) >= 0.7) {
+
+          let speed =
+              parseInt(localStorage.getItem("quiz_speed_clear_" + userKey)) || 0;
+
+          speed++;
+
+          localStorage.setItem(
+              "quiz_speed_clear_" + userKey,
+              speed
+          );
+
+        }
+      }
+
+      const hour = new Date().getHours();
+
+        if (hour >= 5 && hour < 8){
+
+            let c =
+            parseInt(localStorage.getItem("quiz_time_morning_" + userKey)) || 0;
+
+            localStorage.setItem(
+              "quiz_time_morning_" + userKey,
+              c + 1
+            );
+
+          }
+
+          if (hour >=22 || hour <3){
+
+            let c =
+            parseInt(localStorage.getItem("quiz_time_night_" + userKey)) || 0;
+
+            localStorage.setItem(
+              "quiz_time_night_" + userKey,
+              c + 1
+            );
+
+          }
+
+      
+
+      const playSec =
+        Math.max(0, Math.floor((Date.now() - playStart)/1000));
+
+      let totalPlay =
+        parseInt(localStorage.getItem("quiz_total_playtime_" + userKey)) || 0;
+
+      totalPlay += playSec;
+
+      localStorage.setItem(
+        "quiz_total_playtime_" + userKey,
+        totalPlay
+      );
+
+      
+    updateMenuElements();
     }
 
     function goBackToMenu() {
