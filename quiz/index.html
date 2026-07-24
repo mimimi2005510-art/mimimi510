@@ -1082,6 +1082,7 @@
     // 実績リスト定義
     // -------------------------------------------------------------
     const VISUAL_ACHIEVEMENTS = [
+      
       { name: "最初の一歩", icon: "📝", desc: "累計50問解答", rarity: "common", type: "answer", target: 50},
       { name: "学習の習慣化", icon: "🧮", desc: "累計100問解答", rarity: "common", type: "answer", target: 100 },
       { name: "コツコツ積み上げ", icon: "🧱", desc: "累計150問解答", rarity: "common", type: "answer", target: 150 },
@@ -1594,59 +1595,129 @@
 
     // 実績一覧の描画
     function renderAchievements() {
+
       const area = document.getElementById("achievement-grid-area");
-      const unlockedList = JSON.parse(localStorage.getItem("quiz_achievements_" + userKey) || "[]");
+      let unlockedList = JSON.parse(
+        localStorage.getItem("quiz_achievements_" + userKey) || "[]"
+      );
 
       let html = '<div class="achievement-grid">';
+
       VISUAL_ACHIEVEMENTS.forEach(ach => {
+
         let isUnlocked = unlockedList.includes(ach.name);
 
-        // 自動判定チェック
         if (!isUnlocked) {
-          const wrongCount = personalAnswerCount - personalCorrectCount;
-          const streak = parseInt(localStorage.getItem("quiz_login_streak_" + userKey)) || 1;
-          const maxComboAllTime = parseInt(localStorage.getItem("quiz_max_combo_" + userKey)) || 0;
-          const catCor = ach.category ? (parseInt(localStorage.getItem("quiz_cat_cor_" + ach.category)) || 0) : 0;
 
-          if (ach.desc.includes("累計") && ach.desc.includes("問解答")) {
-            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
-            if (personalAnswerCount >= target) isUnlocked = true;
-          } else if (ach.desc.includes("累計") && ach.desc.includes("問正解")) {
-            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
-            if (ach.category) {
-              if (catCor >= (ach.target || 10)) isUnlocked = true;
-            } else {
-              if (personalCorrectCount >= target) isUnlocked = true;
-            }
-          } else if (ach.desc.includes("誤答")) {
-            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
-            if (wrongCount >= target) isUnlocked = true;
-          } else if (ach.desc.includes("連続ログイン")) {
-            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
-            if (streak >= target) isUnlocked = true;
-          } else if (ach.desc.includes("最高") && ach.desc.includes("連続正解")) {
-            const target = parseInt(ach.desc.replace(/[^0-9]/g, ''));
-            if (maxComboAllTime >= target) isUnlocked = true;
+          const wrongCount = personalAnswerCount - personalCorrectCount;
+          const streak =
+            parseInt(localStorage.getItem("quiz_login_streak_" + userKey)) || 1;
+
+          const maxCombo =
+            parseInt(localStorage.getItem("quiz_max_combo_" + userKey)) || 0;
+
+          const totalPlay =
+            parseInt(localStorage.getItem("quiz_total_playtime_" + userKey)) || 0;
+
+          const perfectCount =
+            parseInt(localStorage.getItem("quiz_perfect_count_" + userKey)) || 0;
+
+          const totalXP =
+            parseInt(localStorage.getItem("quiz_user_xp_" + userKey)) || 0;
+
+          const level =
+            parseInt(localStorage.getItem("quiz_user_level_" + userKey)) || 1;
+
+          const catCorrect = ach.category
+            ? parseInt(
+                localStorage.getItem("quiz_cat_cor_" + ach.category)
+              ) || 0
+            : 0;
+
+          switch (ach.type) {
+
+            case "answers":
+              isUnlocked = personalAnswerCount >= ach.target;
+              break;
+
+            case "correct":
+              isUnlocked = personalCorrectCount >= ach.target;
+              break;
+
+            case "wrong":
+              isUnlocked = wrongCount >= ach.target;
+              break;
+
+            case "streak":
+              isUnlocked = streak >= ach.target;
+              break;
+
+            case "combo":
+              isUnlocked = maxCombo >= ach.target;
+              break;
+
+            case "playtime":
+              isUnlocked = totalPlay >= ach.target;
+              break;
+
+            case "perfect":
+              isUnlocked = perfectCount >= ach.target;
+              break;
+
+            case "xp":
+              isUnlocked = totalXP >= ach.target;
+              break;
+
+            case "level":
+              isUnlocked = level >= ach.target;
+              break;
+
+            case "category":
+              isUnlocked = catCorrect >= ach.target;
+              break;
           }
 
           if (isUnlocked) {
+
             unlockedList.push(ach.name);
-            localStorage.setItem("quiz_achievements_" + userKey, JSON.stringify(unlockedList));
-            showAchievementNotice(`「${ach.name}」を解除！`);
+
+            localStorage.setItem(
+              "quiz_achievements_" + userKey,
+              JSON.stringify(unlockedList)
+            );
+
+            showAchievementNotice(
+              `「${ach.name}」を解除しました！`
+            );
+
           }
+
         }
 
         html += `
-          <div class="achievement-badge ${ach.rarity} ${isUnlocked ? '' : 'locked'}">
-            <div style="font-size: 24px;">${isUnlocked ? ach.icon : '🔒'}</div>
-            <div style="font-weight: bold; margin: 4px 0;">${ach.name}</div>
-            <div style="font-size: 11px; opacity: 0.8;">${ach.desc}</div>
+          <div class="achievement-badge ${ach.rarity} ${isUnlocked ? "" : "locked"}">
+
+            <div style="font-size:26px">
+              ${isUnlocked ? ach.icon : "🔒"}
+            </div>
+
+            <div style="font-weight:bold;margin-top:6px;">
+              ${ach.name}
+            </div>
+
+            <div style="font-size:11px;color:#64748b;">
+              ${ach.desc}
+            </div>
+
           </div>
         `;
+
       });
 
-      html += '</div>';
+      html += "</div>";
+
       area.innerHTML = html;
+
     }
 
     // デバッグノート（誤答リスト）の描画
