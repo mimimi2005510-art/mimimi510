@@ -1115,6 +1115,7 @@
     const VISUAL_ACHIEVEMENTS = [
       { name: "生まれたて", icon: "🍼", desc: "累計5問解答", rarity: "common", type: "answers", target: 5},
       { name: "立ち始め", icon: "📝", desc: "累計25問解答", rarity: "common", type: "answers", target: 25},
+      { name: "昔のPC", icon: "🎞️", desc: "累計32問解答", rarity: "common", type: "answers", target: 32},
       { name: "牛歩", icon: "🐄", desc: "累計50問解答", rarity: "common", type: "answers", target: 50},
       { name: "学習の習慣化", icon: "🧮", desc: "累計100問解答", rarity: "common", type: "answers", target: 100 },
       { name: "コツコツ積み上げ", icon: "🧱", desc: "累計150問解答", rarity: "common", type: "answers", target: 150 },
@@ -1133,7 +1134,8 @@
       { name: "512問達成", icon: "💿", desc: "累計512問解答", rarity: "rare", type: "answers", target: 512 },
       { name: "2048問達成", icon: "🖥️", desc: "累計2048問解答", rarity: "legendary", type: "answers", target: 2048 },
       
-      { name: "ひらめきの芽", icon: "🌱", desc: "累計25問正解", rarity: "common", type: "correct", target: 25 },
+      { name: "ひらめきの芽", icon: "🌱", desc: "累計10問正解", rarity: "common", type: "correct", target: 10 },
+      { name: "新緑", icon: "🍃", desc: "累計25問正解", rarity: "common", type: "correct", target: 25 },
       { name: "確かな手応え", icon: "💡", desc: "累計50問正解", rarity: "common", type: "correct", target: 50 },
       { name: "知識のインプット", icon: "📖", desc: "累計75問正解", rarity: "common", type: "correct", target: 75 },
       { name: "知識の開花", icon: "🌸", desc: "累計150問正解", rarity: "common", type: "correct", target: 150 },
@@ -1141,8 +1143,9 @@
       { name: "データベース構築", icon: "🗄️", desc: "累計250問正解", rarity: "rare", type: "correct", target: 250 },
       { name: "グランドマスター", icon: "🦅", desc: "累計300問正解", rarity: "legendary", type: "correct", target: 300 },
 
+      { name: "見習いハンター", icon: "🏇", desc: "累計25回誤答", rarity: "common",type:"wrong",target:25 },
       { name: "バグの種火", icon: "🔥", desc: "累計50回誤答", rarity: "common",type:"wrong",target:50 },
-      { name: "苦ての発見", icon: "🩹", desc: "累計100回誤答", rarity: "common" ,type:"wrong",target:100 },
+      { name: "苦手の発見", icon: "🩹", desc: "累計100回誤答", rarity: "common" ,type:"wrong",target:100 },
       { name: "デバッグ見習い", icon: "🔧", desc: "累計150回誤答", rarity: "common" ,type:"wrong",target:150 },
       { name: "例外処理の達人", icon: "⚙️", desc: "累計200回誤答", rarity: "common" ,type:"wrong",target:200 },
       { name: "パッチ適用中", icon: "🛠️", desc: "累計250回誤答", rarity: "common" ,type:"wrong",target:250 },
@@ -1151,6 +1154,7 @@
       { name: "レジリエンス", icon: "💎", desc: "累計400回誤答", rarity: "rare" ,type:"wrong",target:400 },
       { name: "不屈のデバッガー", icon: "🦁", desc: "累計450回誤答", rarity: "rare" ,type:"wrong",target:450 },
       { name: "バグバスター", icon: "👾", desc: "累計500回誤答", rarity: "legendary" ,type:"wrong",target:500 },
+      { name: "もはやバグ", icon: "🧟", desc: "累計1000回誤答", rarity: "legendary" ,type:"wrong",target:1000 },
 
       { name: "最初の一またぎ", icon: "🏃", desc: "連続ログイン2日以上達成", rarity: "common",type:"streak",target:2 },
       { name: "習慣の定着", icon: "🌿", desc: "連続ログイン3日以上達成", rarity: "rare",type:"streak",target:3  },
@@ -1214,9 +1218,9 @@
       // ■ 情報通信ネットワーク
       { name: "パケットトレーサー", icon: "🧲", desc: "「情報通信ネットワーク」で50問正解", rarity: "common",type:"category", category: "情報通信ネットワーク", target: 50 },
       { name: "ノードコネクター", icon: "🔗", desc: "「情報通信ネットワーク」で100問正解", rarity: "common",type:"category", category: "情報通信ネットワーク", target: 100 },
-      { name: "アドレス・ロケーター", icon: "📍", desc: "「情報通信ネットワーク防衛」で150問正解", rarity: "common",type:"category", category: "情報通信ネットワーク", target: 150 },
+      { name: "アドレス・ロケーター", icon: "📍", desc: "「情報通信ネットワーク」で150問正解", rarity: "common",type:"category", category: "情報通信ネットワーク", target: 150 },
       { name: "プロトコル・セーバー", icon: "🛟", desc: "「情報通信ネットワーク」で200問正解", rarity: "rare",type:"category", category: "情報通信ネットワーク", target: 200 },
-      { name: "ドメイン・ホスト", icon: "📣", desc: "httpリクエスト250回突破", rarity: "rare",type:"category", category: "情報通信ネットワーク", target: 250 },
+      { name: "ドメイン・ホスト", icon: "📣", desc: "「情報通信ネットワーク」", rarity: "rare",type:"category", category: "情報通信ネットワーク", target: 250 },
       { name: "ネビュラ・クラウド", icon: "☁️", desc: "「情報通信ネットワーク」で300問正解", rarity: "rare",type:"category", category: "情報通信ネットワーク", target: 300 },
       { name: "ギガビット・エクスプレス", icon: "📶", desc: "「情報通信ネットワーク」で350問正解", rarity: "legendary",type:"category", category: "情報通信ネットワーク", target: 350 },
       { name: "次世代通信の覇者", icon: "🛸", desc: "「情報通信ネットワーク」で400問正解", rarity: "legendary",type:"category", category: "情報通信ネットワーク", target: 400 },
@@ -1252,23 +1256,28 @@
       { name: "予測AIのシンギュラリティ", icon: "💫", desc: "「予想問題」で400問正解", rarity: "legendary",type:"category", category: "予想問題", target: 400 },
 
       //章制覇
-      { name:"第1章制覇", icon:"📘", desc:"第1章の問題をすべて解答", rarity:"common", type:"chapter", chapter:"Q01" },
-      { name:"第2章制覇", icon:"📗", desc:"第2章の問題をすべて解答", rarity:"common", type:"chapter", chapter:"Q02" },
-      { name:"第3章制覇", icon:"📙", desc:"第3章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q03" },
-      { name:"第4章制覇", icon:"📕", desc:"第4章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q04" },
-      { name:"第5章制覇", icon:"📒", desc:"第5章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q05" },
-      { name:"第6章制覇", icon:"📔", desc:"第6章の問題をすべて解答", rarity:"legendary", type:"chapter", chapter:"Q06" },
-      { name:"第7章制覇", icon:"🛸", desc:"第7章の問題をすべて解答", rarity:"legendary", type:"chapter", chapter:"Q07" },
+      { name:"第1章制覇", icon:"🗒️", desc:"第1章の問題をすべて解答", rarity:"common", type:"chapter", chapter:"Q01" },
+      { name:"第2章制覇", icon:"📘", desc:"第2章の問題をすべて解答", rarity:"common", type:"chapter", chapter:"Q02" },
+      { name:"第3章制覇", icon:"📗", desc:"第3章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q03" },
+      { name:"第4章制覇", icon:"📙", desc:"第4章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q04" },
+      { name:"第5章制覇", icon:"📕", desc:"第5章の問題をすべて解答", rarity:"rare", type:"chapter", chapter:"Q05" },
+      { name:"第6章制覇", icon:"📒", desc:"第6章の問題をすべて解答", rarity:"legendary", type:"chapter", chapter:"Q06" },
+      { name:"第7章制覇", icon:"📔", desc:"第7章の問題をすべて解答", rarity:"legendary", type:"chapter", chapter:"Q07" },
 
       //レベル
       { name:"RANK5", icon:"⭐", desc:"レベル5到達", rarity:"common", type:"level", target:5 },
       { name:"RANK10", icon:"⭐⭐", desc:"レベル10到達", rarity:"common", type:"level", target:10 },
       { name:"RANK20", icon:"⭐⭐⭐", desc:"レベル20到達", rarity:"common", type:"level", target:20 },
+      { name:"RANK30", icon:"⭐⭐⭐⭐", desc:"レベル30到達", rarity:"common", type:"level", target:30 },
+      { name:"RANK40", icon:"⭐⭐⭐⭐⭐", desc:"レベル40到達", rarity:"common", type:"level", target:40 },
+      { name:"RANK50", icon:"🤩", desc:"レベル50到達", rarity:"common", type:"level", target:50 },
 
       //xp
+      { name:"未経験者", icon:"🔹", desc:"100XP獲得", rarity:"common", type:"xp", target:100 },
       { name:"経験者", icon:"💠", desc:"1000XP獲得", rarity:"common", type:"xp", target:1000 },
-      { name:"熟練者", icon:"💎", desc:"5000XP獲得", rarity:"rare", type:"xp", target:5000 },
-      { name:"伝説", icon:"👑", desc:"10000XP獲得", rarity:"legendary", type:"xp", target:10000 },
+      { name:"熟練者", icon:"🔷", desc:"5000XP獲得", rarity:"rare", type:"xp", target:5000 },
+      { name:"有資格者", icon:"🟦", desc:"10000XP獲得", rarity:"legendary", type:"xp", target:10000 },
+      { name:"主権者", icon:"💎", desc:"100000XP獲得", rarity:"legendary", type:"xp", target:100000 },
       
       //play time
       { name:"30分プレイ", icon:"⌚", desc:"累計30分プレイ", rarity:"common", type:"playtime", target:1800 },
@@ -1285,18 +1294,26 @@
 
       //朝活
       { name:"朝活ビギナー", icon:"🌅", desc:"朝に10回プレイ", rarity:"common", type:"time", mode:"morning", target:10 },
+      { name:"朝活アドバンスド・ビギナー", icon:"🌄", desc:"朝に20回プレイ", rarity:"common", type:"time", mode:"morning", target:20 },
+      { name:"朝活コンピテント", icon:"🌥️", desc:"朝に30回プレイ", rarity:"common", type:"time", mode:"morning", target:30 },
+      { name:"朝活プロフィシエント", icon:"⛅", desc:"朝に40回プレイ", rarity:"common", type:"time", mode:"morning", target:40 },
+      { name:"朝活エキスパート", icon:"🌤️", desc:"朝に50回プレイ", rarity:"common", type:"time", mode:"morning", target:50 },
       { name:"朝活マスター", icon:"☀️", desc:"朝に100回プレイ", rarity:"legendary", type:"time", mode:"morning", target:100 },
 
       
       //夜活
-      { name:"夜更かし研究員", icon:"🌙", desc:"夜に10回プレイ", rarity:"common", type:"time", mode:"night", target:10 },
+      { name:"夜更かし研究員", icon:"🌑", desc:"夜に10回プレイ", rarity:"common", type:"time", mode:"night", target:10 },
+      { name:"研究没頭", icon:"🌒", desc:"夜に20回プレイ", rarity:"common", type:"time", mode:"night", target:20 },
+      { name:"エナドリ必須", icon:"🌓", desc:"夜に30回プレイ", rarity:"common", type:"time", mode:"night", target:30 },
+      { name:"寝袋常備", icon:"🌔", desc:"夜に40回プレイ", rarity:"common", type:"time", mode:"night", target:40 },
+      { name:"昼夜反転", icon:"🌕", desc:"夜に50回プレイ", rarity:"common", type:"time", mode:"night", target:50 },
 
       //all
       { name:"全単元開拓者", icon:"🗺️", desc:"全単元プレイ", rarity:"legendary", type:"units", target:7 },
 
       //recover
-      { name:"不屈の精神", icon:"🛠️", desc:"誤答後に80%以上でクリア", rarity:"rare", type:"recover", target:1 },
-      { name:"フェニックス", icon:"🔥", desc:"誤答後に80%以上クリア10回", rarity:"legendary", type:"recover", target:10 },
+      { name:"不屈の精神", icon:"🔨", desc:"誤答後に80%以上でクリア", rarity:"rare", type:"recover", target:1 },
+      { name:"フェニックス", icon:"🐦‍🔥", desc:"誤答後に80%以上クリア10回", rarity:"legendary", type:"recover", target:10 },
 
       // 問題数別クリア
       { name:"ショートランナー", icon:"🚶", desc:"5問モードをクリア", rarity:"common", type:"mode", target:5 },
