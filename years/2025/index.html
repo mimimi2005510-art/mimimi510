@@ -1,1 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>各年度授業評価</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="../../images/icon.ico">
+    
+</head>
+
+
+<body class="">
+
+    <header class="top-banner">
+        <span>📍 授業資料へのご意見・ご要望を募集しています</span>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMvVZe5J0cjGJMThHWPiKqtxn4tVEtYSKkZ_cwsuv_sHXXvA/viewform?usp=dialog" target="_blank">
+            <button>📝 フィードバック</button>
+        </a>
+    </header>
+    <nav class="navbar">
+
+        <div class="logo-area">
+
+            <img src="../../images/logo.png" alt="ロゴ">
+
+            <h1>情報科 みみみ</h1>
+
+        </div>
+
+        <ul>
+
+            <li><a href="../../index.html">ホーム</a></li>
+            <li><a href="../../quiz/index.html">一問一答</a></li>
+            <li><a href="../../videos/index.html">授業動画</a></li>
+            <li>
+                <a href="../../materials/index.html">授業資料 ▼</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../../materials/first-year/index.html">情報Ⅰ（１年）</a></li>
+                    <li><a href="../../materials/second-year/index.html">情報Ⅱ（２年）</a></li>
+                    <li><a href="../../materials/others/index.html">共通・補足資料</a></li>
+                </ul>
+            </li>
+            <li class="active">
+                <a href="../index.html">各年度 ▼</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../../years/2026/index.html">2026</a></li>
+                    <li><a href="../../years/2025/index.html">2025</a></li>
+                    <li><a href="../../years/2024/index.html">2024</a></li>
+                    <li><a href="../../years/archive/index.html">アーカイブ</a></li>
+                </ul>    
+            </li>
+
+            
+
+        </ul>
+
+    </nav>
+
+    <main>
+        <section class="top-image video-top-image">
+
+            <img src="../images/year/2025/year_2025-footer.png">
+
+            <div class="hero-title">
+
+                <h1>各年度授業評価</h1>
+
+            </div>
+
+            <div class="scroll-guide">
+
+                ↓ Scroll
+
+            </div>
+
+
+        </section>
+               
+           
+        <section class="content-box">
+
+            <div class="fight-message">
+
+              <img src="../images/year/year_main2.gif" alt="ちょっとまってて">
+
+              <p>
+                  兄の勤務校における各年度各学期毎の生徒たちからの授業評価になります。
+              </p>
+
+            </div>
+
+        </section>
+        
+
+
+        <section class="hero">
+
+            <img src="../../images/year/2025/year_2025_main1.png">
+
+        </section>
+
+        <footer>
+
+            <div class="footer-title">
+
+                質問＆連絡先：
+
+            </div>
+
+            <div class="footer-buttons">
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMvVZe5J0cjGJMThHWPiKqtxn4tVEtYSKkZ_cwsuv_sHXXvA/viewform?usp=dialog" target="_blank">
+                    <button>📝 フィードバック</button>
+                </a>
+
+                <a href="mailto:xxxholic510@gmail.com?subject=お問い合わせ">
+                    <button>✉️ 連絡先</button>
+                </a>
+
+                <a href="https://classroom.google.com/c/ODU1NTc1NzgyMjA1?cjc=kzs6yp2s" target="_blank">
+                    <button>🏫 情報科準備室</button>
+                </a>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+    <div class="chat-panel-container">
+        <div id="chatPanel" class="chat-panel">
+            <div class="chat-header">
+                <div class="chat-title-area">
+                    <img src="../../images/AIteacher.png" alt="AIみみみ" class="header-avatar">
+                    <div class="chat-status">
+                        <span class="chat-title-name">AIみみみ先生</span>
+                        <span class="chat-status-online">対応中だよ</span>
+                    </div>
+                </div>
+                <button id="closeChatBtn" class="close-chat-btn">✕</button>
+            </div>
+
+            <div id="chatHistory" class="chat-history">
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="質問・キーワードを入力..." onkeypress="handleKeyPress(event)">
+                <button onclick="submitSearch()">▶</button> 
+            </div>
+        </div>
+
+        <button id="openChatBtn">🔍</button>
+    </div>
+
+<script src="../../search.js"></script>
+
+</body>
+
+</html>
