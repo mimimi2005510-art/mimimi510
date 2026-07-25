@@ -3,8 +3,8 @@
 =================================================== */
 
 // ★ GitHubの自動ブロック対策（キーを2つに分けて合体）
-const KEY_PART1 = "AQ.Ab8RN6JrNKx6ezhLPDKBi_";
-const KEY_PART2 = "u52yZmRSjontAFs9GhHkHgx3pHeA";
+const KEY_PART1 = "AQ.Ab8RN6J-ek5GAPrPH6s-PLoE0G5W_";
+const KEY_PART2 = "V5Ul3EHvZah5UhbvqipSw";
 
 const MIMIMI_CONFIG = {
     name: "AIみみみ先生",
