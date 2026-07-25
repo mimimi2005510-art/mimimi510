@@ -1325,6 +1325,11 @@
       { name:"ファーストアンサー", icon:"😃", desc:"初見問題を1問正解", rarity:"common", type:"first", target:1 },
       { name:"初見ハンター", icon:"😄", desc:"初見問題を10問正解", rarity:"rare", type:"first", target:10 },
       { name:"未知への挑戦者", icon:"😆", desc:"初見問題を50問正解", rarity:"legendary", type:"first", target:50 },
+
+      //隠し実績
+      {name:"はじめの一歩", icon:"🎉", desc:"初めてクイズをクリア", rarity:"hidden", type:"hidden_firstplay" },
+
+      
       
     ];
 
@@ -1950,6 +1955,15 @@
                   isUnlocked = true;
                 }
                 break;
+
+              case "hidden_firstplay":
+                isUnlocked =
+                localStorage.getItem(
+                  "quiz_first_play_" + userKey
+                ) === "1";
+              break;
+
+                
           
           }
 
@@ -2516,6 +2530,13 @@
       localStorage.setItem(
         "quiz_total_playtime_" + userKey,
         totalPlay
+      );
+
+
+
+      localStorage.setItem(
+        "quiz_first_play_" + userKey,
+        "1"
       );
 
       
