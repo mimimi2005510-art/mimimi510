@@ -102,7 +102,8 @@ async function submitSearch() {
 // --------------------------------------------------
 async function fetchGeminiResponse(userQuery) {
     const apiKey = MIMIMI_CONFIG.geminiApiKey;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    // ⭕ 修正後：正しいモデル名（gemini-1.5-flash または gemini-2.0-flash）に変更します
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     const rootPath = resolveRootPath();
 
     // 「AIみみみ」のキャラクター・口調・サイト内リンク知識を定義するシステム指示
