@@ -20,6 +20,10 @@ const resolveRootPath = () => {
     if (window.location.pathname.includes("/years/2024/") || 
         window.location.pathname.includes("/years/2025/") || 
         window.location.pathname.includes("/years/2026/") ||
+        window.location.pathname.includes("/years/2027/") || 
+        window.location.pathname.includes("/years/2028/") ||
+        window.location.pathname.includes("/years/2029/") || 
+        window.location.pathname.includes("/years/2030/") ||
         window.location.pathname.includes("/years/archive/") ||
         window.location.pathname.includes("/materials/first-year/") || 
         window.location.pathname.includes("/materials/second-year/") || 
