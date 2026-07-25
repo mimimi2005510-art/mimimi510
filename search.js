@@ -17,7 +17,11 @@ const MIMIMI_CONFIG = {
 // 階層ズレを自動調整するためのベースパス取得
 const resolveRootPath = () => {
     let rootPath = "";
-    if (window.location.pathname.includes("/materials/first-year/") || 
+    if (window.location.pathname.includes("/years/2024/") || 
+        window.location.pathname.includes("/years/2025/") || 
+        window.location.pathname.includes("/years/2026/") ||
+        window.location.pathname.includes("/years/archive/") ||
+        window.location.pathname.includes("/materials/first-year/") || 
         window.location.pathname.includes("/materials/second-year/") || 
         window.location.pathname.includes("/materials/others/")) {
         rootPath = "../../";
