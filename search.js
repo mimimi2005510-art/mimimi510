@@ -25,7 +25,8 @@ const resolveRootPath = () => {
         window.location.pathname.includes("/materials/second-year/") || 
         window.location.pathname.includes("/materials/others/")) {
         rootPath = "../../";
-    } else if (window.location.pathname.includes("/materials/") || 
+    } else if (window.location.pathname.includes("/years/") || 
+               window.location.pathname.includes("/materials/") || 
                window.location.pathname.includes("/videos/") || 
                window.location.pathname.includes("/quiz/")) {
         rootPath = "../";
