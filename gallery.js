@@ -33,3 +33,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+
+
+//-------------------------------------------------
+// 開発カードアコーディオン
+//-------------------------------------------------
+
+document.querySelectorAll(".accordion-btn").forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        const content=
+            btn.nextElementSibling;
+
+        if(content.style.display==="block"){
+
+            content.style.display="none";
+
+            btn.innerHTML="🌸 開発ストーリーを見る";
+
+        }
+
+        else{
+
+            content.style.display="block";
+
+            btn.innerHTML="🌸 閉じる";
+
+        }
+
+    });
+
+});
