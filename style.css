@@ -1037,3 +1037,167 @@ footer {
     font-size:45px;
     cursor:pointer;
 }
+
+/*------------------------------
+授業改善カード
+------------------------------*/
+
+.developer-section{
+
+    max-width:1200px;
+
+    margin:80px auto;
+
+    padding:0 30px;
+
+}
+
+.developer-section h2{
+
+    text-align:center;
+
+    font-size:34px;
+
+    color:#ec4899;
+
+    margin-bottom:15px;
+
+}
+
+.developer-subtitle{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:45px;
+
+}
+
+.developer-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:35px;
+
+}
+
+.developer-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    position:relative;
+
+}
+
+.developer-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+.developer-card img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+}
+
+
+.developer-body{
+
+    padding:25px;
+
+}
+
+.developer-body h3{
+
+    color:#ec4899;
+
+    margin-bottom:15px;
+
+}
+
+.card-badge{
+
+    position:absolute;
+
+    right:15px;
+
+    top:15px;
+
+    background:#ff69b4;
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+.accordion-btn{
+
+    width:100%;
+
+    margin-top:20px;
+
+    border:none;
+
+    padding:14px;
+
+    background:#fde7f3;
+
+    color:#ec4899;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+}
+
+.accordion-content{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding-top:20px;
+
+    border-top:1px solid #eee;
+
+}
+
+.accordion-content img{
+
+    width:100%;
+
+    margin-top:20px;
+
+    border-radius:12px;
+
+}
+
+
