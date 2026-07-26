@@ -1388,17 +1388,17 @@
 
       const statKey = "quiz_q_stat_" + questionId;
 
+      const stats = JSON.parse(
+        localStorage.getItem(statKey) ||
+        '{"ans":0,"cor":0}'
+      );
+
       if(stats.ans>=10){
         localStorage.setItem(
           "quiz_hidden_repeat_"+userKey,
           "1"
         );
       }
-
-      const stats = JSON.parse(
-        localStorage.getItem(statKey) ||
-        '{"ans":0,"cor":0}'
-      );
 
       stats.ans++;
 
