@@ -1120,4 +1120,75 @@ footer {
     border-radius:12px;
 }
 
+/*アーカイブライブラリ用*/
+.archive-library-open{
+    cursor:pointer;
+    text-align:center;
+}
+.library-guide{
+    margin-top:15px;
+    color:#ec4899;
+    font-weight:bold;
+    font-size:18px;
+}
+.library-guide:hover{
+    transform:scale(1.05);
+}
+.illustration-library{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+.library-window{
+    width:90%;
+    max-width:1100px;
+    max-height:85vh;
+    overflow:auto;
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    position:relative;
+}
+.library-close{
+    position:absolute;
+    top:20px;
+    right:25px;
+    font-size:40px;
+    cursor:pointer;
+}
+.library-sub{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:25px;
+}
+.illustration-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:25px;
+}
+.illustration-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    cursor:pointer;
+}
+.illustration-card:hover{
+    transform:translateY(-8px);
+}
+.illustration-card img{
+    width:100%;
+    aspect-ratio:1;
+    object-fit:cover;
+}
+.illustration-card p{
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+}
 
