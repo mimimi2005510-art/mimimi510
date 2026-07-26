@@ -14,7 +14,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "著作権法は「思想または感情を創作的に表現したもの」を保護対象としています。アイデア（着想）や客観的な事実・数値そのものは表現ではないため保護されません"
   },
   {
     "id": "Q01-0002",
@@ -31,7 +31,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "正しい引用には「主従関係（自分が主、引用が従）」を守り、明確に区分（鍵括弧など）し、必ず「出所（出典）の明記」を行う必要があります。"
   },
   {
     "id": "Q01-0003",
@@ -48,7 +48,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "人が自身の姿（容姿や顔）を承諾なしに撮影されたり公表されたりしない権利を肖像権と呼びます。"
   },
   {
     "id": "Q01-0004",
@@ -65,7 +65,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 2,
     "totalCount": 4,
-    "explanation": ""
+    "explanation": "個人情報とは「特定の個人を識別できる情報」です。他の情報と照合しても個人を特定できないよう完全に加工された情報は個人情報に該当しなくなります。"
   },
   {
     "id": "Q01-0005",
@@ -82,7 +82,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 2,
     "totalCount": 2,
-    "explanation": ""
+    "explanation": "個人情報取扱事業者は営利企業だけでなく、NPOや部活動などの非営利団体も対象になります。また、取り扱う人数制限（5000人要件）は法改正により廃止されています。"
   },
   {
     "id": "Q01-0006",
@@ -99,7 +99,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "知的財産権は大きく分けて「産業財産権（特許権・商標権など）」と「著作権（文化・表現・プログラムなど）」に分類されます。"
   },
   {
     "id": "Q01-0007",
@@ -116,7 +116,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "特許権: 高度な「発明」を保護 実用新案権: 物品の形状などの「考案（小発明）」を保護 意匠権: 物品の「デザイン（外観）」を保護 商標権: 商品やサービスの「マークやロゴ（ブランド）」を保護"
   },
   {
     "id": "Q01-0008",
@@ -133,7 +133,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "一度ネット上に拡散された情報はタトゥー（刺青）のように永久に残ることから「デジタルタトゥー」と呼ばれます。"
   },
   {
     "id": "Q01-0009",
@@ -150,7 +150,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "テレビや新聞、SNSなどの各種メディアから発信される情報をクリティカル（批判的）に読み解く力をメディアリテラシーといいます。"
   },
   {
     "id": "Q01-0010",
@@ -167,7 +167,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 2,
-    "explanation": ""
+    "explanation": "個人の私生活に関する事実や情報を他人に勝手に公開されない法的権利をプライバシー権と呼びます"
   },
   {
     "id": "Q01-0011",
@@ -184,7 +184,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "表示 (BY): 著作権者の表示 非営利 (NC): 営利目的での利用禁止 改変禁止 (ND): 元の作品を変更・加工せずに利用 継承 (SA): 同じライセンス条件で配布"
   },
   {
     "id": "Q01-0012",
@@ -201,7 +201,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "偽の電子メール等から本物そっくりの偽Webサイトに誘導して重要情報を盗む手法です。（スニフィング＝盗聴、スプーフィング＝なりすまし、ブルートフォース＝総当たり攻撃）"
   },
   {
     "id": "Q01-0013",
@@ -218,7 +218,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "肩越しにパスワード入力を見る（ショルダーハッキング）やゴミ箱から書類を盗む（トラッシング）など、技術ではなく人間の心理や行動の隙を突く攻撃手法です。"
   },
   {
     "id": "Q01-0014",
@@ -235,7 +235,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "アクセス権限のないコンピュータへ他人のID・パスワードを使ってログインする行為（またはそれを促す行為）を取り締まる法律です。"
   },
   {
     "id": "Q01-0015",
@@ -252,7 +252,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "著作物をWebサイトに掲載したりSNSにアップロードして公衆に送信する権利は「公衆送信権」にあたり、著作権者が専有しています。"
   },
   {
     "id": "Q01-0016",
@@ -269,7 +269,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "地域や年齢、所得などにより情報通信技術（ICT）の利用機会や利活用能力に差が生じる格差を「デジタルディバイド」といいます。"
   },
   {
     "id": "Q01-0017",
@@ -286,7 +286,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "日本の著作権保護期間は、法改正により原則として「著作者の死後（または公表後）70年間」に延長されました。"
   },
   {
     "id": "Q01-0018",
@@ -303,7 +303,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "「非営利（NC）」は、営利目的（金銭的な利益を得る目的）での使用を許可しないことを示す条件です。"
   },
   {
     "id": "Q01-0019",
@@ -320,7 +320,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "悪意のあるソフトウェア（ウイルス、スパイウェア、ランサムウェアなど）全般を指す総称がマルウェア（Malicious Software）です。スパイウェア: 個人情報などを勝手に送信するソフト ランサムウェア: データを暗号化して身代金を要求するソフト アドウェア: 広告を強制表示するソフト"
   },
   {
     "id": "Q01-0020",
@@ -337,7 +337,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "特定の個人を識別できないようにし、かつ復元できないように加工した情報を匿名加工情報といいます。"
   },
   {
     "id": "Q01-0021",
@@ -354,7 +354,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "著作権法は「思想または感情を創作的に表現したもの」を保護対象とします。アイデアや単なる事実・数値自体は保護されません。"
   },
   {
     "id": "Q01-0022",
@@ -371,7 +371,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "文脈としては「出所の明記を行うこと」が必須条件"
   },
   {
     "id": "Q01-0023",
@@ -388,7 +388,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "著作物をインターネット等を通じて不特定多数に送信・配信する権利は公衆送信権に該当します"
   },
   {
     "id": "Q01-0024",
@@ -405,7 +405,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "原則として著作者の死後（または公表後）70年間保護されます。"
   },
   {
     "id": "Q01-0025",
@@ -422,7 +422,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 1,
     "totalCount": 2,
-    "explanation": ""
+    "explanation": "人間の知的創作活動によって生み出された権利全般を知的財産権と呼びます。"
   },
   {
     "id": "Q01-0026",
@@ -439,7 +439,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "高度な技術的アイデアである「発明」を独占的に利用できる権利が特許権です。"
   },
   {
     "id": "Q01-0027",
@@ -456,7 +456,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "作品を利用する際に、原作者名やタイトルなどのクレジットを表示させる条件です。"
   },
   {
     "id": "Q01-0028",
@@ -473,7 +473,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "営利目的（商用利用）での使用を禁止する場合に付与する条件が非営利（NC）です。"
   },
   {
     "id": "Q01-0029",
@@ -490,7 +490,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 2,
     "totalCount": 2,
-    "explanation": ""
+    "explanation": "自身の姿・顔写真を無断で撮影・公表・使用されない法的権利を肖像権といいます。"
   },
   {
     "id": "Q01-0030",
@@ -507,7 +507,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "個人の私生活に関する情報を他人に勝手に公開されない権利がプライバシーの権利です。"
   },
   {
     "id": "Q01-0031",
@@ -524,7 +524,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "完全に匿名化（復元不可能に加工）された情報は特定個人を識別できないため個人情報に該当しなくなります。"
   },
   {
     "id": "Q01-0032",
@@ -541,7 +541,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "個人情報データベース等を事業の用に供している者は、営利・非営利を問わず適用対象となります。"
   },
   {
     "id": "Q01-0033",
@@ -558,7 +558,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "他の情報と照合することで特定できる状態にしたものは「仮名加工情報」などの区分になります。"
   },
   {
     "id": "Q01-0034",
@@ -592,7 +592,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "一度拡散されたデジタルデータがタトゥー（刺青）のように消えず残る現象を指します。"
   },
   {
     "id": "Q01-0036",
@@ -609,7 +609,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "実在する企業を装って偽サイトに誘導し、ID・パスワードやカード番号等を詐取する攻撃手法です。"
   },
   {
     "id": "Q01-0037",
@@ -626,7 +626,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "盗み見（ショルダーハッキング）やゴミ箱の捜索（トラッシング）など、技術ではなく人間の隙を突く手法です。"
   },
   {
     "id": "Q01-0038",
