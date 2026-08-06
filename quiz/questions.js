@@ -575,7 +575,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "ネット上に残り続ける情報はデジタルタトゥーと呼ばれる。"
   },
   {
     "id": "Q01-0035",
@@ -694,7 +694,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "誹謗中傷は名誉権や名誉感情を侵害する可能性がある。"
   },
   {
     "id": "Q01-0042",
@@ -711,7 +711,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "写真には肖像権やプライバシーが関係するため、本人の許可を得てから投稿するべきである。"
   },
   {
     "id": "Q01-0043",
@@ -728,7 +728,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "情報セキュリティの三要素は「機密性・完全性・可用性」である。"
   },
   {
     "id": "Q01-0044",
@@ -745,7 +745,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "許可された人だけが情報を見られる性質を機密性という。"
   },
   {
     "id": "Q01-0045",
@@ -762,7 +762,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "情報が改ざんされていない性質を完全性という。"
   },
   {
     "id": "Q01-0046",
@@ -779,7 +779,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "必要なときに利用できる性質を可用性という。"
   },
   {
     "id": "Q01-0047",
@@ -796,7 +796,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "知識情報とは本人だけが知っている情報であり、代表例はパスワードである。"
   },
   {
     "id": "Q01-0048",
@@ -813,7 +813,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "生体情報とは身体的特徴を利用する認証で、指紋や虹彩、顔などがある。"
   },
   {
     "id": "Q01-0049",
@@ -830,7 +830,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "一度しか使えず短時間で変化するパスワードをワンタイムパスワードという。"
   },
   {
     "id": "Q01-0050",
@@ -847,7 +847,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "暗号化と復号で異なる鍵を利用する方式を公開鍵暗号方式という。鍵配送が容易で、安全な通信に利用される。"
   },
   {
     "id": "Q01-0051",
@@ -864,7 +864,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "公開鍵暗号方式では、送信者は受信者の公開鍵で暗号化し、受信者だけが秘密鍵で復号できる。"
   },
   {
     "id": "Q01-0052",
@@ -881,7 +881,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "電子署名は、送信者本人が作成したこと（本人性）と内容が改ざんされていないこと（完全性）を証明するために用いられる。"
   },
   {
     "id": "Q01-0053",
@@ -898,7 +898,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "インターネットやゲームを自分でやめられなくなる状態をインターネット依存（ネット依存）という。"
   },
   {
     "id": "Q01-0054",
@@ -915,7 +915,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "意図的に作られた虚偽の情報をディスインフォメーション（偽情報）という。"
   },
   {
     "id": "Q01-0055",
@@ -932,7 +932,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "情報の真偽は、行政機関や報道機関など複数の信頼できる情報源で確認することが重要である。"
   },
   {
     "id": "Q01-0056",
@@ -949,7 +949,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "誰でも利用・改良・再配布できるソフトウェアをオープンソースソフトウェア（OSS）という。"
   },
   {
     "id": "Q01-0057",
@@ -966,7 +966,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "プロバイダ責任制限法は、誹謗中傷などの投稿者情報の開示請求や、プロバイダの責任について定めた法律である。"
   },
   {
     "id": "Q01-0058",
@@ -983,7 +983,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "行政などが公開し自由に利用できるデータをオープンデータという。"
   },
   {
     "id": "Q01-0059",
@@ -1000,7 +1000,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "AIの学習データに偏りがあることで生じる問題をAIバイアスという。"
   },
   {
     "id": "Q01-0060",
@@ -1017,7 +1017,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "生成AIは誤情報や著作権侵害の可能性があるため、内容を確認して利用することが重要である。"
   },
   {
     "id": "Q01-0061",
@@ -1034,7 +1034,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "市販の楽曲には著作権があるため、許可なく動画のBGMとして公開すると著作権侵害となる可能性がある。"
   },
   {
     "id": "Q01-0062",
@@ -1051,7 +1051,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "引用として認められるには、引用部分が明確であり、出典が示され、引用が必要最小限であることなどが必要である。"
   },
   {
     "id": "Q01-0063",
@@ -1068,7 +1068,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "単独では個人を特定できなくても、他の情報と組み合わせることで識別できる情報には注意が必要である。"
   },
   {
     "id": "Q01-0064",
@@ -1085,7 +1085,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "取得目的以外に利用する場合は、原則として本人の同意が必要である。"
   },
   {
     "id": "Q01-0065",
@@ -1102,7 +1102,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "サービス停止によって損なわれるのは「可用性」である。"
   },
   {
     "id": "Q01-0066",
@@ -1119,7 +1119,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "英数字・記号を組み合わせた長く複雑なパスワードを設定すると推測されにくい。"
   },
   {
     "id": "Q01-0067",
@@ -1136,7 +1136,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "本物そっくりの偽サイトへ誘導して情報を盗む攻撃をフィッシングという。"
   },
   {
     "id": "Q01-0068",
@@ -1153,7 +1153,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "ICカード（所持情報）と暗証番号（知識情報）を組み合わせる方式は二要素認証である。"
   },
   {
     "id": "Q01-0069",
@@ -1170,7 +1170,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "暗号化には受信者の公開鍵を用いるため、受信者だけが秘密鍵で復号できる。"
   },
   {
     "id": "Q01-0070",
@@ -1187,7 +1187,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "共通鍵暗号方式は処理速度が速いが、安全な鍵の共有方法が課題となる。"
   },
   {
     "id": "Q01-0071",
@@ -1204,7 +1204,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "SNSの情報は、専門機関や公的機関など複数の信頼できる情報源で確認することが重要である。"
   },
   {
     "id": "Q01-0072",
@@ -1221,7 +1221,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "生成AIが作成した内容をそのまま提出せず、事実確認や自分での検証を行う必要がある。"
   },
   {
     "id": "Q01-0073",
@@ -1238,7 +1238,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "AIが不公平な判断をする原因の多くは、学習データに含まれる偏りである。"
   },
   {
     "id": "Q01-0074",
@@ -1255,7 +1255,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "行政がオープンデータを公開する目的は、新しいサービスの創出や行政の透明性向上である。"
   },
   {
     "id": "Q01-0075",
@@ -1272,7 +1272,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "投稿者情報の開示請求にはプロバイダ責任制限法（現・情報流通プラットフォーム対処法）が関係する。"
   },
   {
     "id": "Q01-0076",
@@ -1289,7 +1289,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "特許権・実用新案権・意匠権・商標権をまとめて産業財産権という。"
   },
   {
     "id": "Q01-0077",
@@ -1306,7 +1306,7 @@ const quizQuestions = [
     "answer": 4,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "企業ロゴは商標権によって保護される。"
   },
   {
     "id": "Q01-0078",
@@ -1323,7 +1323,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "位置情報から生活習慣や行動履歴が把握され、プライバシー侵害につながる恐れがある。"
   },
   {
     "id": "Q01-0079",
@@ -1340,7 +1340,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "ICTを利用できる人とできない人で教育や行政サービスなどに格差が生じるため問題となる。"
   },
   {
     "id": "Q01-0080",
@@ -1357,7 +1357,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "ランサムウェア対策として最も有効なのは、定期的なバックアップを取得しておくことである。"
   },
   {
     "id": "Q01-0081",
@@ -1374,7 +1374,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "日本の著作権法第30条の4では、一定条件のもとAI学習目的での利用が原則認められている。"
   },
   {
     "id": "Q01-0082",
@@ -1391,7 +1391,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "AI生成物でも、人間による創作的な表現が認められる場合には著作権が認められる可能性がある。"
   },
   {
     "id": "Q01-0083",
@@ -1408,7 +1408,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "AIで本物そっくりに作られた動画や音声をディープフェイクという。"
   },
   {
     "id": "Q01-0084",
@@ -1425,7 +1425,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "巨大IT企業を規制する法律としてスマホソフトウェア競争促進法などが整備されつつあり、独占禁止法も関係する。"
   },
   {
     "id": "Q01-0085",
@@ -1442,7 +1442,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "IoT機器は初期パスワードのまま利用されたり、更新されなかったりするため攻撃対象になりやすい。"
   },
   {
     "id": "Q01-0086",
@@ -1459,7 +1459,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "自分に合った情報ばかり表示される現象をフィルターバブルという。"
   },
   {
     "id": "Q01-0087",
@@ -1476,7 +1476,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "同じ考えの人だけで交流し意見が極端になる現象をエコーチェンバーという。"
   },
   {
     "id": "Q01-0088",
@@ -1493,7 +1493,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "人々の注目や「いいね」が経済的価値を持つ社会をアテンションエコノミーという。"
   },
   {
     "id": "Q01-0089",
@@ -1510,7 +1510,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "ICTを善く使う力を育成する教育をデジタル・シティズンシップ教育という。"
   },
   {
     "id": "Q01-0090",
@@ -1527,7 +1527,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "検索結果などの削除を求める権利を忘れられる権利という。"
   },
   {
     "id": "Q01-0091",
@@ -1544,7 +1544,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "位置情報などから個人の移動や行動を分析できる情報をライフログという。"
   },
   {
     "id": "Q01-0092",
@@ -1561,7 +1561,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "SNSから離れることに強い不安を感じる状態はSNS依存やスマホ依存と呼ばれる。"
   },
   {
     "id": "Q01-0093",
@@ -1578,7 +1578,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "現実世界をデジタル空間に再現する技術をデジタルツインという。"
   },
   {
     "id": "Q01-0094",
@@ -1595,7 +1595,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "「誰も信頼しない」を前提としたセキュリティモデルをゼロトラストという。"
   },
   {
     "id": "Q01-0095",
@@ -1612,7 +1612,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "ファイルを暗号化して身代金を要求するマルウェアをランサムウェアという。"
   },
   {
     "id": "Q01-0096",
@@ -1629,7 +1629,7 @@ const quizQuestions = [
     "answer": 2,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "偽情報が感染症のように拡散する現象をインフォデミックという。"
   },
   {
     "id": "Q01-0097",
@@ -1646,7 +1646,7 @@ const quizQuestions = [
     "answer": 1,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "現金を使わない決済が普及する社会をキャッシュレス社会という。"
   },
   {
     "id": "Q01-0098",
@@ -1663,7 +1663,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 0,
     "totalCount": 0,
-    "explanation": ""
+    "explanation": "誹謗中傷対策として投稿者特定手続きを迅速化したのは、プロバイダ責任制限法の改正（現：情報流通プラットフォーム対処法）である。"
   },
   {
     "id": "Q01-0099",
@@ -1680,7 +1680,7 @@ const quizQuestions = [
     "answer": 3,
     "correctCount": 1,
     "totalCount": 1,
-    "explanation": ""
+    "explanation": "オンライン化の課題として不適切なのは、一般的には「必ず学習効果が向上する」などの断定的な内容である。実際には通信環境や端末格差などが課題となる。"
   },
   {
     "id": "Q01-0100",
